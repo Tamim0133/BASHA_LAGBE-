@@ -48,7 +48,6 @@ const Login = () => {
         <View style={styles.container}>
             <Text style={styles.title}>Log In</Text>
 
-            // Take Email
             <TextInput
                 autoCapitalize="none"
                 placeholder="Email"
