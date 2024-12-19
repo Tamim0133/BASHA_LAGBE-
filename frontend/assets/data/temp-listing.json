@@ -1,0 +1,79 @@
+[
+    {
+        "_id": "ad1",
+        "user_id": "1",
+        "title": "Spacious 3-Bedroom Family Apartment in Dhaka",
+        "Location": "Location_ID_1",
+        "subarea": ["Gulshan", "Banani"],
+        "division": "Dhaka",
+        "district": "Dhaka",
+        "post": "Available for Rent",
+        "rent": 35000,
+        "advance_deposit": 10000,
+        "advance_refund": true,
+        "category": "family",
+        "floor": 3,
+        "availableFrom": "January",
+        "isAvailable": true,
+        "noOfBedroom": 3,
+        "noOfBathroom": 2,
+        "images": [
+          "https://is1-3.housingcdn.com/01c16c28/43786c8f3ac5b392564249d9a3f0d4f3/v0/fs/3_bhk_apartment-for-rent-sector_54_gurgaon-Gurgaon-hall.jpg",
+          "https://housing-images.n7net.in/01c16c28/123df638493be6f474a950f230134881/v0/small/1_rk_apartment-for-rent-chironwali-Dehradun-bedroom.jpg",
+          "https://housing-images.n7net.in/01c16c28/3d70561c84ad6aeda716b0ca28e8dd18/v0/small/2_bhk_apartment-for-rent-nalasopara_west-Mumbai-hall.jpg"
+        ],
+        "facilities": ["WiFi", "24/7 security", "Parking", "Elevator", "Gym", "Govt Gas Kitchen"],
+        "description": "A beautiful 3-bedroom apartment ideal for families. Located in the heart of Dhaka, close to shopping malls, schools, and public transport. The apartment is well-lit, spacious, and comes with modern amenities including WiFi, 24/7 security, and a parking space."
+      },
+      {
+        "_id": "ad2",
+        "user_id": "1",
+        "title": "Cozy Studio for Rent in Mohakhali",
+        "Location": "Location_ID_2",
+        "subarea": ["Mohakhali"],
+        "division": "Dhaka",
+        "district": "Dhaka",
+        "post": "Available for Rent",
+        "rent": 20000,
+        "advance_deposit": 30000,
+        "advance_refund": false,
+        "category": "bachelor",
+        "floor": 2,
+        "availableFrom": "February",
+        "isAvailable": true,
+        "noOfBedroom": 1,
+        "noOfBathroom": 1,
+        "images": [
+          "https://www.cepagallery.org/wp-content/uploads/2020/08/cepa_gallery_photo_studio_product-scaled.jpg",
+          "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3R1ZGlvfGVufDB8fDB8fHww"
+        ],
+        "facilities": ["WiFi", "AC", "Cable TV", "Fridge"],
+        "description": "A comfortable, fully-furnished studio apartment ideal for bachelors. Located in a prime area of Mohakhali, this apartment offers easy access to public transportation, restaurants, and markets. It includes high-speed internet, air conditioning, and a fridge."
+      },
+      {
+        "_id": "ad3",
+        "user_id": "1",
+        "title": "Prime Office Space for Rent in Banani",
+        "Location": "Location_ID_3",
+        "subarea": ["Banani"],
+        "division": "Dhaka",
+        "district": "Dhaka",
+        "post": "Available for Rent",
+        "rent": 70000,
+        "advance_deposit": 0,
+        "advance_refund": true,
+        "category": "office",
+        "floor": 5,
+        "availableFrom": "February",
+        "isAvailable": true,
+        "noOfBedroom": 2,
+        "noOfBathroom": 1,
+        "images": [
+          "https://files.messbook.xyz/tolets/images/1/adc047f66925e06e8a6be3582e09dbde.jpg",
+          "https://varadeal.com/img_product/2/c75e10ef9ef6d295d4ceba8335d93bdd_62728feb061c3.jpg",
+          "https://roomvara.com/public/post/220522_FA2460_E1C8F7691A.jpg"
+        ],
+        "facilities": ["High-speed internet", "Air conditioning", "24/7 security", "Meeting rooms", "Parking"],
+        "description": "A spacious office space available for rent in Banani. This office is ideal for startups and small businesses looking for a professional setting. The space comes with modern facilities, including high-speed internet, air conditioning, and meeting rooms."
+      }
+]

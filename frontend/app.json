@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "frontend",
+    "slug": "frontend",
+    "version": "1.0.0",
+    "sdkVersion": "52.0.0",
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#008080", 
+          "image": "./assets/images/s2.png",
+          "resizeMode": "cover"
+        }
+      ]
+    ],
+    "splash": {
+      "backgroundColor": "#008080", 
+      "image": "./assets/images/s2.png",
+      "resizeMode": "cover"
+    },
+    "platforms": ["ios", "android"],
+    "statusBar": {
+      "style": "dark", 
+      "backgroundColor": "transparent", 
+      "translucent": true 
+    }
+  }
+}
