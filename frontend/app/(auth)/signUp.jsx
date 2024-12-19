@@ -41,32 +41,32 @@ const SignUp = () => {
         }
     };
 
-    useEffect(() => {
-        if (recaptchaContainerRef.current) {
-            // You can only render this if this is being executed in a web environment.  
-            setTimeout(() => {
-                const verifier = new RecaptchaVerifier(
-                    recaptchaContainerRef.current,
-                    {
-                        size: 'invisible', // Adjust the size based on your needs  
-                        callback: (response) => {
-                            console.log('reCAPTCHA solved:', response);
-                        },
-                        'expired-callback': () => {
-                            console.log('reCAPTCHA expired');
-                        },
-                    },
-                    auth
-                );
+    // useEffect(() => {
+    //     if (recaptchaContainerRef.current) {
+    //         // You can only render this if this is being executed in a web environment.  
+    //         setTimeout(() => {
+    //             const verifier = new RecaptchaVerifier(
+    //                 recaptchaContainerRef.current,
+    //                 {
+    //                     size: 'invisible', // Adjust the size based on your needs  
+    //                     callback: (response) => {
+    //                         console.log('reCAPTCHA solved:', response);
+    //                     },
+    //                     'expired-callback': () => {
+    //                         console.log('reCAPTCHA expired');
+    //                     },
+    //                 },
+    //                 auth
+    //             );
 
-                verifier.render()
-                    .then(() => {
-                        setRecaptchaVerifier(verifier);
-                    })
-                    .catch(error => console.error('Error rendering reCAPTCHA:', error));
-            }, 100); // Adding a slight timeout to ensure the ref is accessible  
-        }
-    }, [recaptchaContainerRef.current]);
+    //             verifier.render()
+    //                 .then(() => {
+    //                     setRecaptchaVerifier(verifier);
+    //                 })
+    //                 .catch(error => console.error('Error rendering reCAPTCHA:', error));
+    //         }, 100); // Adding a slight timeout to ensure the ref is accessible  
+    //     }
+    // }, [recaptchaContainerRef.current]);
 
     const handleSignup = () => {
         setErrMsg(null); // Reset error message before each attempt  
@@ -100,25 +100,26 @@ const SignUp = () => {
                 });
         } else {
             const formattedPhoneNumber = phoneNumber.startsWith('+880') ? phoneNumber : `+880${phoneNumber}`;
-            if (recaptchaVerifier) {
-                const formattedPhoneNumber = phoneNumber.startsWith('+880') ? phoneNumber : `+880${phoneNumber}`;
+            // if (recaptchaVerifier) {
+            //     const formattedPhoneNumber = phoneNumber.startsWith('+880') ? phoneNumber : `+880${phoneNumber}`;
 
-                // Sign in with phone number  
-                signInWithPhoneNumber(auth, formattedPhoneNumber, recaptchaVerifier)
-                    .then((verificationResult) => {
-                        setVerificationId(verificationResult.verificationId);
-                        Alert.alert('Code Sent', 'We have sent an SMS with a verification code.');
-                        setEmailSent(true);
-                        setLoading(false); // Hide loader  
-                    })
-                    .catch((error) => {
-                        setLoading(false); // Hide loader  
-                        setErrMsg(error.message || 'An error occurred while sending the verification code.');
-                    });
-            } else {
-                setErrMsg('Please complete the reCAPTCHA verification.');
-            }
+            //     // Sign in with phone number  
+            //     signInWithPhoneNumber(auth, formattedPhoneNumber, recaptchaVerifier)
+            //         .then((verificationResult) => {
+            //             setVerificationId(verificationResult.verificationId);
+            //             Alert.alert('Code Sent', 'We have sent an SMS with a verification code.');
+            //             setEmailSent(true);
+            //             setLoading(false); // Hide loader  
+            //         })
+            //         .catch((error) => {
+            //             setLoading(false); // Hide loader  
+            //             setErrMsg(error.message || 'An error occurred while sending the verification code.');
+            //         });
+            // } else {
+            //     setErrMsg('Please complete the reCAPTCHA verification.');
+            // }
             // Sign in with phone number  
+
             signInWithPhoneNumber(auth, formattedPhoneNumber)
                 .then((verificationResult) => {
                     setVerificationId(verificationResult.verificationId);

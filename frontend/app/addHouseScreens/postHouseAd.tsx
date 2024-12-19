@@ -286,7 +286,7 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
 // Step 2: Property Details -> Photo and Floor No
 const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [flr, setFlr] = useState<string>(formData.floor.toString()); // Start as string
-    const [images, setImages] = useState<string[]>([]); // Store selected image URIs
+    const [images, setImages] = useState<string[]>(formData.photos); // Initialize with formData.photos
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const handleTitleChange = (text: string) => {
@@ -323,12 +323,15 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
                 Alert.alert("Maximum Images Limit Exceeded", "You can select up to 10 images only.");
             } else {
                 setImages(updatedImages);
+                setFormData({ ...formData, photos: updatedImages }); // Update formData with new images
             }
         }
     };
 
     const removeImage = (index: number) => {
-        setImages(prevImages => prevImages.filter((_, i) => i !== index));
+        const updatedImages = images.filter((_, i) => i !== index);
+        setImages(updatedImages);
+        setFormData({ ...formData, photos: updatedImages }); // Update formData with remaining images   
     };
 
     return (
@@ -420,6 +423,9 @@ const UploadPhotos: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [availableFrom, setAvailableFrom] = useState<string>(formData.availableFrom); // Month
     const [description, setDescription] = useState<string>(formData.description); // Description
 
+
+
+
     const handleDescriptionChange = (text: string) => {
         if (text.length <= 250) {
             setDescription(text); // Only set if length is within the limit
@@ -439,19 +445,23 @@ const UploadPhotos: React.FC<StepProps> = ({ formData, setFormData }) => {
         { name: 'High Commode', icon: 'toilet' },
         { name: 'Balcony', icon: 'balcony' } // Use another suitable icon
     ];
+    const [selectedFeatures, setSelectedFeatures] = useState<string[]>(formData.facilities);
 
-    const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-
+    // Define the function to toggle the selection of a feature
     const toggleFeature = (item: string) => {
+        // Update the `selectedFeatures` state by checking the current selection
         setSelectedFeatures((prev) => {
-            if (prev.includes(item)) {
-                return prev.filter((feature) => feature !== item);
-            } else {
-                return [...prev, item];
-            }
+            // Determine the new state for `selectedFeatures`
+            const newSelectedFeatures = prev.includes(item)
+                ? prev.filter((feature) => feature !== item) // If the item is selected, remove it
+                : [...prev, item]; // If the item is not selected, add it
+
+            // Update `formData` with the new value for `selectedFeatures`
+            setFormData({ ...formData, facilities: newSelectedFeatures });
+
+            return newSelectedFeatures; // Return the new state for `selectedFeatures`
         });
     };
-
     return (
         <View style={styles.containerFor3rd}>
             <Text style={styles.sectionTitle}>Available From:</Text>
@@ -533,7 +543,9 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
                 value={price !== 0 ? String(price) : ''}
                 onChangeText={(text) => {
                     setPrice(Number(text));
-                    setFormData({ ...formData, price: price })
+                    setFormData({ ...formData, price: Number(text) })
+                    // console.log(price);
+
                 }}
                 placeholder=" ৳ ...."
                 keyboardType="numeric"
@@ -546,7 +558,8 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
                 value={String(adv)}
                 onChangeText={(text) => {
                     setAdv(Number(text));
-                    setFormData({ ...formData, advanceDeposit: adv })
+                    setFormData({ ...formData, advanceDeposit: Number(text) })
+
                 }} placeholder="Enter advance deposit"
                 keyboardType="numeric"
             />
@@ -557,7 +570,7 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
                     status={toggleCheckBox ? 'checked' : 'unchecked'}
                     onPress={() => {
                         setToggleCheckBox(!toggleCheckBox);
-                        setFormData({ ...formData, advanceRefundable: toggleCheckBox })
+                        setFormData({ ...formData, advanceRefundable: !toggleCheckBox })
                     }
 
                     }
@@ -565,7 +578,7 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
                 <Text style={styles.checkboxLabel}>Advance is Refundable</Text>
             </View>
             <TouchableOpacity
-                onPress={() => console.log('Submit Data:', formData)}
+                onPress={() => console.log('Submitted Data: ---> ', formData)}
                 style={styles.colorButton}
             >
                 <Text style={styles.buttonText}>Submit</Text>
