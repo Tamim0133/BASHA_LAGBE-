@@ -1,0 +1,4208 @@
+[
+  {
+    "division": "Barishal",
+    "district": "Barguna",
+    "area": "Amtali"
+  },
+  {
+    "division": "Barishal",
+    "district": "Barguna",
+    "area": "Bamna"
+  },
+  {
+    "division": "Barishal",
+    "district": "Barguna",
+    "area": "Barguna Sadar",
+    "subareas": [
+      "Barguna Sadar",
+      "Nali Bandar"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barguna",
+    "area": "Betagi",
+    "subareas": [
+      "Betagi",
+      "Darul Ulam"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barguna",
+    "area": "Patharghata",
+    "subareas": [
+      "Kakchira",
+      "Patharghata"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Agailzhara",
+    "subareas": [
+      "Agailzhara",
+      "Gaila",
+      "Paisarhat"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Babuganj",
+    "subareas": [
+      "Babuganj",
+      "Barishal Cadet",
+      "Chandpasha",
+      "Madhabpasha",
+      "Nizamuddin College",
+      "Rahamatpur",
+      "Thakur Mallik"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Barajalia",
+    "subareas": [
+      "Barajalia",
+      "Osman Manjil"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Barishal Sadar",
+    "subareas": [
+      "Barishal Sadar",
+      "Bukhainagar",
+      "Jaguarhat",
+      "Kashipur",
+      "Patang",
+      "Saheberhat",
+      "Sugandia"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Gouranadi",
+    "subareas": [
+      "Batajor",
+      "Gouranadi",
+      "Kashemabad",
+      "Tarki Bandar"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Mahendiganj",
+    "subareas": [
+      "Langutia",
+      "Laskarpur",
+      "Mahendiganj",
+      "Nalgora",
+      "Ulania"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Muladi",
+    "subareas": [
+      "Charkalekhan",
+      "Kazirchar",
+      "Muladi"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Sahebganj",
+    "subareas": [
+      "Charamandi",
+      "kalaskati",
+      "Padri Shibpur",
+      "Sahebganj",
+      "Shialguni"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Barishal",
+    "area": "Uzirpur",
+    "subareas": [
+      "Dakuarhat",
+      "Dhamura",
+      "Jugirkanda",
+      "Shikarpur",
+      "Uzirpur"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Bhola",
+    "area": "Bhola Sadar",
+    "subareas": [
+      "Bhola Sadar",
+      "Joynagar"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Bhola",
+    "area": "Borhanuddin UPO",
+    "subareas": [
+      "Borhanuddin UPO",
+      "Mirzakalu"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Bhola",
+    "area": "Charfashion",
+    "subareas": [
+      "Charfashion",
+      "Dularhat",
+      "Keramatganj"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Bhola",
+    "area": "Doulatkhan",
+    "subareas": [
+      "Doulatkhan",
+      "Hajipur"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Bhola",
+    "area": "Hajirhat"
+  },
+  {
+    "division": "Barishal",
+    "district": "Bhola",
+    "area": "Hatshoshiganj"
+  },
+  {
+    "division": "Barishal",
+    "district": "Bhola",
+    "area": "Lalmohan UPO",
+    "subareas": [
+      "Daurihat",
+      "Gazaria",
+      "Lalmohan UPO"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Jhalokathi",
+    "area": "Jhalokathi Sadar",
+    "subareas": [
+      "Baukathi",
+      "Gabha",
+      "Jhalokathi Sadar",
+      "Nabagram",
+      "Shekherhat"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Jhalokathi",
+    "area": "Kathalia",
+    "subareas": [
+      "Amua",
+      "Kathalia",
+      "Niamatee",
+      "Shoulajalia"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Jhalokathi",
+    "area": "Nalchhiti",
+    "subareas": [
+      "Beerkathi",
+      "Nalchhiti"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Jhalokathi",
+    "area": "Rajapur"
+  },
+  {
+    "division": "Barishal",
+    "district": "Patuakhali",
+    "area": "Bauphal",
+    "subareas": [
+      "Bagabandar",
+      "Bauphal",
+      "Birpasha",
+      "Kalaia",
+      "Kalishari"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Patuakhali",
+    "area": "Dashmina"
+  },
+  {
+    "division": "Barishal",
+    "district": "Patuakhali",
+    "area": "Galachipa",
+    "subareas": [
+      "Galachipa",
+      "Gazipur Bandar"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Patuakhali",
+    "area": "Khepupara",
+    "subareas": [
+      "Khepupara",
+      "Mahipur"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Patuakhali",
+    "area": "Patuakhali Sadar",
+    "subareas": [
+      "Dumkee",
+      "Moukaran",
+      "Patuakhali Sadar",
+      "Rahimabad"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Patuakhali",
+    "area": "Subidkhali"
+  },
+  {
+    "division": "Barishal",
+    "district": "Pirojpur",
+    "area": "Banaripara",
+    "subareas": [
+      "Banaripara",
+      "Chakhar"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Pirojpur",
+    "area": "Bhandaria",
+    "subareas": [
+      "Bhandaria",
+      "Dhaoa",
+      "Kanudashkathi"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Pirojpur",
+    "area": "kaukhali",
+    "subareas": [
+      "Jolagati",
+      "Joykul",
+      "Kaukhali",
+      "Keundia"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Pirojpur",
+    "area": "Mathbaria",
+    "subareas": [
+      "Betmor Natun Hat",
+      "Gulishakhali",
+      "Halta",
+      "Mathbaria",
+      "Shilarganj",
+      "Tiarkhali",
+      "Tushkhali"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Pirojpur",
+    "area": "Nazirpur",
+    "subareas": [
+      "Nazirpur",
+      "Sriramkathi"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Pirojpur",
+    "area": "Pirojpur Sadar",
+    "subareas": [
+      "Hularhat",
+      "Parerhat",
+      "Pirojpur Sadar"
+    ]
+  },
+  {
+    "division": "Barishal",
+    "district": "Pirojpur",
+    "area": "Swarupkathi",
+    "subareas": [
+      "Darus Sunnat",
+      "Jalabari",
+      "Kaurikhara",
+      "Swarupkathi"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Bandarban",
+    "area": "Alikadam"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Bandarban",
+    "area": "Bandarban Sadar"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Bandarban",
+    "area": "Naikhingchhari"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Bandarban",
+    "area": "Roangchhari"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Bandarban",
+    "area": "Ruma"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Bandarban",
+    "area": "Lama"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Bandarban",
+    "area": "Thanchi"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Brahmanbaria",
+    "area": "Akhaura",
+    "subareas": [
+      "Akhaura",
+      "Azampur",
+      "Gangasagar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Brahmanbaria",
+    "area": "Banchharampur"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Brahmanbaria",
+    "area": "Brahamanbaria Sadar",
+    "subareas": [
+      "Ashuganj",
+      "Ashuganj Share",
+      "Brahamanbaria Sadar",
+      "Poun",
+      "Talshahar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Brahmanbaria",
+    "area": "Kasba",
+    "subareas": [
+      "Chandidar",
+      "Chargachh",
+      "Gopinathpur",
+      "Kasba",
+      "Kuti"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Brahmanbaria",
+    "area": "Nabinagar",
+    "subareas": [
+      "Jibanganj",
+      "Kaitala",
+      "Laubfatehpur",
+      "Nabinagar",
+      "Rasullabad",
+      "Ratanpur",
+      "Salimganj",
+      "Shahapur",
+      "Shamgram"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Brahmanbaria",
+    "area": "Nasirnagar",
+    "subareas": [
+      "Fandauk",
+      "Nasirnagar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Brahmanbaria",
+    "area": "Sarail",
+    "subareas": [
+      "Chandura",
+      "Sarial",
+      "Shahbajpur"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chandpur",
+    "area": "Chandpur Sadar",
+    "subareas": [
+      "Baburhat",
+      "Chandpur Sadar",
+      "Puranbazar",
+      "Sahatali"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chandpur",
+    "area": "Faridganj",
+    "subareas": [
+      "Chandra",
+      "Faridganj",
+      "Gridkaliandia",
+      "Islampur Shah Isain",
+      "Rampurbazar",
+      "Rupsha"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chandpur",
+    "area": "Hajiganj",
+    "subareas": [
+      "Bolakhal",
+      "Hajiganj"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chandpur",
+    "area": "Hayemchar",
+    "subareas": [
+      "Gandamara",
+      "Hayemchar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chandpur",
+    "area": "Kachua",
+    "subareas": [
+      "Kachua",
+      "Pak Shrirampur",
+      "Rahima Nagar",
+      "Shachar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chandpur",
+    "area": "Matlobganj",
+    "subareas": [
+      "Kalipur",
+      "Matlobganj",
+      "Mohanpur"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chandpur",
+    "area": "Shahrasti",
+    "subareas": [
+      "Chotoshi",
+      "Islamia Madrasha",
+      "Khilabazar",
+      "Pashchim Kherihar Al",
+      "Shahrasti"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Anawara",
+    "subareas": [
+      "Anowara",
+      "Battali",
+      "Paroikora"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Boalkhali",
+    "subareas": [
+      "Boalkhali",
+      "Charandwip",
+      "Iqbal Park",
+      "Kadurkhal",
+      "Kanungopara",
+      "Sakpura",
+      "Saroatoli"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Chittagong Sadar",
+    "subareas": [
+      "Al- Amin Baria Madra",
+      "Amin Jute Mills",
+      "Anandabazar",
+      "Bayezid Bostami",
+      "Chandgaon",
+      "Chawkbazar",
+      "Chitt. Cantonment",
+      "Chitt. Customs Acca",
+      "Chitt. Politechnic In",
+      "Chitt. Sailers Colon",
+      "Chittagong Airport",
+      "Chittagong Bandar",
+      "Chittagong GPO",
+      "Export Processing",
+      "Firozshah",
+      "Halishahar",
+      "Halishshar",
+      "Jalalabad",
+      "Jaldia Merine Accade",
+      "Middle Patenga",
+      "Mohard",
+      "North Halishahar",
+      "North Katuli",
+      "Pahartoli",
+      "Patenga",
+      "Rampura TSO",
+      "Wazedia"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "East Joara",
+    "subareas": [
+      "Barma",
+      "Dohazari",
+      "East Joara",
+      "Gachbaria"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Fatikchhari",
+    "subareas": [
+      "Bhandar Sharif",
+      "Fatikchhari",
+      "Harualchhari",
+      "Najirhat",
+      "Nanupur",
+      "Narayanhat"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Hathazari",
+    "subareas": [
+      "Chitt.University",
+      "Fatahabad",
+      "Gorduara",
+      "Hathazari",
+      "Katirhat",
+      "Madrasa",
+      "Mirzapur",
+      "Nuralibari",
+      "Yunus Nagar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Jaldi",
+    "subareas": [
+      "Banigram",
+      "Gunagari",
+      "Jaldi",
+      "Khan Bahadur Bazar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Lohagara",
+    "subareas": [
+      "Chaunti",
+      "Lohagara",
+      "Padua"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Mirsharai",
+    "subareas": [
+      "Abutorab",
+      "Azampur",
+      "Bharawazhat",
+      "Darrogahat",
+      "Joarganj",
+      "Korerhat",
+      "Mirsharai",
+      "Mohazanhat"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Patia Head Office",
+    "subareas": [
+      "Budhpara",
+      "Patia Head Office"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Rangunia",
+    "subareas": [
+      "Dhamair",
+      "Rangunia"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Rouzan",
+    "subareas": [
+      "B.I.T Post Office",
+      "Beenajuri",
+      "Dewanpur",
+      "Fatepur",
+      "Gahira",
+      "Guzra Noapara",
+      "jagannath Hat",
+      "Kundeshwari",
+      "Mohamuni",
+      "Rouzan"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Sandwip",
+    "subareas": [
+      "Sandwip",
+      "Shiberhat",
+      "Urirchar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Satkania",
+    "subareas": [
+      "Baitul Ijjat",
+      "Bazalia",
+      "Satkania"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Chittagong",
+    "area": "Sitakunda",
+    "subareas": [
+      "Barabkunda",
+      "Baroidhala",
+      "Bawashbaria",
+      "Bhatiari",
+      "Fouzdarhat",
+      "Jafrabad",
+      "Kumira",
+      "Sitakunda"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Barura",
+    "subareas": [
+      "Barura",
+      "Murdafarganj",
+      "Poyalgachha"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Brahmanpara"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Burichang",
+    "subareas": [
+      "Burichang",
+      "Maynamoti bazar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Chandina",
+    "subareas": [
+      "Chandia",
+      "Madhaiabazar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Chouddagram",
+    "subareas": [
+      "Batisa",
+      "Chiora",
+      "Chouddagram"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Comilla Sadar",
+    "subareas": [
+      "Comilla Contoment",
+      "Comilla Sadar",
+      "Courtbari",
+      "Halimanagar",
+      "Suaganj"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Daudkandi",
+    "subareas": [
+      "Dashpara",
+      "Daudkandi",
+      "Eliotganj",
+      "Gouripur"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Davidhar",
+    "subareas": [
+      "Barashalghar",
+      "Davidhar",
+      "Dhamtee",
+      "Gangamandal"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Homna"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Laksam",
+    "subareas": [
+      "Bipulasar",
+      "Laksam",
+      "Lakshamanpur"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Langalkot",
+    "subareas": [
+      "Chhariabazar",
+      "Dhalua",
+      "Gunabati",
+      "Langalkot"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Comilla",
+    "area": "Muradnagar",
+    "subareas": [
+      "Bangra",
+      "Companyganj",
+      "Muradnagar",
+      "Pantibazar",
+      "Ramchandarpur",
+      "Sonakanda"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Coxâ€™s Bazar",
+    "area": "Chiringga",
+    "subareas": [
+      "Badarkali",
+      "Chiringga",
+      "Chiringga S.O",
+      "Malumghat"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Coxâ€™s Bazar",
+    "area": "Coxs Bazar Sadar",
+    "subareas": [
+      "Coxs Bazar Sadar",
+      "Eidga",
+      "Jhilanja"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Coxâ€™s Bazar",
+    "area": "Gorakohata"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Coxâ€™s Bazar",
+    "area": "Kutubdia"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Coxâ€™s Bazar",
+    "area": "Ramu"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Coxâ€™s Bazar",
+    "area": "Teknaf",
+    "subareas": [
+      "Hnila",
+      "St.Martin",
+      "Teknaf"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Coxâ€™s Bazar",
+    "area": "Ukhia"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Feni",
+    "area": "Chhagalnaia",
+    "subareas": [
+      "Chhagalnaia",
+      "Daraga Hat",
+      "Maharajganj",
+      "Puabashimulia"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Feni",
+    "area": "Dagonbhuia",
+    "subareas": [
+      "Chhilonia",
+      "Dagondhuia",
+      "Dudmukha",
+      "Rajapur"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Feni",
+    "area": "Feni Sadar",
+    "subareas": [
+      "Fazilpur",
+      "Feni Sadar",
+      "Laskarhat",
+      "Sharshadie"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Feni",
+    "area": "Pashurampur",
+    "subareas": [
+      "Fulgazi",
+      "Munshirhat",
+      "Pashurampur",
+      "Shuarbazar"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Feni",
+    "area": "Sonagazi",
+    "subareas": [
+      "Ahmadpur",
+      "Kazirhat",
+      "Motiganj",
+      "Sonagazi"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Khagrachari",
+    "area": "Diginala"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Khagrachari",
+    "area": "Khagrachari Sadar"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Khagrachari",
+    "area": "Laxmichhari"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Khagrachari",
+    "area": "Mahalchhari"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Khagrachari",
+    "area": "Manikchhari"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Khagrachari",
+    "area": "Matiranga"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Khagrachari",
+    "area": "Panchhari"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Khagrachari",
+    "area": "Ramghar Head Office"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Lakshmipur",
+    "area": "Char Alexgander",
+    "subareas": [
+      "Char Alexgander",
+      "Hajirghat",
+      "Ramgatirhat"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Lakshmipur",
+    "area": "Lakshimpur Sadar",
+    "subareas": [
+      "Amani Lakshimpur",
+      "Bhabaniganj",
+      "Chandraganj",
+      "Choupalli",
+      "Dalal Bazar",
+      "Duttapara",
+      "Keramatganj",
+      "Lakshimpur Sadar",
+      "Mandari",
+      "Rupchara"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Lakshmipur",
+    "area": "Ramganj",
+    "subareas": [
+      "Alipur",
+      "Dolta",
+      "Kanchanpur",
+      "Naagmud",
+      "Panpara",
+      "Ramganj"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Lakshmipur",
+    "area": "Raypur",
+    "subareas": [
+      "Bhuabari",
+      "Haydarganj",
+      "Nagerdighirpar",
+      "Rakhallia",
+      "Raypur"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Noakhali",
+    "area": "Basurhat",
+    "subareas": [
+      "Basur Hat",
+      "Charhajari"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Noakhali",
+    "area": "Begumganj",
+    "subareas": [
+      "Alaiarpur",
+      "Amisha Para",
+      "Banglabazar",
+      "Bazra",
+      "Begumganj",
+      "Bhabani Jibanpur",
+      "Choumohani",
+      "Dauti",
+      "Durgapur",
+      "Gopalpur",
+      "Jamidar Hat",
+      "Joyag",
+      "Joynarayanpur",
+      "Khalafat Bazar",
+      "Khalishpur",
+      "Maheshganj",
+      "Mir Owarishpur",
+      "Nadona",
+      "Nandiapara",
+      "Oachhekpur",
+      "Rajganj",
+      "Sonaimuri",
+      "Tangirpar",
+      "Thanar Hat"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Noakhali",
+    "area": "Chatkhil",
+    "subareas": [
+      "Bansa Bazar",
+      "Bodalcourt",
+      "Chatkhil",
+      "Dosh Gharia",
+      "Karihati",
+      "Khilpara",
+      "Palla",
+      "Rezzakpur",
+      "Sahapur",
+      "Sampara",
+      "Shingbahura",
+      "Solla"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Noakhali",
+    "area": "Hatiya",
+    "subareas": [
+      "Afazia",
+      "Hatiya",
+      "Tamoraddi"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Noakhali",
+    "area": "Noakhali Sadar",
+    "subareas": [
+      "Chaprashir Hat",
+      "Char Jabbar",
+      "Charam Tua",
+      "Din Monir Hat",
+      "Kabirhat",
+      "Khalifar Hat",
+      "Mriddarhat",
+      "Noakhali College",
+      "Noakhali Sadar",
+      "Pak Kishoreganj",
+      "Sonapur"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Noakhali",
+    "area": "Senbag",
+    "subareas": [
+      "Beezbag",
+      "Chatarpaia",
+      "Kallyandi",
+      "Kankirhat",
+      "Senbag",
+      "T.P. Lamua"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Barakal"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Bilaichhari"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Jarachhari"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Kalampati",
+    "subareas": [
+      "Betbunia",
+      "Kalampati"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "kaptai",
+    "subareas": [
+      "Chandraghona",
+      "Kaptai",
+      "Kaptai Nuton Bazar",
+      "Kaptai Project"
+    ]
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Longachh"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Marishya"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Naniachhar"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Rajsthali"
+  },
+  {
+    "division": "Chattogram",
+    "district": "Rangamati",
+    "area": "Rangamati Sadar"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Dhaka",
+    "area": "Dhaka City",
+    "subareas": [
+      "Abdullahpur",
+      "Adabor",
+      "Aftab Nagar",
+      "Agargaon",
+      "Badda",
+      "Banani",
+      "Banasree",
+      "Baridhara",
+      "Basabo",
+      "Bashundhara",
+      "Bawnia",
+      "Beraid",
+      "Bochila",
+      "Cantonment area",
+      "Dakshinkhan",
+      "Dania",
+      "Demra",
+      "Dhanmondi",
+      "Farmgate",
+      "Gabtali",
+      "Gulshan",
+      "Hatirjheel",
+      "Hazaribagh",
+      "Islampur",
+      "Jatrabari",
+      "Jigatala",
+      "Jurain",
+      "Kadamtali",
+      "Kafrul",
+      "Kakrail",
+      "Kalabagan",
+      "Kamalapur",
+      "Kamrangirchar",
+      "Kazipara",
+      "Khilgaon",
+      "Khilkhet",
+      "Kotwali",
+      "Lalbagh",
+      "Matuail",
+      "Mirpur",
+      "Mohakhali",
+      "Mohammadpur",
+      "Motijheel",
+      "Nimtoli",
+      "Niketan",
+      "Pallabi",
+      "Paribagh",
+      "Paltan",
+      "Ramna",
+      "Rampura",
+      "Sabujbagh",
+      "Sadarghat",
+      "Satarkul",
+      "Segunbagicha",
+      "Shahbagh",
+      "Shahjadpur",
+      "Shantinagr",
+      "Sher-e-Bangla Nagar",
+      "Shyampur",
+      "Sutrapur",
+      "Tejgaon",
+      "Uttara",
+      "Uttarkhan",
+      "Vatara",
+      "Wari"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Dhaka",
+    "area": "Dhamrai",
+    "subareas": [
+      "Dhamrai",
+      "Kalampur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Dhaka",
+    "area": "Dohar",
+    "subareas": [
+      "Meghula",
+      "Joypara",
+      "Narisha",
+      "Palamganj",
+      "Hasnabad"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Dhaka",
+    "area": "Keraniganj",
+    "subareas": [
+      "Ati",
+      "Dhaka Jute Mills",
+      "Kalatia",
+      "Keraniganj"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Dhaka",
+    "area": "Nawabganj",
+    "subareas": [
+      "Agla",
+      "Churain",
+      "Daudpur",
+      "Khalpar",
+      "Nawabganj"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Dhaka",
+    "area": "Savar",
+    "subareas": [
+      "Amin Bazar",
+      "Dairy Farm",
+      "EPZ",
+      "Jahangirnagar University",
+      "Kashem Cotton Mills",
+      "Rajphulbaria",
+      "Savar",
+      "Savar Canttonment",
+      "Saver P.A.T.C",
+      "Shimulia"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Alfadanga"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Bhanga"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Boalmari",
+    "subareas": [
+      "Boalmari",
+      "Rupatpat"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Charbhadrasan"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Faridpur Sadar",
+    "subareas": [
+      "Ambikapur",
+      "Baitulaman Politecni",
+      "Faridpursadar",
+      "Kanaipur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Madukhali",
+    "subareas": [
+      "Kamarkali",
+      "Madukhali"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Nagarkanda",
+    "subareas": [
+      "Nagarkanda",
+      "Talma"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Sadarpur",
+    "subareas": [
+      "Bishwa jaker Manjil",
+      "Hat Krishapur",
+      "Sadarpur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Faridpur",
+    "area": "Shriangan"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gazipur",
+    "area": "Gazipur Sadar",
+    "subareas": [
+      "B.O.F",
+      "B.R.R",
+      "Chandna",
+      "Gazipur Sadar",
+      "National University"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gazipur",
+    "area": "Kaliakair",
+    "subareas": [
+      "Kaliakair",
+      "konabari",
+      "Safipur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gazipur",
+    "area": "Kaliganj",
+    "subareas": [
+      "Kaliganj",
+      "Pubail",
+      "Santanpara",
+      "Vaoal Jamalpur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gazipur",
+    "area": "Kapashia"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gazipur",
+    "area": "Monnunagar",
+    "subareas": [
+      "Ershad Nagar",
+      "Monnunagar"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gazipur",
+    "area": "Turag"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gazipur",
+    "area": "Sreepur",
+    "subareas": [
+      "Barmi",
+      "Bashamur",
+      "Boubi",
+      "Kawraid",
+      "Satkhamair",
+      "Sreepur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gazipur",
+    "area": "Sripur",
+    "subareas": [
+      "Tepirbari",
+      "Tengra",
+      "Rajendrapur",
+      "Rajendrapur Canttome"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gopalganj",
+    "area": "Gopalganj Sadar",
+    "subareas": [
+      "Barfa",
+      "Chandradighalia",
+      "Gopalganj Sadar",
+      "Ulpur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gopalganj",
+    "area": "Kashiani",
+    "subareas": [
+      "Jonapur",
+      "Kashiani",
+      "Ramdia College",
+      "Ratoil"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gopalganj",
+    "area": "Kotalipara"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gopalganj",
+    "area": "Maksudpur",
+    "subareas": [
+      "Batkiamari",
+      "Khandarpara"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gopalganj",
+    "area": "Muksudpur"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Gopalganj",
+    "area": "Tungipara",
+    "subareas": [
+      "Patgati",
+      "Tungipara"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Bajitpur",
+    "subareas": [
+      "Bajitpur",
+      "Sararchar"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Kuliarchar",
+    "subareas": [
+      "Laksmipur",
+      "Chhoysuti",
+      "Kuliarchar"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Bhairob"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Hossenpur"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Itna"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Karimganj"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Katiadi",
+    "subareas": [
+      "Gochhihata",
+      "Katiadi"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Kishoreganj Sadar",
+    "subareas": [
+      "Kishoreganj S.Mills",
+      "Kishoreganj Sadar",
+      "Maizhati",
+      "Nilganj"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Mithamoin",
+    "subareas": [
+      "Abdullahpur",
+      "MIthamoin"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Nikli"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Ostagram"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Pakundia"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Kishoreganj",
+    "area": "Tarial"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Madaripur",
+    "area": "Barhamganj",
+    "subareas": [
+      "Bahadurpur",
+      "Barhamganj",
+      "Nilaksmibandar",
+      "Umedpur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Madaripur",
+    "area": "kalkini",
+    "subareas": [
+      "Kalkini",
+      "Sahabrampur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Madaripur",
+    "area": "Madaripur Sadar",
+    "subareas": [
+      "Charmugria",
+      "Habiganj",
+      "Kulpaddi",
+      "Madaripur Sadar",
+      "Mustafapur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Madaripur",
+    "area": "Rajoir",
+    "subareas": [
+      "Khalia",
+      "Rajoir"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Manikganj",
+    "area": "Doulatpur"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Manikganj",
+    "area": "Ghior"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Manikganj",
+    "area": "Lechhraganj",
+    "subareas": [
+      "Jhitka",
+      "Lechhraganj"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Manikganj",
+    "area": "Manikganj Sadar",
+    "subareas": [
+      "Barangail",
+      "Gorpara",
+      "Mahadebpur",
+      "Manikganj Bazar",
+      "Manikganj Sadar"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Manikganj",
+    "area": "Saturia",
+    "subareas": [
+      "Baliati",
+      "Saturia"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Manikganj",
+    "area": "Shibloya",
+    "subareas": [
+      "Aricha",
+      "Shibaloy",
+      "Tewta",
+      "Uthli"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Manikganj",
+    "area": "Singair",
+    "subareas": [
+      "Baira",
+      "joymantop",
+      "Singair"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Munshiganj",
+    "area": "Gajaria",
+    "subareas": [
+      "Gajaria",
+      "Hossendi",
+      "Rasulpur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Munshiganj",
+    "area": "Lohajong",
+    "subareas": [
+      "Gouragonj",
+      "Haldia SO",
+      "Haridia",
+      "Haridia DESO",
+      "Korhati",
+      "Lohajang",
+      "Madini Mandal",
+      "Medini Mandal EDSO"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Munshiganj",
+    "area": "Munshiganj Sadar",
+    "subareas": [
+      "Kathakhali",
+      "Mirkadim",
+      "Munshiganj Sadar",
+      "Rikabibazar"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Munshiganj",
+    "area": "Sirajdikhan",
+    "subareas": [
+      "Ichapur",
+      "Kola",
+      "Malkha Nagar",
+      "Shekher Nagar",
+      "Sirajdikhan"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Munshiganj",
+    "area": "Sreenagar",
+    "subareas": [
+      "Baghra",
+      "Rarikhal",
+      "Bhaggyakul",
+      "Hashara",
+      "Kolapara",
+      "Kumarbhog",
+      "Maijpara",
+      "Sreenagar",
+      "Vaggyakul SO"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Munshiganj",
+    "area": "Tangibari",
+    "subareas": [
+      "Bajrajugini",
+      "Baligao",
+      "Betkahat",
+      "Dighirpar",
+      "Hasail",
+      "Pura",
+      "Pura EDSO",
+      "Tangibari"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narayanganj",
+    "area": "Araihazar",
+    "subareas": [
+      "Araihazar",
+      "Gopaldi"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narayanganj",
+    "area": "Sonargaon"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narayanganj",
+    "area": "Baidder Bazar",
+    "subareas": [
+      "Baidder Bazar",
+      "Bara Nagar",
+      "Barodi"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narayanganj",
+    "area": "Bandar",
+    "subareas": [
+      "Bandar",
+      "BIDS",
+      "D.C Mills",
+      "Madanganj",
+      "Nabiganj"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narayanganj",
+    "area": "Fatullah",
+    "subareas": [
+      "Fatulla Bazar",
+      "Fatullah"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narayanganj",
+    "area": "Narayanganj Sadar"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narayanganj",
+    "area": "Rupganj",
+    "subareas": [
+      "Bhulta",
+      "Kanchan",
+      "Murapara",
+      "Nagri",
+      "Rupganj"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narayanganj",
+    "area": "Siddirganj",
+    "subareas": [
+      "Adamjeenagar",
+      "LN Mills",
+      "Siddirganj"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narsingdi",
+    "area": "Belabo"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narsingdi",
+    "area": "Monohordi",
+    "subareas": [
+      "Hatirdia",
+      "Katabaria",
+      "Monohordi"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narsingdi",
+    "area": "Narsingdi Sadar",
+    "subareas": [
+      "Karimpur",
+      "Narsingdi College",
+      "Narsingdi Sadar",
+      "Panchdona",
+      "UMC Jute Mills"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narsingdi",
+    "area": "Madhabdi"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narsingdi",
+    "area": "Palash",
+    "subareas": [
+      "Char Sindhur",
+      "Ghorashal",
+      "Sarkarkhana",
+      "Palash"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narsingdi",
+    "area": "Raypura",
+    "subareas": [
+      "Bazar Hasnabad",
+      "Radhaganj bazar",
+      "Raypura"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Narsingdi",
+    "area": "Shibpur"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Rajbari",
+    "area": "Baliakandi",
+    "subareas": [
+      "Baliakandi",
+      "Nalia"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Rajbari",
+    "area": "Pangsha",
+    "subareas": [
+      "Mrigibazar",
+      "Pangsha",
+      "Ramkol",
+      "Ratandia"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Rajbari",
+    "area": "Rajbari Sadar",
+    "subareas": [
+      "Goalanda",
+      "Khankhanapur",
+      "Rajbari Sadar"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Shariatpur",
+    "area": "Bhedorganj"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Shariatpur",
+    "area": "Damudhya"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Shariatpur",
+    "area": "Gosairhat"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Shariatpur",
+    "area": "Jajira"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Shariatpur",
+    "area": "Naria",
+    "subareas": [
+      "Bhozeshwar",
+      "Gharisar",
+      "Kartikpur",
+      "Naria",
+      "Upshi"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Shariatpur",
+    "area": "Shariatpur Sadar",
+    "subareas": [
+      "Angaria",
+      "Chikandi",
+      "Shariatpur Sadar"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Basail"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Bhuapur"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Delduar",
+    "subareas": [
+      "Delduar",
+      "Elasin",
+      "Hinga Nagar",
+      "Jangalia",
+      "Lowhati",
+      "Patharail"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Ghatail",
+    "subareas": [
+      "D. Pakutia",
+      "Dhalapara",
+      "Ghatial",
+      "Lohani",
+      "Zahidganj"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Gopalpur",
+    "subareas": [
+      "Gopalpur",
+      "Hemnagar",
+      "Jhowail",
+      "Chatutia"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Kalihati",
+    "subareas": [
+      "Ballabazar",
+      "Elinga",
+      "Kalihati",
+      "Nagarbari",
+      "Nagarbari SO",
+      "Nagbari",
+      "Palisha",
+      "Rajafair"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Kashkaolia"
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Madhupur",
+    "subareas": [
+      "Dhonbari",
+      "Madhupur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Mirzapur",
+    "subareas": [
+      "Gorai",
+      "Jarmuki",
+      "M.C. College",
+      "Mirzapur",
+      "Mohera",
+      "Warri paikpara"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Nagarpur",
+    "subareas": [
+      "Dhuburia",
+      "Nagarpur",
+      "Salimabad"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Sakhipur",
+    "subareas": [
+      "Kochua",
+      "Sakhipur"
+    ]
+  },
+  {
+    "division": "Dhaka",
+    "district": "Tangail",
+    "area": "Tangail Sadar",
+    "subareas": [
+      "Kagmari",
+      "Korotia",
+      "Purabari",
+      "Santosh",
+      "Tangail Sadar"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Chuadanga",
+    "area": "Alamdanga",
+    "subareas": [
+      "Alamdanga",
+      "Hardi"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Chuadanga",
+    "area": "Chuadanga Sadar",
+    "subareas": [
+      "Chuadanga Sadar",
+      "Munshiganj"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Chuadanga",
+    "area": "Damurhuda",
+    "subareas": [
+      "Andulbaria",
+      "Damurhuda",
+      "Darshana"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Chuadanga",
+    "area": "Doulatganj"
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Bagerhat Sadar",
+    "subareas": [
+      "Bagerhat Sadar",
+      "P.C College",
+      "Rangdia"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Chalna Ankorage",
+    "subareas": [
+      "Chalna Ankorage",
+      "Mongla Port"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Chitalmari",
+    "subareas": [
+      "Barabaria",
+      "Chitalmari"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Fakirhat",
+    "subareas": [
+      "Bhanganpar Bazar",
+      "Fakirhat",
+      "Mansa"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Kachua UPO",
+    "subareas": [
+      "Kachua",
+      "Sonarkola"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Mollahat",
+    "subareas": [
+      "Charkulia",
+      "Dariala",
+      "Kahalpur",
+      "Mollahat",
+      "Nagarkandi",
+      "Pak Gangni"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Morelganj",
+    "subareas": [
+      "Morelganj",
+      "Sannasi Bazar",
+      "Telisatee"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Rampal",
+    "subareas": [
+      "Foylahat",
+      "Gourambha",
+      "Rampal",
+      "Sonatunia"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Bagherhat",
+    "area": "Rayenda"
+  },
+  {
+    "division": "Khulna",
+    "district": "Jessore",
+    "area": "Bagharpara",
+    "subareas": [
+      "Bagharpara",
+      "Gouranagar"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Jessore",
+    "area": "Chaugachha"
+  },
+  {
+    "division": "Khulna",
+    "district": "Jessore",
+    "area": "Jessore Sadar",
+    "subareas": [
+      "Basundia",
+      "Chanchra",
+      "Churamankathi",
+      "Jessore Airbach",
+      "Jessore canttonment",
+      "Jessore Sadar",
+      "Jessore Upa-Shahar",
+      "Rupdia"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Jessore",
+    "area": "Jhikargachha"
+  },
+  {
+    "division": "Khulna",
+    "district": "Jessore",
+    "area": "Keshabpur"
+  },
+  {
+    "division": "Khulna",
+    "district": "Jessore",
+    "area": "Monirampur"
+  },
+  {
+    "division": "Khulna",
+    "district": "Jessore",
+    "area": "Noapara",
+    "subareas": [
+      "Bhugilhat",
+      "Noapara",
+      "Rajghat"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Jessore",
+    "area": "Sarsa",
+    "subareas": [
+      "Bag Achra",
+      "Benapole",
+      "Jadabpur",
+      "Sarsa"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Jinaidaha",
+    "area": "Harinakundu"
+  },
+  {
+    "division": "Khulna",
+    "district": "Jinaidaha",
+    "area": "Jinaidaha Sadar",
+    "subareas": [
+      "Jinaidaha Cadet College",
+      "Jinaidaha Sadar"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Jinaidaha",
+    "area": "Kotchandpur"
+  },
+  {
+    "division": "Khulna",
+    "district": "Jinaidaha",
+    "area": "Maheshpur"
+  },
+  {
+    "division": "Khulna",
+    "district": "Jinaidaha",
+    "area": "Naldanga",
+    "subareas": [
+      "Hatbar Bazar",
+      "Naldanga"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Jinaidaha",
+    "area": "Shailakupa",
+    "subareas": [
+      "Kumiradaha",
+      "Shailakupa"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Alaipur",
+    "subareas": [
+      "Alaipur",
+      "Belphulia",
+      "Rupsha"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Batiaghat",
+    "subareas": [
+      "Batiaghat",
+      "Surkalee"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Chalna Bazar",
+    "subareas": [
+      "Bajua",
+      "Chalna Bazar",
+      "Dakup",
+      "Nalian"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Digalia",
+    "subareas": [
+      "Chandni Mahal",
+      "Digalia",
+      "Gazirhat",
+      "Ghoshghati",
+      "Senhati"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Khulna Sadar",
+    "subareas": [
+      "Atra Shilpa Area",
+      "BIT Khulna",
+      "Doulatpur",
+      "Jahanabad Canttonmen",
+      "Khula Sadar",
+      "Khulna G.P.O",
+      "Khulna Shipyard",
+      "Khulna University",
+      "Siramani",
+      "Sonali Jute Mills"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Madinabad",
+    "subareas": [
+      "Amadee",
+      "Madinabad"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Paikgachha",
+    "subareas": [
+      "Chandkhali",
+      "Garaikhali",
+      "Godaipur",
+      "Kapilmoni",
+      "Katipara",
+      "Paikgachha"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Phultala"
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Sajiara",
+    "subareas": [
+      "Chuknagar",
+      "Ghonabanda",
+      "Sajiara",
+      "Shahapur"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Khulna",
+    "area": "Terakhada",
+    "subareas": [
+      "Pak Barasat",
+      "Terakhada"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Kustia",
+    "area": "Bheramara",
+    "subareas": [
+      "Allardarga",
+      "Bheramara",
+      "Ganges Bheramara"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Kustia",
+    "area": "Janipur",
+    "subareas": [
+      "Janipur",
+      "Khoksa"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Kustia",
+    "area": "Kumarkhali",
+    "subareas": [
+      "Kumarkhali",
+      "Panti"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Kustia",
+    "area": "Kustia Sadar",
+    "subareas": [
+      "Islami University",
+      "Jagati",
+      "Kushtia Mohini",
+      "Kustia Sadar"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Kustia",
+    "area": "Mirpur",
+    "subareas": [
+      "Amla Sadarpur",
+      "Mirpur",
+      "Poradaha"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Kustia",
+    "area": "Rafayetpur",
+    "subareas": [
+      "Khasmathurapur",
+      "Rafayetpur",
+      "Taragunia"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Magura",
+    "area": "Arpara"
+  },
+  {
+    "division": "Khulna",
+    "district": "Magura",
+    "area": "Magura Sadar"
+  },
+  {
+    "division": "Khulna",
+    "district": "Magura",
+    "area": "Mohammadpur",
+    "subareas": [
+      "Binodpur",
+      "Mohammadpur",
+      "Nahata"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Magura",
+    "area": "Shripur",
+    "subareas": [
+      "Langalbadh",
+      "Nachol",
+      "Shripur"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Meherpur",
+    "area": "Gangni"
+  },
+  {
+    "division": "Khulna",
+    "district": "Meherpur",
+    "area": "Meherpur Sadar",
+    "subareas": [
+      "Amjhupi",
+      "Meherpur Sadar",
+      "Mujib Nagar Complex"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Narail",
+    "area": "Kalia"
+  },
+  {
+    "division": "Khulna",
+    "district": "Narail",
+    "area": "Laxmipasha",
+    "subareas": [
+      "Baradia",
+      "Itna",
+      "Laxmipasha",
+      "Lohagora",
+      "Naldi"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Narail",
+    "area": "Mohajan"
+  },
+  {
+    "division": "Khulna",
+    "district": "Narail",
+    "area": "Narail Sadar",
+    "subareas": [
+      "Narail Sadar",
+      "Ratanganj"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Satkhira",
+    "area": "Ashashuni",
+    "subareas": [
+      "Ashashuni",
+      "Baradal"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Satkhira",
+    "area": "Debbhata",
+    "subareas": [
+      "Debbhata",
+      "Gurugram"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Satkhira",
+    "area": "kalaroa",
+    "subareas": [
+      "Chandanpur",
+      "Hamidpur",
+      "Jhaudanga",
+      "kalaroa",
+      "Khordo",
+      "Murarikati"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Satkhira",
+    "area": "Kaliganj UPO",
+    "subareas": [
+      "Kaliganj UPO",
+      "Nalta Mubaroknagar",
+      "Ratanpur"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Satkhira",
+    "area": "Nakipur",
+    "subareas": [
+      "Buri Goalini",
+      "Gabura",
+      "Habinagar",
+      "Nakipur",
+      "Naobeki",
+      "Noornagar"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Satkhira",
+    "area": "Satkhira Sadar",
+    "subareas": [
+      "Budhhat",
+      "Gunakar kati",
+      "Satkhira Islamia Acc",
+      "Satkhira Sadar"
+    ]
+  },
+  {
+    "division": "Khulna",
+    "district": "Satkhira",
+    "area": "Taala",
+    "subareas": [
+      "Patkelghata",
+      "Taala"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Jamalpur",
+    "area": "Bakshiganj"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Jamalpur",
+    "area": "Dewangonj",
+    "subareas": [
+      "Dewangonj",
+      "Dewangonj S. Mills"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Jamalpur",
+    "area": "Islampur",
+    "subareas": [
+      "Durmoot",
+      "Gilabari",
+      "Islampur"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Jamalpur",
+    "area": "Jamalpur",
+    "subareas": [
+      "Jamalpur",
+      "Nandina",
+      "Narundi"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Jamalpur",
+    "area": "Melandah",
+    "subareas": [
+      "Jalalpur",
+      "Mahmudpur",
+      "Malancha",
+      "Melandah"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Jamalpur",
+    "area": "Madarganj",
+    "subareas": [
+      "Balijhuri",
+      "Adarvita"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Jamalpur",
+    "area": "Madarganjng"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Jamalpur",
+    "area": "Sharishabari",
+    "subareas": [
+      "Bausee",
+      "Jagannath Ghat",
+      "Jamuna Sar Karkhanayy",
+      "Pingna",
+      "Sharishabari"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Bhaluka"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Gaforgaon",
+    "subareas": [
+      "Dobasia",
+      "Gaforgaon",
+      "Kandipara",
+      "Shibganj",
+      "Usti"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Gouripur",
+    "subareas": [
+      "Gouripur",
+      "Ramgopalpur"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Haluaghat",
+    "subareas": [
+      "Dhara",
+      "Haluaghat",
+      "Munshirhat"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Isshwargonj",
+    "subareas": [
+      "Atharabari",
+      "Isshwargonj",
+      "Sohagi"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Muktagachha"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Mymensingh Sadar",
+    "subareas": [
+      "Agriculture Universi",
+      "Biddyaganj",
+      "Kawatkhali",
+      "Mymensingh Sadar",
+      "Pearpur",
+      "Shombhuganj"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Nandail",
+    "subareas": [
+      "Gangail",
+      "Nandail"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Phulpur",
+    "subareas": [
+      "Beltia",
+      "Phulpur",
+      "Tarakanda"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensingh",
+    "area": "Trishal",
+    "subareas": [
+      "Ahmadbad",
+      "Dhala",
+      "Ram Amritaganj",
+      "Trishal"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Mymensinghyns",
+    "area": "Fulbaria"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Susung Durgapur"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Atpara"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Barhatta"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Dharmapasha"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Dhobaura",
+    "subareas": [
+      "Dhobaura",
+      "Sakoai"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Kalmakanda"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Kendua"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Khaliajuri",
+    "subareas": [
+      "Khaliajhri",
+      "Shaldigha"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Madan"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Moddhynagar"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Mohanganj"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Netrakona Sadar",
+    "subareas": [
+      "Baikherhati",
+      "Netrakona Sadar"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Netrakona",
+    "area": "Purbadhola",
+    "subareas": [
+      "Jaria Jhanjhail",
+      "Purbadhola",
+      "Shamgonj"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Sherpur",
+    "area": "Bakshigonj"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Sherpur",
+    "area": "Jhinaigati"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Sherpur",
+    "area": "Nakla",
+    "subareas": [
+      "Gonopaddi",
+      "Nakla"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Sherpur",
+    "area": "Nalitabari",
+    "subareas": [
+      "Hatibandha",
+      "Nalitabari"
+    ]
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Sherpur",
+    "area": "Sherpur Shadar"
+  },
+  {
+    "division": "Mymensingh",
+    "district": "Sherpur",
+    "area": "Shribardi"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Alamdighi",
+    "subareas": [
+      "Adamdighi",
+      "Nasharatpur",
+      "Santahar"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Bogra Sadar",
+    "subareas": [
+      "Bogra Canttonment",
+      "Bogra Sadar"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Dhunat",
+    "subareas": [
+      "Dhunat",
+      "Gosaibari"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Dupchachia",
+    "subareas": [
+      "Dupchachia",
+      "Talora"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Gabtoli",
+    "subareas": [
+      "Gabtoli",
+      "Sukhanpukur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Kahalu"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Nandigram"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Sariakandi",
+    "subareas": [
+      "Chandan Baisha",
+      "Sariakandi"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Sherpur",
+    "subareas": [
+      "Chandaikona",
+      "Palli Unnyan Accadem",
+      "Sherpur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Shibganj"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Bogra",
+    "area": "Sonatola"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Chapinawabganj",
+    "area": "Bholahat"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Chapinawabganj",
+    "area": "Chapinawabganj Sadar",
+    "subareas": [
+      "Amnura",
+      "Chapinawbganj Sadar",
+      "Rajarampur",
+      "Ramchandrapur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Chapinawabganj",
+    "area": "Nachol",
+    "subareas": [
+      "Mandumala",
+      "Nachol"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Chapinawabganj",
+    "area": "Rohanpur",
+    "subareas": [
+      "Gomashtapur",
+      "Rohanpur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Chapinawabganj",
+    "area": "Shibganj U.P.O",
+    "subareas": [
+      "Kansart",
+      "Manaksha",
+      "Shibganj U.P.O"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Joypurhat",
+    "area": "Akkelpur",
+    "subareas": [
+      "Akklepur",
+      "jamalganj",
+      "Tilakpur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Joypurhat",
+    "area": "Joypurhat Sadar"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Joypurhat",
+    "area": "kalai"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Joypurhat",
+    "area": "Khetlal"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Joypurhat",
+    "area": "panchbibi"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Ahsanganj",
+    "subareas": [
+      "Ahsanganj",
+      "Bandai"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Badalgachhi"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Dhamuirhat"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Mahadebpur"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Naogaon Sadar"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Niamatpur"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Nitpur",
+    "subareas": [
+      "Nitpur",
+      "Panguria",
+      "Porsa"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Patnitala"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Prasadpur",
+    "subareas": [
+      "Balihar",
+      "Manda",
+      "Prasadpur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Raninagar",
+    "subareas": [
+      "Kashimpur",
+      "Raninagar"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Naogaon",
+    "area": "Sapahar",
+    "subareas": [
+      "Moduhil",
+      "Sapahar"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Natore",
+    "area": "Gopalpur UPO",
+    "subareas": [
+      "Abdulpur",
+      "Gopalpur U.P.O",
+      "Lalpur S.O"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Natore",
+    "area": "Harua",
+    "subareas": [
+      "Baraigram",
+      "Dayarampur",
+      "Harua"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Natore",
+    "area": "Hatgurudaspur"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Natore",
+    "area": "Laxman"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Natore",
+    "area": "Natore Sadar",
+    "subareas": [
+      "Baiddyabal Gharia",
+      "Digapatia",
+      "Madhnagar",
+      "Natore Sadar"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Natore",
+    "area": "Singra"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Banwarinagar"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Bera",
+    "subareas": [
+      "Bera",
+      "Kashinathpur",
+      "Nakalia",
+      "Puran Bharenga"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Bhangura"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Chatmohar"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Debottar"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Ishwardi",
+    "subareas": [
+      "Dhapari",
+      "Ishwardi",
+      "Pakshi",
+      "Rajapur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Pabna Sadar",
+    "subareas": [
+      "Hamayetpur",
+      "Kaliko Cotton Mills",
+      "Pabna Sadar"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Sathia"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Pabna",
+    "area": "Sujanagar",
+    "subareas": [
+      "Sagarkandi",
+      "Sujanagar"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Bagha",
+    "subareas": [
+      "Arani",
+      "Bagha"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Bhabaniganj",
+    "subareas": [
+      "Bhabaniganj",
+      "Taharpur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Charghat",
+    "subareas": [
+      "Charghat",
+      "Sarda"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Durgapur"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Godagari",
+    "subareas": [
+      "Godagari",
+      "Premtoli"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Khod Mohanpur"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Lalitganj",
+    "subareas": [
+      "Lalitganj",
+      "Rajshahi Sugar Mills",
+      "Shyampur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Putia"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Rajshahi Sadar",
+    "subareas": [
+      "Binodpur Bazar",
+      "Ghuramara",
+      "Kazla",
+      "Rajshahi Canttonment",
+      "Rajshahi Court",
+      "Rajshahi Sadar",
+      "Rajshahi University",
+      "Sapura"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Rajshahi",
+    "area": "Tanor"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Sirajganj",
+    "area": "Baiddya Jam Toil"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Sirajganj",
+    "area": "Belkuchi",
+    "subareas": [
+      "Belkuchi",
+      "Enayetpur",
+      "Rajapur",
+      "Sohagpur",
+      "Sthal"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Sirajganj",
+    "area": "Dhangora",
+    "subareas": [
+      "Dhangora",
+      "Malonga"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Sirajganj",
+    "area": "Kazipur",
+    "subareas": [
+      "Gandail",
+      "Kazipur",
+      "Shuvgachha"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Sirajganj",
+    "area": "Shahjadpur",
+    "subareas": [
+      "Jamirta",
+      "Kaijuri",
+      "Porjana",
+      "Shahjadpur"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Sirajganj",
+    "area": "Sirajganj Sadar",
+    "subareas": [
+      "Raipur",
+      "Rashidabad",
+      "Sirajganj Sadar"
+    ]
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Sirajganj",
+    "area": "Tarash"
+  },
+  {
+    "division": "Rajshahi",
+    "district": "Sirajganj",
+    "area": "Ullapara",
+    "subareas": [
+      "Lahiri Mohanpur",
+      "Salap",
+      "Ullapara",
+      "Ullapara R.S"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Bangla Hili"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Biral"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Birampur"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Birganj"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Chrirbandar",
+    "subareas": [
+      "Chrirbandar",
+      "Ranirbandar"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Dinajpur Sadar",
+    "subareas": [
+      "Dinajpur Rajbari",
+      "Dinajpur Sadar"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Khansama",
+    "subareas": [
+      "Khansama",
+      "Pakarhat"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Maharajganj"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Nababganj",
+    "subareas": [
+      "Daudpur",
+      "Gopalpur",
+      "Nababganj"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Osmanpur",
+    "subareas": [
+      "Ghoraghat",
+      "Osmanpur"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Parbatipur"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Phulbari"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Dinajpur",
+    "area": "Setabganj"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Gaibandha",
+    "area": "Bonarpara",
+    "subareas": [
+      "Bonarpara",
+      "saghata"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Gaibandha",
+    "area": "Gaibandha Sadar"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Gaibandha",
+    "area": "Gobindaganj",
+    "subareas": [
+      "Gobindhaganj",
+      "Mahimaganj"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Gaibandha",
+    "area": "Palashbari"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Gaibandha",
+    "area": "Phulchhari",
+    "subareas": [
+      "Bharatkhali",
+      "Phulchhari"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Gaibandha",
+    "area": "Saadullapur",
+    "subareas": [
+      "Naldanga",
+      "Saadullapur"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Gaibandha",
+    "area": "Sundarganj",
+    "subareas": [
+      "Bamandanga",
+      "Sundarganj"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Kurigram",
+    "area": "Bhurungamari"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Kurigram",
+    "area": "Chilmari",
+    "subareas": [
+      "Chilmari",
+      "Jorgachh"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Kurigram",
+    "area": "Kurigram Sadar",
+    "subareas": [
+      "Kurigram Sadar",
+      "Pandul",
+      "Phulbari"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Kurigram",
+    "area": "Nageshwar"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Kurigram",
+    "area": "Rajarhat",
+    "subareas": [
+      "Nazimkhan",
+      "Rajarhat"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Kurigram",
+    "area": "Rajibpur"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Kurigram",
+    "area": "Roumari"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Kurigram",
+    "area": "Ulipur",
+    "subareas": [
+      "Bazarhat",
+      "Ulipur"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Lalmonirhat",
+    "area": "Aditmari"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Lalmonirhat",
+    "area": "Hatibandha"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Lalmonirhat",
+    "area": "Lalmonirhat Sadar",
+    "subareas": [
+      "Kulaghat SO",
+      "Lalmonirhat Sadar",
+      "Moghalhat"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Lalmonirhat",
+    "area": "Patgram",
+    "subareas": [
+      "Baura",
+      "Burimari",
+      "Patgram"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Lalmonirhat",
+    "area": "Tushbhandar"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Nilphamari",
+    "area": "Dimla",
+    "subareas": [
+      "Dimla",
+      "Ghaga Kharibari"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Nilphamari",
+    "area": "Domar",
+    "subareas": [
+      "Chilahati",
+      "Domar"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Nilphamari",
+    "area": "Jaldhaka"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Nilphamari",
+    "area": "Kishoriganj"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Nilphamari",
+    "area": "Nilphamari Sadar",
+    "subareas": [
+      "Nilphamari Sadar",
+      "Nilphamari Sugar Mil"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Nilphamari",
+    "area": "Syedpur",
+    "subareas": [
+      "Syedpur",
+      "Syedpur Upashahar"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Panchagarh",
+    "area": "Boda"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Panchagarh",
+    "area": "Chotto Dab",
+    "subareas": [
+      "Chotto Dab",
+      "Mirjapur"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Panchagarh",
+    "area": "Dabiganj"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Panchagarh",
+    "area": "Panchagra Sadar"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Panchagarh",
+    "area": "Tetulia"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Rangpur",
+    "area": "Badarganj",
+    "subareas": [
+      "Badarganj",
+      "Shyampur"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Rangpur",
+    "area": "Gangachara"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Rangpur",
+    "area": "Kaunia",
+    "subareas": [
+      "Haragachh",
+      "Kaunia"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Rangpur",
+    "area": "Mithapukur"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Rangpur",
+    "area": "Pirgachha"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Rangpur",
+    "area": "Rangpur Sadar",
+    "subareas": [
+      "Alamnagar",
+      "Mahiganj",
+      "Rangpur Cadet Colleg",
+      "Rangpur Carmiecal Col",
+      "Rangpur Sadar",
+      "Rangpur Upa-Shahar"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Rangpur",
+    "area": "Taraganj"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Thakurgaon",
+    "area": "Baliadangi",
+    "subareas": [
+      "Baliadangi",
+      "Lahiri"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Thakurgaon",
+    "area": "Jibanpur"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Thakurgaon",
+    "area": "Pirganj"
+  },
+  {
+    "division": "Rangpur",
+    "district": "Thakurgaon",
+    "area": "Rani Sankail",
+    "subareas": [
+      "Nekmarad",
+      "Rani Sankail"
+    ]
+  },
+  {
+    "division": "Rangpur",
+    "district": "Thakurgaon",
+    "area": "Thakurgaon Sadar",
+    "subareas": [
+      "Ruhia",
+      "Shibganj",
+      "Thakurgaon Road",
+      "Thakurgaon Sadar"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Hobiganj",
+    "area": "Azmireeganj"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Hobiganj",
+    "area": "Bahubal"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Hobiganj",
+    "area": "Baniachang",
+    "subareas": [
+      "Baniachang",
+      "Jatrapasha",
+      "Kadirganj"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Hobiganj",
+    "area": "Chunarughat",
+    "subareas": [
+      "Chandpurbagan",
+      "Chunarughat",
+      "Narapati"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Hobiganj",
+    "area": "Hobiganj Sadar",
+    "subareas": [
+      "Gopaya",
+      "Hobiganj Sadar",
+      "Shaestaganj"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Hobiganj",
+    "area": "Kalauk",
+    "subareas": [
+      "Kalauk",
+      "Lakhai"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Hobiganj",
+    "area": "Madhabpur",
+    "subareas": [
+      "Itakhola",
+      "Madhabpur",
+      "Saihamnagar",
+      "Shahajibazar"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Hobiganj",
+    "area": "Nabiganj",
+    "subareas": [
+      "Digalbak",
+      "Golduba",
+      "Goplarbazar",
+      "Inathganj",
+      "Nabiganj"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Moulvibazar",
+    "area": "Baralekha",
+    "subareas": [
+      "Baralekha",
+      "Dhakkhinbag",
+      "Juri",
+      "Purbashahabajpur"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Moulvibazar",
+    "area": "Kamalganj",
+    "subareas": [
+      "Kamalganj",
+      "Keramatnaga",
+      "Munshibazar",
+      "Patrakhola",
+      "Shamsher Nagar"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Moulvibazar",
+    "area": "Kulaura",
+    "subareas": [
+      "Baramchal",
+      "Kajaldhara",
+      "Karimpur",
+      "Kulaura",
+      "Langla",
+      "Prithimpasha",
+      "Tillagaon"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Moulvibazar",
+    "area": "Moulvibazar Sadar",
+    "subareas": [
+      "Afrozganj",
+      "Barakapan",
+      "Monumukh",
+      "Moulvibazar Sadar"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Moulvibazar",
+    "area": "Rajnagar"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Moulvibazar",
+    "area": "Srimangal",
+    "subareas": [
+      "Kalighat",
+      "Khejurichhara",
+      "Narain Chora",
+      "Satgaon",
+      "Srimangal"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Bishamsarpur"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Chhatak",
+    "subareas": [
+      "Chhatak",
+      "Chhatak Cement Facto",
+      "Chhatak Paper Mills",
+      "Chourangi Bazar",
+      "Gabindaganj",
+      "Gabindaganj Natun Ba",
+      "Islamabad",
+      "jahidpur",
+      "Khurma",
+      "Moinpur"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Dhirai Chandpur",
+    "subareas": [
+      "Dhirai Chandpur",
+      "Jagdal"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Duara bazar"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Ghungiar"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Jagnnathpur",
+    "subareas": [
+      "Atuajan",
+      "Hasan Fatemapur",
+      "Jagnnathpur",
+      "Rasulganj",
+      "Shiramsi",
+      "Syedpur"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Sachna"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Sunamganj Sadar",
+    "subareas": [
+      "Pagla",
+      "Patharia",
+      "Sunamganj Sadar"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "area": "Tahirpur"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Balaganj",
+    "subareas": [
+      "Balaganj",
+      "Begumpur",
+      "Brahman Shashon",
+      "Gaharpur",
+      "Goala Bazar",
+      "Karua",
+      "Kathal Khair",
+      "Natun Bazar",
+      "Omarpur",
+      "Tajpur"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Bianibazar",
+    "subareas": [
+      "Bianibazar",
+      "Churkai",
+      "jaldup",
+      "Kurar bazar",
+      "Mathiura",
+      "Salia bazar"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Bishwanath",
+    "subareas": [
+      "Bishwanath",
+      "Dashghar",
+      "Deokalas",
+      "Doulathpur",
+      "Singer kanch"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Fenchuganj",
+    "subareas": [
+      "Fenchuganj",
+      "Fenchuganj SareKarkh"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Goainhat",
+    "subareas": [
+      "Chiknagul",
+      "Goainhat",
+      "Jaflong"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Golapganj",
+    "subareas": [
+      "banigram",
+      "Chandanpur",
+      "Dakkhin Bhadashore",
+      "Dhaka Dakkhin",
+      "Gopalgannj",
+      "Ranaping"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Jaintapur"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Jakiganj",
+    "subareas": [
+      "Ichhamati",
+      "Jakiganj"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Kanaighat",
+    "subareas": [
+      "Chatulbazar",
+      "Gachbari",
+      "Kanaighat",
+      "Manikganj"
+    ]
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Kompanyganj"
+  },
+  {
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "area": "Sylhet Sadar",
+    "subareas": [
+      "Birahimpur",
+      "Jalalabad",
+      "Jalalabad Cantoment",
+      "Kadamtali",
+      "Kamalbazer",
+      "Khadimnagar",
+      "Lalbazar",
+      "Mogla",
+      "Ranga Hajiganj",
+      "Shahajalal Science &",
+      "Silam",
+      "Sylhe Sadar",
+      "Sylhet Biman Bondar",
+      "Sylhet Cadet Col"
+    ]
+  }
+]
