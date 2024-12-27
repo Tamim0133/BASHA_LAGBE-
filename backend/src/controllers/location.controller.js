@@ -8,18 +8,18 @@ const __dirname = path.dirname(__filename);
 
 export const insertLocations = async (req, res) => {
     try {
-        const filePath = path.resolve(__dirname, "../../flat_location.json");
-        const rawData = readFileSync(filePath, "utf-8");
-        const locations = JSON.parse(rawData);
+        // const filePath = path.resolve(__dirname, "../../flat_location.json");
+        // const rawData = readFileSync(filePath, "utf-8");
+        // const locations = JSON.parse(rawData);
 
-        await Location.insertMany(locations);
+        // await Location.insertMany(locations);
         // await Location.updateMany({"district" : "Coxâ€™s Bazar"}, {"district" : "Cox's Bazar"})
-        // console.log("Successfully inserted locations");
+        console.log("Health is good!");
 
-        res.status(200).send("Locations inserted successfully");
+        res.status(200).send("Health is good!");
     } catch (error) {
-        console.error("Error in inserting location", error);
-        res.status(500).send("Failed to insert locations");
+        console.error("Health is bad!", error);
+        res.status(500).send("Health is bad!");
     }
 };
 
@@ -73,12 +73,9 @@ export const getSubAreas = async (req, res) => {
     try {
         const {area} = req.params
         const areas = await Location.findOne({area: area})
-        
-        const hasSubarea = "subareas" in areas
         res.status(200).json({
             message: "areas retrieved successfully",
-            hasSubarea : hasSubarea,
-            data: hasSubarea ? areas.subareas : []
+            data: areas.subareas
         })
     } catch (error) {
         console.error("Error in finding areas", error);
