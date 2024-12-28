@@ -44,7 +44,6 @@ export const getDistricts = async (req, res) => {
     try {
         const {div} = req.params
         const districts = await Location.find({division: div}).distinct("district")
-
         res.status(200).json({
             message: "Districts retrieved successfully",
             data: districts
@@ -72,10 +71,11 @@ export const getAreas = async (req, res) => {
 export const getSubAreas = async (req, res) => {
     try {
         const {area} = req.params
-        const areas = await Location.findOne({area: area})
+        const foundArea = await Location.findOne({area: area})
         res.status(200).json({
             message: "areas retrieved successfully",
-            data: areas.subareas
+            location: foundArea,
+            data: foundArea.subareas
         })
     } catch (error) {
         console.error("Error in finding areas", error);
