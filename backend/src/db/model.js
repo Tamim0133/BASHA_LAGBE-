@@ -142,8 +142,8 @@ const adSchema = new Schema(
             type: String, 
             enum: ['Family', 'Bachelor', 'Hostel', 'Office', 'Sublet', 'Female', 'Shop', 'Garage']
         },
-        noOfBedrooms : Number,
-        noOfBathrooms : Number,
+        bedrooms : Number,
+        bathrooms : Number,
         facilities: {
             type: [String], 
             enum: ['Wifi', 'Gas', 'Parking', 'Lift', 'Water Supply', 'Sunlight & Ventilation', 'Markets Nearby', 'Security', 'High Commode', 'Balcony']

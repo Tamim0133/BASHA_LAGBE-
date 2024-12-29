@@ -1,6 +1,6 @@
 import { Ad } from "../db/model.js";
 import Joi from 'joi'
-
+import {uploadOnCloudinary} from "../utils/cloudinary.js"
 const adValidationSchema = Joi.object({
     title: Joi.string().required(),
     area: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).required(), // Valid ObjectId pattern
@@ -28,8 +28,14 @@ const adValidationSchema = Joi.object({
 
 export const insertAd = async (req, res) => {
     try {
-        const adData = req.body;
-        const { error } = adValidationSchema.validate({...adData});
+        const adData = req.body.data;
+        const serverURIs = req.files.images
+        const cloudImages = []
+        serverURIs.map(async (img,ind)=>{
+            const result = await uploadOnCloudinary(img.path)
+            cloudImages.push(result.url)
+        })
+        const { error } = adValidationSchema.validate({...adData, images:cloudImages});
 
         if (error) return res.status(400).json({ error: error.details[0].message });
         // Mongoose handles required fields validation
