@@ -6,23 +6,24 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert, ScrollView,
 import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper'; // Import CheckBox
 import * as ImagePicker from "expo-image-picker";
-import { Icon } from 'react-native-vector-icons/Icon';
-
+import { LocationSelector } from '@/components/LocationSelector';
+import axios from 'axios'
 
 
 
 // Type for form data
 interface FormData {
     title: string;
-    location: string;
+    areaId: string;
+    subarea: string;
     bedrooms: (Number | String);
     bathrooms: (Number | String);
-    photos: string[]; // array of photo URIs
+    images: ImagePicker.ImagePickerAsset[]; // array of photo URIs
     floor: Number,
-    category: 'family' | 'bachelor' | 'hostel' | 'office' | 'sublet' | 'female' | 'shop';
-    price: Number;
+    category: 'Family' | 'Bachelor'| 'Hostel'| 'Office'| 'Sublet'| 'Female' | 'Shop' | 'Garage';
+    rent: Number;
     advanceDeposit: Number;
-    advanceRefundable: boolean;
+    willRefundAdvance: boolean;
     availableFrom:
     'January' | 'February' | 'March' | 'April' | 'May' | 'June'
     | 'July' | 'August' | 'September' | 'October' | 'November' | 'December',
@@ -41,42 +42,44 @@ interface StepProps {
 
 // Main Onboarding Screen Component
 const OnboardingScreen: React.FC = () => {
-    const router = useRouter();
-    const [currentStep, setCurrentStep] = useState<number>(0);
-    const [error, setError] = useState<string>(''); // State to show error message
-
     const [formData, setFormData] = useState<FormData>({
         title: '',
-        location: '',
+        areaId: '',
+        subarea: '',
         bedrooms: 0,
         bathrooms: 0,
-        photos: [],
-        price: 0,
+        images: [],
+        rent: 0,
         advanceDeposit: 0,
-        advanceRefundable: true,
-        category: 'family',
+        willRefundAdvance: true,
+        category: 'Family',
         floor: 0,
         availableFrom: 'January',
         isAvailable: true,
         facilities: [],
         description: '',
     });
+    
 
+    const router = useRouter();
+    const [currentStep, setCurrentStep] = useState<number>(0);
+    const [error, setError] = useState<string>(''); // State to show error message
 
-
+    
 
     // Steps array
     const steps: { title: string; component: React.FC<StepProps> }[] = [
         { title: 'Step 1: Basic Info', component: BasicInfo },
         { title: 'Step 2: Property Details', component: PropertyDetails },
-        { title: 'Step 3: Upload Photos', component: UploadPhotos },
+        { title: 'Step 3: Upload Images', component: Uploadimages },
         { title: 'Step 4: Pricing and Publish', component: Pricing },
     ];
 
     // Validation for each step
     const validateStep = (): boolean => {
         if (currentStep === 0) {
-            // if (!formData.title.trim() || !formData.location.trim()) {
+            // if (!formData.title.trim() || !formData.areaId.trim()) {
+            // if (!formData.title.trim() || !formData.subarea.trim()) {
             //     setError('Please fill in all fields for Step 1.');
             //     return false;
             // }
@@ -86,8 +89,8 @@ const OnboardingScreen: React.FC = () => {
             //     return false;
             // }
         } else if (currentStep === 3) {
-            // if (!formData.price) {
-            //     setError('Please set a price.');
+            // if (!formData.rent) {
+            //     setError('Please set a rent.');
             //     return false;
             // }
         }
@@ -160,7 +163,7 @@ const OnboardingScreen: React.FC = () => {
 // Step 1: Basic Info
 const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
 
-    const Catagory: string[] = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'Female', 'Shop'];
+    const Catagory: string[] = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'Female', 'Shop', 'Garage'];
     const Bedrooms: (number | string)[] = [1, 2, 3, 4, 5, 6, '6+'];
     const Bathrooms: (number | string)[] = [1, 2, 3, 4, 5, 6, '6+'];
     const Facilities: string[] = ['Wifi', 'Gas', 'Parking', 'Lift', 'Water Supply', 'Sunlight & Ventilation', 'Markets Nearby', 'Security', 'High Commode', 'Balcony'];
@@ -191,16 +194,25 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
     };
 
     //Kun catagory er basha
-    const handleCategory = (text: 'female' | 'family' | 'bachelor' | 'hostel' | 'office' | 'sublet' | 'shop') => {
+    const handleCategory = (text: 'Family' | 'Bachelor'| 'Hostel'| 'Office'| 'Sublet'| 'Female' | 'Shop' | 'Garage') => {
         setFormData({ ...formData, category: text });
         console.log(formData);
-
+        
     };
+    const handleLocation = (obj : any)=>{
+        setSelectedArea(obj.areaId)
+        setSelectedSubArea(obj.subArea)
+        setFormData({ ...formData, areaId:selectedArea, subarea:selectedSubArea });
+        console.log(formData);
+
+    }
 
     const [selectedPropertyType, setSelectedPropertyType] = useState<string | null>(formData.category);
     const [selectedBedroom, setSelectedBedroom] = useState<Number | String | null>(formData.bedrooms);
     const [selectedBathroom, setSelectedBathroom] = useState<Number | String | null>(formData.bathrooms);
     const [selectedFeatures, setSelectedFeatures] = useState<string[]>(formData.facilities);
+    const [selectedArea, setSelectedArea] = useState<string>(formData.areaId);
+    const [selectedSubArea, setSelectedSubArea] = useState<string>(formData.subarea);
 
     return (
         <View>
@@ -227,8 +239,8 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
                             key={type}
                             style={[styles.button, selectedPropertyType === type && styles.selectedButton]}
                             onPress={() => {
-                                setSelectedPropertyType(type as "family" | "bachelor" | "hostel" | "office" | "sublet" | "female" | "shop");
-                                handleCategory(type as "family" | "bachelor" | "hostel" | "office" | "sublet" | "female" | "shop");
+                                setSelectedPropertyType(type as 'Family' | 'Bachelor'| 'Hostel'| 'Office'| 'Sublet'| 'Female' | 'Shop' | 'Garage');
+                                handleCategory(type as 'Family' | 'Bachelor'| 'Hostel'| 'Office'| 'Sublet'| 'Female' | 'Shop' | 'Garage');
                             }}
                         >
                             <Text style={[selectedPropertyType === type ? styles.showButtonText : styles.selectedText]}>{type}</Text>
@@ -262,22 +274,8 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
                 </View>
             </View>
             <Text style={styles.sectionTitle}>Location:</Text>
-            <View style={styles.dropdownSection}>
-                <TouchableOpacity style={styles.dropdown}>
-                    <Text style={styles.dropdownText}>Division</Text>
-                    <Ionicons name="chevron-down" size={20} color="#000" />
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.dropdown}>
-                    <Text style={styles.dropdownText}>District</Text>
-                    <Ionicons name="chevron-down" size={20} color="#000" />
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.dropdown}>
-                    <Text style={styles.dropdownText}>Area</Text>
-                    <Ionicons name="chevron-down" size={20} color="#000" />
-                </TouchableOpacity>
-            </View>
+            <LocationSelector onLocationSelected={handleLocation} />
+            
 
         </View>
     );
@@ -286,7 +284,7 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
 // Step 2: Property Details -> Photo and Floor No
 const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [flr, setFlr] = useState<string>(formData.floor.toString()); // Start as string
-    const [images, setImages] = useState<string[]>(formData.photos); // Initialize with formData.photos
+    const [images, setImages] = useState<ImagePicker.ImagePickerAsset[]>(formData.images); // Initialize with formData.images
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const handleTitleChange = (text: string) => {
@@ -313,7 +311,7 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
         });
 
         if (!result.canceled) {
-            const selectedImages = result.assets.map(asset => asset.uri);
+            const selectedImages = result.assets//.map(asset => asset.uri);
 
             const updatedImages = [...images, ...selectedImages];
 
@@ -323,7 +321,7 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
                 Alert.alert("Maximum Images Limit Exceeded", "You can select up to 10 images only.");
             } else {
                 setImages(updatedImages);
-                setFormData({ ...formData, photos: updatedImages }); // Update formData with new images
+                setFormData({ ...formData, images: updatedImages }); // Update formData with new images
             }
         }
     };
@@ -331,7 +329,7 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
     const removeImage = (index: number) => {
         const updatedImages = images.filter((_, i) => i !== index);
         setImages(updatedImages);
-        setFormData({ ...formData, photos: updatedImages }); // Update formData with remaining images   
+        setFormData({ ...formData, images: updatedImages }); // Update formData with remaining images   
     };
 
     return (
@@ -347,7 +345,7 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
                     maxLength={50}
                 />
 
-                <Text style={styles.sectionTitle}>Upload Property Photos:</Text>
+                <Text style={styles.sectionTitle}>Upload Property images:</Text>
                 <Text></Text>
 
                 <View style={{ marginBottom: 10 }}>
@@ -359,7 +357,7 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
                             <ScrollView horizontal style={{ maxHeight: 200, marginTop: 10 }}>
                                 {images.map((image, index) => (
                                     <View key={index} style={styles.imageContainer}>
-                                        <Image source={{ uri: image }} style={styles.thumbnail} />
+                                        <Image source={{ uri: image.uri }} style={styles.thumbnail} />
                                         <TouchableOpacity
                                             style={styles.removeButton}
                                             onPress={() => removeImage(index)}
@@ -395,7 +393,7 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
                         <ScrollView>
                             {images.map((image, index) => (
                                 <View key={index} style={styles.imageContainer}>
-                                    <Image source={{ uri: image }} style={styles.fullImage} />
+                                    <Image source={{ uri: image.uri }} style={styles.fullImage} />
                                     <TouchableOpacity
                                         style={styles.removeButton}
                                         onPress={() => removeImage(index)}
@@ -419,7 +417,7 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
 };
 
 // Step 3: Available From and Description
-const UploadPhotos: React.FC<StepProps> = ({ formData, setFormData }) => {
+const Uploadimages: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [availableFrom, setAvailableFrom] = useState<string>(formData.availableFrom); // Month
     const [description, setDescription] = useState<string>(formData.description); // Description
 
@@ -529,22 +527,61 @@ const UploadPhotos: React.FC<StepProps> = ({ formData, setFormData }) => {
 
 // Step 4: Pricing
 const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
-    const [price, setPrice] = useState<Number>(formData.price); // Month
+    const [rent, setrent] = useState<Number>(formData.rent); // Month
     const [adv, setAdv] = useState<Number>(formData.advanceDeposit);
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
+    const baseURL = process.env.EXPO_PUBLIC_BASE_URL
+    const handleSubmit = async () => {
+        if (formData.images.length < 3) {
+          Alert.alert("Minimum Images Required", "Please select at least 3 images.");
+          return;
+        }
+      
+        const fd = new FormData();
+      
+        // Handle image uploads
+        formData.images.forEach((image, index) => {
+          // ImagePickerAsset already contains the necessary file information
+          fd.append('images', {
+            uri: image.uri,
+            type: image.mimeType || 'image/jpeg', // Use the actual mime type if available
+            name: image.fileName || `image${index}.jpg`, // Use the actual filename if available
+          }as unknown as Blob);
+        });
+      
+        // Add other form data
+        const { images, ...otherData } = formData;
+        fd.append('data', JSON.stringify(otherData));
+      
+        try {
+          const response = await axios.post('http://192.168.0.101:8000/api/ad/insert-ad', fd, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Accept: 'application/json',
+            },
+          });
+          
+          console.log('Upload Success:', response.data);
+        } catch (error) {
+          console.error('Upload Error:', error);
+          Alert.alert('Upload Failed', 'An error occurred while posting the ad.');
+        }
+      };
+    
+    
 
     return (
         <View style={styles.container}>
-            {/* Price Input */}
-            <Text style={styles.sectionTitle}>Set Price:<Text style={{ color: Colors.grey }}> (rent in taka per month) </Text></Text>
+            {/* rent Input */}
+            <Text style={styles.sectionTitle}>Set Rent:<Text style={{ color: Colors.grey }}> (rent in taka per month) </Text></Text>
             <TextInput
                 style={styles.inputMoney}
-                value={price !== 0 ? String(price) : ''}
+                value={rent !== 0 ? String(rent) : ''}
                 onChangeText={(text) => {
-                    setPrice(Number(text));
-                    setFormData({ ...formData, price: Number(text) })
-                    // console.log(price);
+                    setrent(Number(text));
+                    setFormData({ ...formData, rent: Number(text) })
+                    // console.log(rent);
 
                 }}
                 placeholder=" ৳ ...."
@@ -570,15 +607,14 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
                     status={toggleCheckBox ? 'checked' : 'unchecked'}
                     onPress={() => {
                         setToggleCheckBox(!toggleCheckBox);
-                        setFormData({ ...formData, advanceRefundable: !toggleCheckBox })
+                        setFormData({ ...formData, willRefundAdvance: !toggleCheckBox })
                     }
 
                     }
                 />
                 <Text style={styles.checkboxLabel}>Advance is Refundable</Text>
             </View>
-            <TouchableOpacity
-                onPress={() => console.log('Submitted Data: ---> ', formData)}
+            <TouchableOpacity onPress={handleSubmit}
                 style={styles.colorButton}
             >
                 <Text style={styles.buttonText}>Submit</Text>
@@ -761,7 +797,7 @@ const styles = StyleSheet.create({
         margin: 5,
         alignItems: 'center',
     },
-    priceRange: {
+    rentRange: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
