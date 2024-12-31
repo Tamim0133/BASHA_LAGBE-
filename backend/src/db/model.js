@@ -152,7 +152,7 @@ const adSchema = new Schema(
             type: Boolean,
             default: true
         },
-        availableFrom : Date,
+        availableFrom : String,
         owner: {
             type: Schema.Types.ObjectId,
             ref: "User"
