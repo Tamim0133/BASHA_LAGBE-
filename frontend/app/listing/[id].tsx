@@ -6,8 +6,7 @@ import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import Animated, { SlideInDown, interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
 import { defaultStyles } from '@/constants/Styles';
-import Carousel from 'react-native-reanimated-carousel'; // Import the carousel library
-import { Icon } from 'react-native-vector-icons/Icon';
+import Carousel from 'react-native-reanimated-carousel'; 
 
 
 

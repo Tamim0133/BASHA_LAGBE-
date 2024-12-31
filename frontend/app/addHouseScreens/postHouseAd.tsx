@@ -24,6 +24,7 @@ interface FormData {
     rent: Number;
     advanceDeposit: Number;
     willRefundAdvance: boolean;
+    detailedLocation: String;
     availableFrom:
     'January' | 'February' | 'March' | 'April' | 'May' | 'June'
     | 'July' | 'August' | 'September' | 'October' | 'November' | 'December',
@@ -53,6 +54,7 @@ const OnboardingScreen: React.FC = () => {
         advanceDeposit: 0,
         willRefundAdvance: true,
         category: 'Family',
+        detailedLocation: '',
         floor: 0,
         availableFrom: 'January',
         isAvailable: true,
@@ -199,10 +201,15 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
         console.log(formData);
         
     };
-    const handleLocation = (obj : any)=>{
+    const handleArea = (obj : any)=>{
         setSelectedArea(obj.areaId)
-        setSelectedSubArea(obj.subArea)
-        setFormData({ ...formData, areaId:selectedArea, subarea:selectedSubArea });
+        setFormData({ ...formData, areaId: obj.areaId});
+        console.log(formData);
+
+    }
+    const handleSubArea = (obj : any)=>{
+        setSelectedSubArea(obj.subarea)
+        setFormData({ ...formData, subarea:obj.subarea });
         console.log(formData);
 
     }
@@ -274,7 +281,7 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
                 </View>
             </View>
             <Text style={styles.sectionTitle}>Location:</Text>
-            <LocationSelector onLocationSelected={handleLocation} />
+            <LocationSelector onAreaSelected={handleArea} onSubAreaSelected = {handleSubArea} />
             
 
         </View>
@@ -287,6 +294,16 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [images, setImages] = useState<ImagePicker.ImagePickerAsset[]>(formData.images); // Initialize with formData.images
     const [isModalVisible, setIsModalVisible] = useState(false);
 
+    const [detailedLocation, setDetailedLocation] = useState<string>(formData.detailedLocation.toString());
+
+    // Text handle korar jonno
+    const handleDetailedLocationChange = (text: string) => {
+        if (text.length <= 100) {
+            setDetailedLocation(text);
+            setFormData({ ...formData, detailedLocation: text });
+            console.log(formData);
+        }
+    };
     const handleTitleChange = (text: string) => {
         const numberValue = text ? parseInt(text, 10) : NaN;
         if (!isNaN(numberValue)) {
@@ -335,14 +352,24 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
     return (
         <ScrollView>
             <View>
+                <Text style={styles.sectionTitle}>Detailed Location:</Text>
+                <TextInput
+                    style={styles.input}
+                    value={detailedLocation}
+                    onChangeText={handleDetailedLocationChange}
+                    placeholder="Describe your location..."
+                    multiline={true} // Allow multiple lines
+                    numberOfLines={2}                    
+                    maxLength={50}
+                />
                 <Text style={styles.sectionTitle}>Enter a Floor No:</Text>
                 <TextInput
                     style={styles.input}
                     value={flr}
                     onChangeText={handleTitleChange}
-                    placeholder="Floor No"
+                    placeholder=""
                     keyboardType="numeric"
-                    maxLength={50}
+                    maxLength={100}
                 />
 
                 <Text style={styles.sectionTitle}>Upload Property images:</Text>
@@ -555,17 +582,22 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
         fd.append('data', JSON.stringify(otherData));
       
         try {
-          const response = await axios.post('http://192.168.0.101:8000/api/ad/insert-ad', fd, {
+          const response = await axios.post(`${baseURL}/api/ad/insert-ad`, fd, {
             headers: {
               'Content-Type': 'multipart/form-data',
               Accept: 'application/json',
             },
           });
-          
-          console.log('Upload Success:', response.data);
-        } catch (error) {
-          console.error('Upload Error:', error);
-          Alert.alert('Upload Failed', 'An error occurred while posting the ad.');
+          if (!response.data.success) {
+            Alert.alert('Error', response.data.message);
+            return;
+          }
+      
+          Alert.alert('Success', response.data.message);
+        } catch (error : any) {
+            const errorMessage =
+            error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+            Alert.alert('Error', errorMessage);
         }
       };
     
