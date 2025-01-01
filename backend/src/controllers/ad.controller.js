@@ -5,7 +5,7 @@ const adValidationSchema = Joi.object({
     title: Joi.string().required(),
     areaId: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).required(), // Valid ObjectId pattern
     subarea: Joi.string().optional().allow(null, ''),
-    // detailedLocation: Joi.string().required(),
+    detailedLocation: Joi.string().required(),
     images: Joi.array().items(Joi.string().uri()).optional(), // Array of valid URLs
     description: Joi.string().optional().allow(null, ''),
     floor: Joi.number().integer().optional().allow(null),
@@ -24,7 +24,7 @@ const adValidationSchema = Joi.object({
     isAvailable: Joi.boolean().optional(),
     availableFrom: Joi.string().optional().allow(null),
     owner: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).optional(), // Valid ObjectId pattern
-});
+  });
 
 export const insertAd = async (req, res) => {
     try {
@@ -37,7 +37,7 @@ export const insertAd = async (req, res) => {
         //   console.log("Local ", ind, " :", img.path);
           const result = await uploadOnCloudinary(img.path);
         //   console.log("Cloud ", ind, " :", result);
-          return result.url; // Return the URL to be included in the final array
+          return result.url; 
         })
       );
   
@@ -66,5 +66,59 @@ export const insertAd = async (req, res) => {
           error: err.message, // Optional for debugging purposes, can be removed in production
         });
     }
+  };
+  
+
+export const getAds = async (req, res) => {
+      try {
+          const {
+              sortBy, // e.g., "priceLowToHigh", "priceHighToLow", "newest"
+              propertyType, // e.g., "Family", "Bachelor"
+              priceMin, // minimum price
+              priceMax, // maximum price
+              bathrooms, // number of bathrooms
+              bedrooms, // number of bedrooms
+              features // array of features, e.g., ['Wifi', 'Parking']
+          } = req.query;
+  
+          // Build the query object for filtering
+          const filters = {};
+  
+          if (propertyType) filters.category = propertyType;
+          if (priceMin || priceMax) filters.rent = {};
+          if (priceMin) filters.rent.$gte = Number(priceMin);
+          if (priceMax) filters.rent.$lte = Number(priceMax);
+          if (bathrooms) filters.bathrooms = Number(bathrooms);
+          if (bedrooms) filters.bedrooms = Number(bedrooms);
+          if (features && Array.isArray(features)) filters.facilities = { $all: features };
+  
+          // Determine sorting
+          let sortOption = {};
+          if (sortBy === "priceLowToHigh") {
+              sortOption.rent = 1;
+          } else if (sortBy === "priceHighToLow") {
+              sortOption.rent = -1;
+          } else if (sortBy === "newest") {
+              sortOption.createdAt = -1;
+          }
+  
+          // Fetch ads from the database
+          const ads = await Ad.find(filters)
+              .sort(sortOption)
+              // .populate("area") // Populate area details
+              // .populate("owner", "name email"); // Populate owner details with selected fields
+  
+          res.status(200).json({
+              success: true,
+              data: ads,
+          });
+      } catch (error) {
+          console.error("Error fetching ads:", error);
+          res.status(500).json({
+              success: false,
+              message: "An error occurred while fetching ads.",
+              error: error.message,
+          });
+      }
   };
   

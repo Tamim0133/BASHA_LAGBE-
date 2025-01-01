@@ -119,7 +119,7 @@ const adSchema = new Schema(
             type: String, 
             required: true
         },
-        area: {
+        areaId: {
             type: Schema.Types.ObjectId,
             ref: "Location",
             required: true

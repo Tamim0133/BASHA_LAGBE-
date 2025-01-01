@@ -3,13 +3,13 @@ import React, { useMemo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import ListingsBottomSheet from '@/components/ListingsBottomSheet';
-import listingsData from '@/assets/data/temp-listing.json';
+// import listingsData from '@/assets/data/temp-listing.json';
 import ListingsMap from '@/components/ListingsMap';
 import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
 import Header from '@/components/Header';
 import settings from '../otherScreens/settings';
 import CustomDrawerContent from '@/components/DrawerNavigator';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import Colors from '@/constants/Colors';
 import AboutUsScreen from '../otherScreens/aboutUs';
 import PrivacyPolicyScreen from '../otherScreens/privacyPolicy';
@@ -18,7 +18,7 @@ import TermsAndConditionsScreen from '../otherScreens/termsAndCondition';
 import ContactUsScreen from '../otherScreens/contactUs';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
-
+import axios from 'axios';
 
 
 
@@ -26,15 +26,33 @@ const Drawer = createDrawerNavigator();
 
 const MainScreen = () => {
     const [category, setCategory] = useState<string>('Tiny homes');
-    const [items, setItems] = useState<any>(listingsData);
-
+    let listingsData : any[]= [];
+    const [items, setItems] = useState<any[]>(listingsData);
     const getoItems = useMemo(() => listingsDataGeo, []);
+    const baseURL = process.env.EXPO_PUBLIC_BASE_URL
 
     // Re-fetch or reload items when the screen comes into focus
     useFocusEffect(
         React.useCallback(() => {
-            setItems(listingsData); // Force reload items
-            setCategory('Tiny homes'); // Reset category if needed
+            const fetchAds = async () => {
+                try {
+                    const response = await axios.get(`${baseURL}/api/ad/get-ad`);
+                    if (!response.data.success) {
+                        Alert.alert('Error', response.data.message);
+                        return;
+                    }
+                    listingsData = response.data.data
+                    // Alert.alert('Success', response.data.message);
+                } catch (error: any) {
+                    const errorMessage =
+                        error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+                    Alert.alert('Error', errorMessage);
+                }
+                setItems(listingsData); // Force reload items
+                setCategory('Tiny homes'); // Reset category if needed
+            };
+    
+            fetchAds();
         }, [])
     );
 

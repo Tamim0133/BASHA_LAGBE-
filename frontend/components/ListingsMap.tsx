@@ -15,8 +15,8 @@ interface Props {
 const INITIAL_REGION = {
   latitude: 23.8103,
   longitude: 90.4125,
-  latitudeDelta: 0.1,
-  longitudeDelta: 0.1,
+  latitudeDelta: 0.01,
+  longitudeDelta: 0.01,
 };
 const ListingsMap = memo(({ listings }: Props) => {
   const router = useRouter();
@@ -44,8 +44,8 @@ const ListingsMap = memo(({ listings }: Props) => {
     const region = {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
-      latitudeDelta: 7,
-      longitudeDelta: 7,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.1,
     };
 
     mapRef.current?.animateToRegion(region);
