@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Modal, FlatList
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 
-export const LocationSelector = ({onAreaSelected,  onSubAreaSelected}) => {
+export const LocationSelector = ({ onAreaSelected, onSubAreaSelected }) => {
     const baseURL = process.env.EXPO_PUBLIC_BASE_URL
-    
+
     const [divisions, setDivisions] = useState([]);
     const [selectedDivision, setSelectedDivision] = useState('');
     const [isDivisionDropdownVisible, setIsDivisionDropdownVisible] = useState(false);
@@ -28,6 +28,7 @@ export const LocationSelector = ({onAreaSelected,  onSubAreaSelected}) => {
             try {
                 const response = await fetch(`${baseURL}/api/location/get-divisions`);
                 const data = await response.json();
+                console.log(data);
                 setDivisions(data.data);
                 setDistricts([]);
                 setAreas([]);
@@ -84,7 +85,7 @@ export const LocationSelector = ({onAreaSelected,  onSubAreaSelected}) => {
                 const data = await response.json();
                 setSubAreas(data.data);
                 setSelectedAreaObj(data.location)
-                onAreaSelected({ areaId: data.location._id});
+                onAreaSelected({ areaId: data.location._id });
 
             } catch (error) {
                 console.error('Error fetching sub-areas:', error);
@@ -101,74 +102,74 @@ export const LocationSelector = ({onAreaSelected,  onSubAreaSelected}) => {
     // }, [selectedSubArea]);
 
     return (
-            <View style={styles.dropdownSection}>
-                {/* Division Dropdown */}
-                <TouchableOpacity style={styles.dropdown} onPress={() => setIsDivisionDropdownVisible(true)}>
-                    <Text style={styles.dropdownText}>{selectedDivision || 'Division'}</Text>
+        <View style={styles.dropdownSection}>
+            {/* Division Dropdown */}
+            <TouchableOpacity style={styles.dropdown} onPress={() => setIsDivisionDropdownVisible(true)}>
+                <Text style={styles.dropdownText}>{selectedDivision || 'Division'}</Text>
+                <Ionicons name="chevron-down" size={20} color="#000" />
+            </TouchableOpacity>
+            <Modal visible={isDivisionDropdownVisible} transparent animationType="fade">
+                <DropdownModal
+                    data={divisions}
+                    onSelect={(item) => {
+                        setSelectedDivision(item);
+                        setIsDivisionDropdownVisible(false);
+                    }}
+                />
+            </Modal>
+
+            {/* District Dropdown */}
+            <TouchableOpacity style={styles.dropdown} onPress={() => setIsDistrictDropdownVisible(true)}>
+                <Text style={styles.dropdownText}>{selectedDistrict || 'District'}</Text>
+                <Ionicons name="chevron-down" size={20} color="#000" />
+            </TouchableOpacity>
+            <Modal visible={isDistrictDropdownVisible} transparent animationType="fade">
+                <DropdownModal
+                    data={districts}
+                    onSelect={(item) => {
+                        setSelectedDistrict(item);
+                        setIsDistrictDropdownVisible(false);
+                    }}
+                />
+            </Modal>
+
+            {/* Area Dropdown */}
+            <TouchableOpacity style={styles.dropdown} onPress={() => setIsAreaDropdownVisible(true)}>
+                <Text style={styles.dropdownText}>{selectedArea || 'Area'}</Text>
+                <Ionicons name="chevron-down" size={20} color="#000" />
+            </TouchableOpacity>
+            <Modal visible={isAreaDropdownVisible} transparent animationType="fade">
+                <DropdownModal
+                    data={areas}
+                    onSelect={(item) => {
+                        setSelectedArea(item);
+                        setIsAreaDropdownVisible(false);
+                    }}
+                />
+            </Modal>
+
+            {/* Sub-area Dropdown */}
+            {subAreas.length > 0 && (
+                <TouchableOpacity style={styles.dropdown} onPress={() => setIsSubAreaDropdownVisible(true)}>
+                    <Text style={styles.dropdownText}>{selectedSubArea || 'Sub-area'}</Text>
                     <Ionicons name="chevron-down" size={20} color="#000" />
                 </TouchableOpacity>
-                <Modal visible={isDivisionDropdownVisible} transparent animationType="fade">
-                    <DropdownModal
-                        data={divisions}
-                        onSelect={(item) => {
-                            setSelectedDivision(item);
-                            setIsDivisionDropdownVisible(false);
-                        }}
-                    />
-                </Modal>
-
-                {/* District Dropdown */}
-                <TouchableOpacity style={styles.dropdown} onPress={() => setIsDistrictDropdownVisible(true)}>
-                    <Text style={styles.dropdownText}>{selectedDistrict || 'District'}</Text>
-                    <Ionicons name="chevron-down" size={20} color="#000" />
-                </TouchableOpacity>
-                <Modal visible={isDistrictDropdownVisible} transparent animationType="fade">
-                    <DropdownModal
-                        data={districts}
-                        onSelect={(item ) => {
-                            setSelectedDistrict(item);
-                            setIsDistrictDropdownVisible(false);
-                        }}
-                    />
-                </Modal>
-
-                {/* Area Dropdown */}
-                <TouchableOpacity style={styles.dropdown} onPress={() => setIsAreaDropdownVisible(true)}>
-                    <Text style={styles.dropdownText}>{selectedArea || 'Area'}</Text>
-                    <Ionicons name="chevron-down" size={20} color="#000" />
-                </TouchableOpacity>
-                <Modal visible={isAreaDropdownVisible} transparent animationType="fade">
-                    <DropdownModal
-                        data={areas}
-                        onSelect={(item) => {
-                            setSelectedArea(item);
-                            setIsAreaDropdownVisible(false);
-                        }}
-                    />
-                </Modal>
-
-                {/* Sub-area Dropdown */}
-                {subAreas.length > 0 && (
-                    <TouchableOpacity style={styles.dropdown} onPress={() => setIsSubAreaDropdownVisible(true)}>
-                        <Text style={styles.dropdownText}>{selectedSubArea || 'Sub-area'}</Text>
-                        <Ionicons name="chevron-down" size={20} color="#000" />
-                    </TouchableOpacity>
-                )}
-                <Modal visible={isSubAreaDropdownVisible} transparent animationType="fade">
-                    <DropdownModal
-                        data={subAreas}
-                        onSelect={(item ) => {
-                            setSelectedSubArea(item);
-                            setIsSubAreaDropdownVisible(false);
-                            onSubAreaSelected({ subarea: item })
-                        }}
-                    />
-                </Modal>
-            </View>
+            )}
+            <Modal visible={isSubAreaDropdownVisible} transparent animationType="fade">
+                <DropdownModal
+                    data={subAreas}
+                    onSelect={(item) => {
+                        setSelectedSubArea(item);
+                        setIsSubAreaDropdownVisible(false);
+                        onSubAreaSelected({ subarea: item })
+                    }}
+                />
+            </Modal>
+        </View>
     );
 };
 
-const DropdownModal = ({ data , onSelect }) => (
+const DropdownModal = ({ data, onSelect }) => (
     <View style={styles.modalOverlay}>
         <View style={styles.dropdownList}>
             <FlatList
