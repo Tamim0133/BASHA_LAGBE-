@@ -17,5 +17,5 @@
     "**/*.tsx",
     "app/(auth)/signUp.jsx",
     "nativewind-env.d.ts"
-  ]
+, "components/LocationSelector.jsx"  ]
 }
