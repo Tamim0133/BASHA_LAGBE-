@@ -1,13 +1,16 @@
 import Colors from '@/constants/Colors';
 import { Entypo, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert, ScrollView, Image, Button, Modal } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert, ScrollView, Image, Button, Modal, ActivityIndicator } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper'; // Import CheckBox
 import * as ImagePicker from "expo-image-picker";
 import { LocationSelector } from '@/components/LocationSelector';
-import axios from 'axios'
+import axios, { all } from 'axios'
+import ImageAnalyzer from '@/components/ImageAnalyzer';
+
+
 
 
 
@@ -19,8 +22,9 @@ interface FormData {
     bedrooms: (Number | String);
     bathrooms: (Number | String);
     images: ImagePicker.ImagePickerAsset[]; // array of photo URIs
+    imagesInfo: string[];
     floor: Number,
-    category: 'Family' | 'Bachelor'| 'Hostel'| 'Office'| 'Sublet'| 'Female' | 'Shop' | 'Garage';
+    category: 'Family' | 'Bachelor' | 'Hostel' | 'Office' | 'Sublet' | 'Female' | 'Shop' | 'Garage';
     rent: Number;
     advanceDeposit: Number;
     willRefundAdvance: boolean;
@@ -31,8 +35,6 @@ interface FormData {
     isAvailable: boolean,
     facilities: string[];
     description: string;
-
-
 }
 
 // Props for each step component
@@ -50,6 +52,7 @@ const OnboardingScreen: React.FC = () => {
         bedrooms: 0,
         bathrooms: 0,
         images: [],
+        imagesInfo: [],
         rent: 0,
         advanceDeposit: 0,
         willRefundAdvance: true,
@@ -61,13 +64,14 @@ const OnboardingScreen: React.FC = () => {
         facilities: [],
         description: '',
     });
-    
+
 
     const router = useRouter();
     const [currentStep, setCurrentStep] = useState<number>(0);
     const [error, setError] = useState<string>(''); // State to show error message
 
-    
+
+
 
     // Steps array
     const steps: { title: string; component: React.FC<StepProps> }[] = [
@@ -77,34 +81,54 @@ const OnboardingScreen: React.FC = () => {
         { title: 'Step 4: Pricing and Publish', component: Pricing },
     ];
 
+
     // Validation for each step
-    const validateStep = (): boolean => {
+    const validateStep = async (): Promise<boolean> => {
         if (currentStep === 0) {
             // if (!formData.title.trim() || !formData.areaId.trim()) {
-            // if (!formData.title.trim() || !formData.subarea.trim()) {
             //     setError('Please fill in all fields for Step 1.');
             //     return false;
             // }
         } else if (currentStep === 1) {
-            // if (!formData.bedrooms || !formData.bathrooms) {
-            //     setError('Please fill in all fields for Step 2.');
-            //     return false;
-            // }
+
+            for (let i = 0; i < formData.images.length; i++) {
+                try {
+                    const isRoom = await ImageAnalyzer(formData.images[i].uri);
+                    const firstWord = isRoom.split(".")[0].toUpperCase();
+                    if (firstWord === "FALSE") {
+                        setError(`Image ${i + 1} is not a rental-related image.`);
+                        return false;
+                    }
+                } catch (error) {
+                    console.error(`Error analyzing Image ${i + 1}:`, error);
+                    setError(`An error occurred while analyzing Image ${i + 1}.`);
+                    return false;
+                }
+            }
         } else if (currentStep === 3) {
             // if (!formData.rent) {
             //     setError('Please set a rent.');
             //     return false;
             // }
         }
+
         setError('');
         return true;
     };
+    const [isLoading, setIsLoading] = useState(false);
 
-    const nextStep = () => {
-        if (validateStep()) {
+    const nextStep = async () => {
+        setError('');
+        setIsLoading(true); // Show loader
+
+        const isValid = await validateStep();
+
+        if (isValid) {
             console.log(formData);
             setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
         }
+        setIsLoading(false); // Hide loader
+
     };
 
     const prevStep = () => {
@@ -124,9 +148,30 @@ const OnboardingScreen: React.FC = () => {
     };
 
     const CurrentStepComponent = steps[currentStep].component;
+    const [dots, setDots] = useState('.');
+
+    useEffect(() => {
+        if (isLoading) {
+            const interval = setInterval(() => {
+                setDots((prev) => (prev.length < 3 ? prev + '.' : '.'));
+            }, 1000); // Change dots every 500ms
+
+            return () => clearInterval(interval); // Cleanup on unmount or when `isLoading` changes
+        }
+    }, [isLoading]);
+    //---------------------------------------------
+    //    General Template for all 4 pages
+    //---------------------------------------------
 
     return (
         <View style={styles.container}>
+
+            {isLoading && (
+                <View style={styles.loaderContainer}>
+                    <ActivityIndicator size="large" color="#ffffff" />
+                    <Text style={styles.loaderText}>{`Validating${dots}`}</Text>
+                </View>
+            )}
             {/* Exit Button in the top-left corner */}
             <TouchableOpacity onPress={handleExit} style={styles.exitButton}>
                 <Ionicons name='exit-outline' size={20} style={{ color: '#f44336' }}></Ionicons>
@@ -140,6 +185,7 @@ const OnboardingScreen: React.FC = () => {
 
                 {/* Show error message */}
                 {error ? <Text style={styles.error}>{error}</Text> : null}
+
 
                 <View style={styles.buttonContainer}>
                     {currentStep > 0 && (
@@ -162,7 +208,10 @@ const OnboardingScreen: React.FC = () => {
     );
 };
 
+//------------------------------
 // Step 1: Basic Info
+//------------------------------
+
 const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
 
     const Catagory: string[] = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'Female', 'Shop', 'Garage'];
@@ -196,20 +245,20 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
     };
 
     //Kun catagory er basha
-    const handleCategory = (text: 'Family' | 'Bachelor'| 'Hostel'| 'Office'| 'Sublet'| 'Female' | 'Shop' | 'Garage') => {
+    const handleCategory = (text: 'Family' | 'Bachelor' | 'Hostel' | 'Office' | 'Sublet' | 'Female' | 'Shop' | 'Garage') => {
         setFormData({ ...formData, category: text });
         console.log(formData);
-        
+
     };
-    const handleArea = (obj : any)=>{
+    const handleArea = (obj: any) => {
         setSelectedArea(obj.areaId)
-        setFormData({ ...formData, areaId: obj.areaId});
+        setFormData({ ...formData, areaId: obj.areaId });
         console.log(formData);
 
     }
-    const handleSubArea = (obj : any)=>{
+    const handleSubArea = (obj: any) => {
         setSelectedSubArea(obj.subarea)
-        setFormData({ ...formData, subarea:obj.subarea });
+        setFormData({ ...formData, subarea: obj.subarea });
         console.log(formData);
 
     }
@@ -246,8 +295,8 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
                             key={type}
                             style={[styles.button, selectedPropertyType === type && styles.selectedButton]}
                             onPress={() => {
-                                setSelectedPropertyType(type as 'Family' | 'Bachelor'| 'Hostel'| 'Office'| 'Sublet'| 'Female' | 'Shop' | 'Garage');
-                                handleCategory(type as 'Family' | 'Bachelor'| 'Hostel'| 'Office'| 'Sublet'| 'Female' | 'Shop' | 'Garage');
+                                setSelectedPropertyType(type as 'Family' | 'Bachelor' | 'Hostel' | 'Office' | 'Sublet' | 'Female' | 'Shop' | 'Garage');
+                                handleCategory(type as 'Family' | 'Bachelor' | 'Hostel' | 'Office' | 'Sublet' | 'Female' | 'Shop' | 'Garage');
                             }}
                         >
                             <Text style={[selectedPropertyType === type ? styles.showButtonText : styles.selectedText]}>{type}</Text>
@@ -281,20 +330,27 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
                 </View>
             </View>
             <Text style={styles.sectionTitle}>Location:</Text>
-            <LocationSelector onAreaSelected={handleArea} onSubAreaSelected = {handleSubArea} />
-            
+            <LocationSelector onAreaSelected={handleArea} onSubAreaSelected={handleSubArea} />
+
 
         </View>
     );
 };
 
+
+//---------------------------------------------------
 // Step 2: Property Details -> Photo and Floor No
+//---------------------------------------------------
+
+
 const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [flr, setFlr] = useState<string>(formData.floor.toString()); // Start as string
     const [images, setImages] = useState<ImagePicker.ImagePickerAsset[]>(formData.images); // Initialize with formData.images
     const [isModalVisible, setIsModalVisible] = useState(false);
-
+    const [imagesAreGood, setImagesAreGood] = useState(false);
     const [detailedLocation, setDetailedLocation] = useState<string>(formData.detailedLocation.toString());
+    const [tempImgInfo, setTempImgInfo] = useState<string[]>([]);
+
 
     // Text handle korar jonno
     const handleDetailedLocationChange = (text: string) => {
@@ -329,19 +385,15 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
 
         if (!result.canceled) {
             const selectedImages = result.assets//.map(asset => asset.uri);
-
             const updatedImages = [...images, ...selectedImages];
-
-            if (updatedImages.length < 3) {
-                Alert.alert("Minimum Images Required", "Please select at least 3 images.");
-            } else if (updatedImages.length > 10) {
-                Alert.alert("Maximum Images Limit Exceeded", "You can select up to 10 images only.");
-            } else {
-                setImages(updatedImages);
-                setFormData({ ...formData, images: updatedImages }); // Update formData with new images
-            }
+            setImages(updatedImages);
+            setFormData({ ...formData, images: updatedImages }); // Update formData with new images
+            // }
         }
+
     };
+
+
 
     const removeImage = (index: number) => {
         const updatedImages = images.filter((_, i) => i !== index);
@@ -359,7 +411,7 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
                     onChangeText={handleDetailedLocationChange}
                     placeholder="Describe your location..."
                     multiline={true} // Allow multiple lines
-                    numberOfLines={2}                    
+                    numberOfLines={2}
                     maxLength={50}
                 />
                 <Text style={styles.sectionTitle}>Enter a Floor No:</Text>
@@ -443,7 +495,13 @@ const PropertyDetails: React.FC<StepProps> = ({ formData, setFormData }) => {
     );
 };
 
+
+
+//----------------------------------------------
 // Step 3: Available From and Description
+//----------------------------------------------
+
+
 const Uploadimages: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [availableFrom, setAvailableFrom] = useState<string>(formData.availableFrom); // Month
     const [description, setDescription] = useState<string>(formData.description); // Description
@@ -524,8 +582,8 @@ const Uploadimages: React.FC<StepProps> = ({ formData, setFormData }) => {
                         key={feature.name}
                         onPress={() => toggleFeature(feature.name)}
                         style={{
-                            width: '48%', // Adjust width to fit two items in each row with some margin
-                            margin: '1%', // Add margin for spacing between items
+                            width: '48%',
+                            margin: '1%',
                             flexDirection: 'row',
                             alignItems: 'center',
                         }}                    >
@@ -552,56 +610,67 @@ const Uploadimages: React.FC<StepProps> = ({ formData, setFormData }) => {
 };
 
 
+//-----------------------
 // Step 4: Pricing
+//-----------------------
+
+
 const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [rent, setrent] = useState<Number>(formData.rent); // Month
     const [adv, setAdv] = useState<Number>(formData.advanceDeposit);
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
     const baseURL = process.env.EXPO_PUBLIC_BASE_URL
+
+
+    //-----------------------------------------------
+    // Final Page Submit Button Handle Click 
+    //-----------------------------------------------
+
     const handleSubmit = async () => {
         if (formData.images.length < 3) {
-          Alert.alert("Minimum Images Required", "Please select at least 3 images.");
-          return;
+            Alert.alert("Minimum Images Required", "Please select at least 3 images.");
+            return;
         }
-      
+
         const fd = new FormData();
-      
+
         // Handle image uploads
         formData.images.forEach((image, index) => {
-          // ImagePickerAsset already contains the necessary file information
-          fd.append('images', {
-            uri: image.uri,
-            type: image.mimeType || 'image/jpeg', // Use the actual mime type if available
-            name: image.fileName || `image${index}.jpg`, // Use the actual filename if available
-          }as unknown as Blob);
+            // ImagePickerAsset already contains the necessary file information
+            fd.append('images', {
+                uri: image.uri,
+                type: image.mimeType || 'image/jpeg', // Use the actual mime type if available
+                name: image.fileName || `image${index}.jpg`, // Use the actual filename if available
+            } as unknown as Blob);
         });
-      
+
         // Add other form data
         const { images, ...otherData } = formData;
         fd.append('data', JSON.stringify(otherData));
-      
+
         try {
-          const response = await axios.post(`${baseURL}/api/ad/insert-ad`, fd, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              Accept: 'application/json',
-            },
-          });
-          if (!response.data.success) {
-            Alert.alert('Error', response.data.message);
-            return;
-          }
-      
-          Alert.alert('Success', response.data.message);
-        } catch (error : any) {
+            const response = await axios.post(`${baseURL}/api/ad/insert-ad`, fd, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Accept: 'application/json',
+                },
+            });
+            if (!response.data.success) {
+                Alert.alert('Error', response.data.message);
+                return;
+            }
+
+            Alert.alert('Success', response.data.message);
+        } catch (error: any) {
+            console.log(error);
             const errorMessage =
-            error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+                error.response?.data?.message || 'An unexpected error occurred. Please try again.';
             Alert.alert('Error', errorMessage);
         }
-      };
-    
-    
+    };
+
+
 
     return (
         <View style={styles.container}>
@@ -902,6 +971,23 @@ const styles = StyleSheet.create({
         borderColor: "#000", // Set border color (black in this case)
         borderRadius: 10,
 
+    },
+    loaderContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 999, // Ensure it appears above other content
+    },
+    loaderText: {
+        marginTop: 10,
+        color: '#ffffff',
+        fontSize: 24,
+        fontWeight: 'bold'
     },
 });
 export default OnboardingScreen;
