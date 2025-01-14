@@ -6,7 +6,7 @@ import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import Animated, { SlideInDown, interpolate, useAnimatedRef, useAnimatedScrollHandler, useAnimatedStyle, useScrollViewOffset, useSharedValue } from 'react-native-reanimated';
 import { defaultStyles } from '@/constants/Styles';
-import Carousel from 'react-native-reanimated-carousel'; 
+import Carousel from 'react-native-reanimated-carousel';
 import axios from 'axios';
 import { useUserState } from '@/hooks/UserContext';
 
@@ -27,7 +27,7 @@ const DetailsPage = () => {
   const scrollRef = useAnimatedRef();  // Remove the type annotation
   const scrollOffset = useSharedValue(0);
   const [activeIndex, setActiveIndex] = useState(0)
-  const {currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
+  const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
   const [isLoved, setIsLoved] = useState<boolean>(false)
   // Rest of your state declarations...
 
@@ -51,20 +51,17 @@ const DetailsPage = () => {
           return;
         }
         const fetchedAd = response.data.data;
+        console.log("Ad: " + JSON.stringify(response.data.data, null, 2));
+        // console.log("Ad" + fetchedAd);
         setListing(fetchedAd);
 
-        // resolve loved or not
-        // if(isLoggedIn && currentUser.myAds){
-        //   currentUser.myAds.forEach((id: any) => {
-        //     if(id === fetchedAd._id) setIsLoved(true)
-        //   }); 
-        // }
-        // Fetch location
         const response2 = await axios.get(`${baseURL}/api/location/get-one/${fetchedAd.areaId}`);
         if (!response2.data.success) {
           Alert.alert("Error!", response2.data.message);
           return;
         }
+        // console.log("Location: " + JSON.stringify(response2.data.data, null, 2));
+        // console.log("Type of subarea:", typeof response2.data.data.subarea);
         setLocation(response2.data.data);
       } catch (error) {
         console.error(error);
@@ -78,59 +75,60 @@ const DetailsPage = () => {
   }, [id])
 
   console.log("Listing info : " + listing);
+  console.log("Lisssss : " + listing)
 
   const handleLoved = async () => {
     const baseURL = process.env.EXPO_PUBLIC_BASE_URL
     console.log("is logged: ", currentUser);
-    
-    if(!isLoggedIn){
+
+    if (!isLoggedIn) {
       Alert.alert('Sorry!', "You must login first.");
       return;
     }
 
-    if(isLoved){
+    if (isLoved) {
       try {
-          const response = await axios.post(`${baseURL}/api/user/remove-from-wishlist`, {
-            userId : currentUser._id, 
-            adId : listing._id
-          });
-          
-          if (!response.data.success) {
-              Alert.alert('Error', response.data.message);
-              return;
-          }
+        const response = await axios.post(`${baseURL}/api/user/remove-from-wishlist`, {
+          userId: currentUser._id,
+          adId: listing._id
+        });
 
-          Alert.alert('Success', response.data.message);
-      } catch (error : any) {
-          console.log(error);
-          const errorMessage =
-              error.response?.data?.message || 'An unexpected error occurred. Try again.';
-          Alert.alert('Error', errorMessage);
+        if (!response.data.success) {
+          Alert.alert('Error', response.data.message);
+          return;
+        }
+
+        Alert.alert('Success', response.data.message);
+      } catch (error: any) {
+        console.log(error);
+        const errorMessage =
+          error.response?.data?.message || 'An unexpected error occurred. Try again.';
+        Alert.alert('Error', errorMessage);
       }
-    } else{ // add-to-wishlist
+    } else { // add-to-wishlist
       try {
         const response = await axios.post(`${baseURL}/api/user/add-to-wishlist`, {
-          userId : currentUser._id, 
-          adId : listing._id
+          userId: currentUser._id,
+          adId: listing._id
         });
-        
+
         if (!response.data.success) {
-            Alert.alert('Error', response.data.message);
-            return;
+          Alert.alert('Error', response.data.message);
+          return;
         }
 
 
         Alert.alert('Success', response.data.message);
-    } catch (error : any) {
+      } catch (error: any) {
         console.log(error);
         const errorMessage =
-            error.response?.data?.message || 'An unexpected error occurred. Try again.';
+          error.response?.data?.message || 'An unexpected error occurred. Try again.';
         Alert.alert('Error', errorMessage);
+      }
     }
-    }
-};
+  };
 
- // To manage the active slide index
+  // To manage the active slide index
 
   const shareListing = async () => {
     try {
@@ -156,7 +154,7 @@ const DetailsPage = () => {
             <Ionicons name="share-outline" size={22} color={'#000'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.roundButton} onPress={handleLoved}>
-            <Ionicons name="heart-outline" size={22} color={!isLoved ?  '#000' : '#4feb34'} />
+            <Ionicons name="heart-outline" size={22} color={!isLoved ? '#000' : '#4feb34'} />
           </TouchableOpacity>
         </View>
       ),
@@ -303,25 +301,24 @@ const DetailsPage = () => {
           </View>
         </View>
 
-        {/* Location Information Table */}
         <View style={styles.tableContainer}>
           <Text style={styles.sectionTitle}>Location Information</Text>
           <View style={styles.table}>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Division:</Text>
-              <Text style={styles.tableCellValue}>{location.district}</Text>
+              <Text style={styles.tableCellValue}>{location.division}</Text>
             </View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>District:</Text>
-              <Text style={styles.tableCellValue}>{location.division}</Text>
+              <Text style={styles.tableCellValue}>{location.district}</Text>
+            </View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Area:</Text>
               <Text style={styles.tableCellValue}>{location.area}</Text>
             </View>
-            {(listing.subarea) && (<View style={styles.tableRow}>
-              <Text style={styles.tableCell}>SubArea:</Text>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCell}>Subarea :</Text>
               <Text style={styles.tableCellValue}>{listing.subarea}</Text>
-            </View>)}
             </View>
           </View>
         </View>
@@ -368,7 +365,6 @@ const DetailsPage = () => {
         {/* Facilities Information Table */}
         <View style={styles.tableContainer}>
           <Text style={styles.sectionTitle}>Additional Description : </Text>
-
           <Text style={styles.location}>{listing.description}</Text>
         </View>
       </Animated.ScrollView >

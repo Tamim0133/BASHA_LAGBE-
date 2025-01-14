@@ -22,6 +22,7 @@ const ListingsMap = memo(({ listings }: Props) => {
   const router = useRouter();
   const mapRef = useRef<any>(null);
 
+  console.log('Listings:', JSON.stringify(listings.features, null, 2));
   // When the component mounts, locate the user
   useEffect(() => {
     onLocateMe();

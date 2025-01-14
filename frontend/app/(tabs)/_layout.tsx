@@ -1,8 +1,11 @@
+
 import React from 'react';
 import { Tabs, useNavigation } from 'expo-router';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Colors from '@/constants/Colors';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+
+
 
 const Layout = () => {
     const BackButton = () => {

@@ -29,36 +29,14 @@ const Login = () => {
             }
         };
 
-    // const handleLogin = () => {
-    //     // CLEAR ERROR MESSAGE ON LOGIN BUTTON CLICK
-    //     setErrMsg(null);
-    //     signInWithEmailAndPassword(auth, email, password)
-    //         .then((userCredential) => {
-    //             const user = userCredential.user;
-    //             // SUCCESSFULL LOGIN
-    //             if (user.emailVerified) {
-    //                 Alert.alert('Login Successful', 'Welcome back!');
-    //                 router.push('/'); // GO TO HOME PAGE
-    //             } else {
-    //                 // EMAIL IS NOT VARIFIED
-    //                 Alert.alert('Email Not Verified', 'Please verify your email. A verification has been sent to your email...');
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             const eMsg = error.message || 'An unknown error occurred.';
-    //             setErrMsg(eMsg);
-    //             console.log(eMsg);
-    //         });
-    // };
-
     const handleLogin = async () => {
         const baseURL = process.env.EXPO_PUBLIC_BASE_URL
         try {
             const response = await axios.post(`${baseURL}/api/user/login-user`, {
-                contactNo : formattedContactNo,
-                password : password
+                contactNo: formattedContactNo,
+                password: password
             });
-            
+
             if (!response.data.success) {
                 Alert.alert('Error', response.data.message);
                 return;
@@ -67,7 +45,7 @@ const Login = () => {
             await SecureStore.setItemAsync("refreshToken", String(response.data.data.refreshToken));
 
             Alert.alert('Success', response.data.message);
-        } catch (error : any) {
+        } catch (error: any) {
             console.log(error);
             const errorMessage =
                 error.response?.data?.message || 'An unexpected error occurred. Try again.';
@@ -77,19 +55,15 @@ const Login = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Log In</Text>
-
-            <TextInput
-                autoCapitalize="none"
-                placeholder="Email"
-                value={email}
-                onChangeText={handleInputChange(setEmail)}
-                style={[defaultStyles.inputField, { marginBottom: 20 }]}
-            />
             <PhoneInput
+                defaultCode='BD'
                 layout="first"
                 onChangeText={(text) => setContactNo(text)}
                 onChangeFormattedText={(text) => setFormattedContactNo(text)}
-                containerStyle={[styles.phoneInputContainer, { marginBottom: 20 }]}
+                containerStyle={[
+                    defaultStyles.inputField,
+                    { marginBottom: 20, width: '100%' }, // Adjust the width here
+                ]}
                 textContainerStyle={styles.phoneInputTextContainer}
                 textInputStyle={styles.phoneInputText}
                 withDarkTheme={false}

@@ -54,7 +54,7 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
 
     return (
       <Link href={`/listing/${item._id}`} asChild>
-        <TouchableOpacity>
+        <TouchableOpacity activeOpacity={1}>
           <Animated.View style={styles.listing} entering={FadeInRight} exiting={FadeOutLeft}>
             {/* Carousel for Images */}
             <Carousel
@@ -85,8 +85,8 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
               name="heart-outline"
               size={24}
               color="#000" // '#4feb34'
-              style={{ position: 'absolute', right: 30, top: 30, borderRadius: 17,}}
-              backgroundColor = ''
+              style={{ position: 'absolute', right: 30, top: 30, borderRadius: 17, }}
+              backgroundColor=''
             />
 
             {/* Title */}
@@ -96,7 +96,7 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
 
             {/* Location */}
             <Text style={{ fontFamily: 'mon' }}>
-              {item.district + (Array.isArray(item.subarea) ? item.subarea.join(', ') : item.district)}
+              {item.subarea}
             </Text>
 
             {/* Rent Per Month */}
