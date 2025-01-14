@@ -82,3 +82,24 @@ export const getSubAreas = async (req, res) => {
         res.status(500).send("Failed to find areas");
     }
 }
+
+export const getOne = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        const location = await Location.findById(String(id))
+        console.log(location);
+        
+        res.status(200).json({
+            success: true,
+            data: location,
+        });
+    } catch (error) {
+        console.error("Error fetching a location:", error);
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while fetching a location.",
+            error: error.message,
+        });
+    }
+};

@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BottomSheetFlatList, BottomSheetFlatListMethods } from '@gorhom/bottom-sheet';
 import Carousel from 'react-native-reanimated-carousel'; // Import the carousel library
 import { TouchableOpacity } from 'react-native';
+import { useUserState } from '@/hooks/UserContext';
 
 interface Props {
   listings: any[];
@@ -83,8 +84,9 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
             <Ionicons
               name="heart-outline"
               size={24}
-              color="#000"
-              style={{ position: 'absolute', right: 30, top: 30 }}
+              color="#000" // '#4feb34'
+              style={{ position: 'absolute', right: 30, top: 30, borderRadius: 17,}}
+              backgroundColor = ''
             />
 
             {/* Title */}

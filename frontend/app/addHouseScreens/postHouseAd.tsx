@@ -7,8 +7,10 @@ import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper'; // Import CheckBox
 import * as ImagePicker from "expo-image-picker";
 import { LocationSelector } from '@/components/LocationSelector';
-import axios, { all } from 'axios'
+import axios from 'axios'
+import * as SecureStore from 'expo-secure-store';
 import ImageAnalyzer from '@/components/ImageAnalyzer';
+import { useUserState } from '@/hooks/UserContext';
 
 
 
@@ -35,6 +37,7 @@ interface FormData {
     isAvailable: boolean,
     facilities: string[];
     description: string;
+    owner: string;
 }
 
 // Props for each step component
@@ -42,8 +45,12 @@ interface StepProps {
     formData: FormData;
     setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }
+const baseURL = process.env.EXPO_PUBLIC_BASE_URL
+
+
 
 // Main Onboarding Screen Component
+
 const OnboardingScreen: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({
         title: '',
@@ -63,6 +70,7 @@ const OnboardingScreen: React.FC = () => {
         isAvailable: true,
         facilities: [],
         description: '',
+        owner: ""
     });
 
 
@@ -620,7 +628,6 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [adv, setAdv] = useState<Number>(formData.advanceDeposit);
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
-    const baseURL = process.env.EXPO_PUBLIC_BASE_URL
 
 
     //-----------------------------------------------
@@ -628,6 +635,12 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
     //-----------------------------------------------
 
     const handleSubmit = async () => {
+        const {currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
+
+        if(!isLoggedIn){
+            Alert.alert("Login Required.", "You must login first.")
+            return
+        } else formData.owner = currentUser._id
         if (formData.images.length < 3) {
             Alert.alert("Minimum Images Required", "Please select at least 3 images.");
             return;

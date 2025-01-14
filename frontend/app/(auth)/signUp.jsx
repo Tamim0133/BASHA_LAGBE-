@@ -8,6 +8,8 @@ import { signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider, signInWith
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import DividerWithText from '@/components/DividerWithText';
 import { auth } from '@/firebaseConfig';
+import PhoneInput from "react-native-phone-number-input";
+import axios from 'axios';
 
 
 const SignUp = () => {
@@ -30,6 +32,8 @@ const SignUp = () => {
     const [loading, setLoading] = useState(false); // Loader state
     const [passwordVisible, setPasswordVisible] = useState(false); // State for the eye inside the password field
 
+    const [value, setValue] = useState("");
+    const [formattedValue, setFormattedValue] = useState("");
     const recaptchaContainerRef = useRef(null);
 
 
@@ -68,69 +72,91 @@ const SignUp = () => {
     //     }
     // }, [recaptchaContainerRef.current]);
 
-    const handleSignup = () => {
-        setErrMsg(null); // Reset error message before each attempt  
+    // const handleSignup = () => {
+    //     setErrMsg(null); // Reset error message before each attempt  
 
-        // EMAIL SIGN UP  
-        if (isEmailSignup) {
-            if (password !== confirmPassword) {
-                setErrMsg('Passwords do not match!');
+    //     // EMAIL SIGN UP  
+    //     if (isEmailSignup) {
+    //         if (password !== confirmPassword) {
+    //             setErrMsg('Passwords do not match!');
+    //             return;
+    //         }
+
+    //         setLoading(true);
+
+    //         createUserWithEmailAndPassword(auth, email, password)
+    //             .then((userCredential) => {
+    //                 const user = userCredential.user;
+    //                 sendEmailVerification(user)
+    //                     .then(() => {
+    //                         setLoading(false); // Hide loader  
+    //                         Alert.alert('Verification Sent', 'A verification email has been sent to your email address. Verify it to log in.');
+    //                         router.push('/login'); // Redirect to login page  
+    //                     })
+    //                     .catch((error) => {
+    //                         setLoading(false); // Hide loader  
+    //                         setErrMsg(error.message || 'An unknown error occurred.');
+    //                     });
+    //             })
+    //             .catch((error) => {
+    //                 setLoading(false); // Hide loader  
+    //                 setErrMsg(error.message || 'An unknown error occurred.');
+    //             });
+    //     } else {
+    //         const formattedPhoneNumber = phoneNumber.startsWith('+880') ? phoneNumber : `+880${phoneNumber}`;
+    //         // if (recaptchaVerifier) {
+    //         //     const formattedPhoneNumber = phoneNumber.startsWith('+880') ? phoneNumber : `+880${phoneNumber}`;
+
+    //         //     // Sign in with phone number  
+    //         //     signInWithPhoneNumber(auth, formattedPhoneNumber, recaptchaVerifier)
+    //         //         .then((verificationResult) => {
+    //         //             setVerificationId(verificationResult.verificationId);
+    //         //             Alert.alert('Code Sent', 'We have sent an SMS with a verification code.');
+    //         //             setEmailSent(true);
+    //         //             setLoading(false); // Hide loader  
+    //         //         })
+    //         //         .catch((error) => {
+    //         //             setLoading(false); // Hide loader  
+    //         //             setErrMsg(error.message || 'An error occurred while sending the verification code.');
+    //         //         });
+    //         // } else {
+    //         //     setErrMsg('Please complete the reCAPTCHA verification.');
+    //         // }
+    //         // Sign in with phone number  
+
+    //         signInWithPhoneNumber(auth, formattedPhoneNumber)
+    //             .then((verificationResult) => {
+    //                 setVerificationId(verificationResult.verificationId);
+    //                 Alert.alert('Code Sent', 'We have sent an SMS with a verification code.');
+    //                 setEmailSent(true);
+    //                 setLoading(false); // Hide loader  
+    //             })
+    //             .catch((error) => {
+    //                 setLoading(false); // Hide loader  
+    //                 setErrMsg(error.message || 'An error occurred while sending the verification code.');
+    //             });
+    //     }
+    // };
+    
+    const handleSignup = async () => {
+        const baseURL = process.env.EXPO_PUBLIC_BASE_URL
+        try {
+            const response = await axios.post(`${baseURL}/api/user/register-user`, {
+                username: email,
+                contactNo : formattedValue,
+                password : password
+            });
+            if (!response.data.success) {
+                Alert.alert('Error', response.data.message);
                 return;
             }
 
-            setLoading(true);
-
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    sendEmailVerification(user)
-                        .then(() => {
-                            setLoading(false); // Hide loader  
-                            Alert.alert('Verification Sent', 'A verification email has been sent to your email address. Verify it to log in.');
-                            router.push('/login'); // Redirect to login page  
-                        })
-                        .catch((error) => {
-                            setLoading(false); // Hide loader  
-                            setErrMsg(error.message || 'An unknown error occurred.');
-                        });
-                })
-                .catch((error) => {
-                    setLoading(false); // Hide loader  
-                    setErrMsg(error.message || 'An unknown error occurred.');
-                });
-        } else {
-            const formattedPhoneNumber = phoneNumber.startsWith('+880') ? phoneNumber : `+880${phoneNumber}`;
-            // if (recaptchaVerifier) {
-            //     const formattedPhoneNumber = phoneNumber.startsWith('+880') ? phoneNumber : `+880${phoneNumber}`;
-
-            //     // Sign in with phone number  
-            //     signInWithPhoneNumber(auth, formattedPhoneNumber, recaptchaVerifier)
-            //         .then((verificationResult) => {
-            //             setVerificationId(verificationResult.verificationId);
-            //             Alert.alert('Code Sent', 'We have sent an SMS with a verification code.');
-            //             setEmailSent(true);
-            //             setLoading(false); // Hide loader  
-            //         })
-            //         .catch((error) => {
-            //             setLoading(false); // Hide loader  
-            //             setErrMsg(error.message || 'An error occurred while sending the verification code.');
-            //         });
-            // } else {
-            //     setErrMsg('Please complete the reCAPTCHA verification.');
-            // }
-            // Sign in with phone number  
-
-            signInWithPhoneNumber(auth, formattedPhoneNumber)
-                .then((verificationResult) => {
-                    setVerificationId(verificationResult.verificationId);
-                    Alert.alert('Code Sent', 'We have sent an SMS with a verification code.');
-                    setEmailSent(true);
-                    setLoading(false); // Hide loader  
-                })
-                .catch((error) => {
-                    setLoading(false); // Hide loader  
-                    setErrMsg(error.message || 'An error occurred while sending the verification code.');
-                });
+            Alert.alert('Success', response.data.message);
+        } catch (error) {
+            console.log(error);
+            const errorMessage =
+                error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+            Alert.alert('Error', errorMessage);
         }
     };
 
@@ -172,10 +198,23 @@ const SignUp = () => {
                             <Text style={{ color: Colors.grey }}>Continue With Email</Text>
                             <Text />
 
+                            {/*Phone Number Field*/}
+                            <PhoneInput
+                                layout="first"
+                                onChangeText={(text) => {
+                                    setValue(text);
+                                }}
+                                onChangeFormattedText={(text) => {
+                                    setFormattedValue(text);
+                                }}
+                                withDarkTheme
+                                withShadow
+                                autoFocus
+                            />
                             {/* Email Field */}
                             <TextInput
                                 autoCapitalize="none"
-                                placeholder="Email"
+                                placeholder="Username"
                                 value={email}
                                 onChangeText={handleInputChange(setEmail)}
                                 style={[defaultStyles.inputField, { marginBottom: 20 }]}

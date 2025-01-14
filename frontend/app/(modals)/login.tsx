@@ -6,6 +6,10 @@ import { useRouter } from 'expo-router';
 import Colors from '@/constants/Colors';
 import { defaultStyles } from '@/constants/Styles';
 import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
+import PhoneInput from "react-native-phone-number-input";
+import * as SecureStore from 'expo-secure-store';
+
 
 const Login = () => {
     const router = useRouter();
@@ -13,6 +17,9 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState<string | null>(null);
     const [passwordVisible, setPasswordVisible] = useState(false);
+
+    const [contactNo, setContactNo] = useState("");
+    const [formattedContactNo, setFormattedContactNo] = useState("");
 
     const handleInputChange =
         (setter: React.Dispatch<React.SetStateAction<string>>) => (value: string) => {
@@ -22,28 +29,51 @@ const Login = () => {
             }
         };
 
-    const handleLogin = () => {
-        // CLEAR ERROR MESSAGE ON LOGIN BUTTON CLICK
-        setErrMsg(null);
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                // SUCCESSFULL LOGIN
-                if (user.emailVerified) {
-                    Alert.alert('Login Successful', 'Welcome back!');
-                    router.push('/'); // GO TO HOME PAGE
-                } else {
-                    // EMAIL IS NOT VARIFIED
-                    Alert.alert('Email Not Verified', 'Please verify your email. A verification has been sent to your email...');
-                }
-            })
-            .catch((error) => {
-                const eMsg = error.message || 'An unknown error occurred.';
-                setErrMsg(eMsg);
-                console.log(eMsg);
-            });
-    };
+    // const handleLogin = () => {
+    //     // CLEAR ERROR MESSAGE ON LOGIN BUTTON CLICK
+    //     setErrMsg(null);
+    //     signInWithEmailAndPassword(auth, email, password)
+    //         .then((userCredential) => {
+    //             const user = userCredential.user;
+    //             // SUCCESSFULL LOGIN
+    //             if (user.emailVerified) {
+    //                 Alert.alert('Login Successful', 'Welcome back!');
+    //                 router.push('/'); // GO TO HOME PAGE
+    //             } else {
+    //                 // EMAIL IS NOT VARIFIED
+    //                 Alert.alert('Email Not Verified', 'Please verify your email. A verification has been sent to your email...');
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             const eMsg = error.message || 'An unknown error occurred.';
+    //             setErrMsg(eMsg);
+    //             console.log(eMsg);
+    //         });
+    // };
 
+    const handleLogin = async () => {
+        const baseURL = process.env.EXPO_PUBLIC_BASE_URL
+        try {
+            const response = await axios.post(`${baseURL}/api/user/login-user`, {
+                contactNo : formattedContactNo,
+                password : password
+            });
+            
+            if (!response.data.success) {
+                Alert.alert('Error', response.data.message);
+                return;
+            }
+            await SecureStore.setItemAsync("accessToken", String(response.data.data.accessToken));
+            await SecureStore.setItemAsync("refreshToken", String(response.data.data.refreshToken));
+
+            Alert.alert('Success', response.data.message);
+        } catch (error : any) {
+            console.log(error);
+            const errorMessage =
+                error.response?.data?.message || 'An unexpected error occurred. Try again.';
+            Alert.alert('Error', errorMessage);
+        }
+    };
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Log In</Text>
@@ -55,7 +85,17 @@ const Login = () => {
                 onChangeText={handleInputChange(setEmail)}
                 style={[defaultStyles.inputField, { marginBottom: 20 }]}
             />
-
+            <PhoneInput
+                layout="first"
+                onChangeText={(text) => setContactNo(text)}
+                onChangeFormattedText={(text) => setFormattedContactNo(text)}
+                containerStyle={[styles.phoneInputContainer, { marginBottom: 20 }]}
+                textContainerStyle={styles.phoneInputTextContainer}
+                textInputStyle={styles.phoneInputText}
+                withDarkTheme={false}
+                withShadow={false}
+                autoFocus
+            />
             {/* TAKE PASSWORD */}
             <View style={styles.passwordContainer}>
                 <TextInput
@@ -126,6 +166,24 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 10,
         padding: 5,
+    },
+    phoneInputContainer: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8,
+        overflow: 'hidden',
+        height: 50, // Match TextInput height
+    },
+    phoneInputTextContainer: {
+        backgroundColor: 'transparent',
+        paddingVertical: 0,
+        paddingHorizontal: 10,
+    },
+    phoneInputText: {
+        fontSize: 16,
+        color: '#000',
+        padding: 0,
+        margin: 0,
     },
     signUpContainer: {
         flexDirection: 'row',

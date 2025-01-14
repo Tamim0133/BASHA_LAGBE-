@@ -45,7 +45,7 @@ const addHouse = () => {
             {/* Header */}
             <Text style={styles.header}>
                 It's easy to start listing your property on
-                <Text style={{ color: Colors.primary }}> BashaLagbe? </Text> app
+                <Text style={{ color: Colors.primary }}> BashaLagbe? </Text>
             </Text>
 
             {/* Steps */}

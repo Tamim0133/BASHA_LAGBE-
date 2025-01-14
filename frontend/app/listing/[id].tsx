@@ -1,12 +1,14 @@
-import { useLocalSearchParams, useNavigation } from 'expo-router';
-import React, { useLayoutEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Share, ScrollView, TouchableWithoutFeedback, Button } from 'react-native';
+import { useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Share, ScrollView, TouchableWithoutFeedback, Button, Alert } from 'react-native';
 import listingsData from '@/assets/data/temp-listing.json';
 import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
-import Animated, { SlideInDown, interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
+import Animated, { SlideInDown, interpolate, useAnimatedRef, useAnimatedScrollHandler, useAnimatedStyle, useScrollViewOffset, useSharedValue } from 'react-native-reanimated';
 import { defaultStyles } from '@/constants/Styles';
 import Carousel from 'react-native-reanimated-carousel'; 
+import axios from 'axios';
+import { useUserState } from '@/hooks/UserContext';
 
 
 
@@ -16,26 +18,125 @@ const IMG_HEIGHT = 300;
 
 const DetailsPage = () => {
   const { id } = useLocalSearchParams();
-  console.log("Selected Id : " + id);
   console.log(typeof id);
-  const listingsArray = listingsData as any[];
-  listingsArray.forEach((item) => {
-    console.log(item._id);
+  const baseURL = process.env.EXPO_PUBLIC_BASE_URL
+  const [listing, setListing] = useState<any>(null)
+  const [location, setLocation] = useState<any>(null)
+  const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
+  const scrollRef = useAnimatedRef();  // Remove the type annotation
+  const scrollOffset = useSharedValue(0);
+  const [activeIndex, setActiveIndex] = useState(0)
+  const {currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
+  const [isLoved, setIsLoved] = useState<boolean>(false)
+  // Rest of your state declarations...
+
+  // Modify your Animated.ScrollView to include onScroll handler
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      scrollOffset.value = event.contentOffset.y;
+    },
   });
 
-  const listing = (listingsData as any[]).find((item) => String(item._id) === String(id));
+  console.log("Selected Id : " + id);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        // Fetch listing
+        const response = await axios.get(`${baseURL}/api/ad/get-one/${id}`);
+        if (!response.data.success) {
+          Alert.alert("Error!", response.data.message);
+          return;
+        }
+        const fetchedAd = response.data.data;
+        setListing(fetchedAd);
+
+        // resolve loved or not
+        // if(isLoggedIn && currentUser.myAds){
+        //   currentUser.myAds.forEach((id: any) => {
+        //     if(id === fetchedAd._id) setIsLoved(true)
+        //   }); 
+        // }
+        // Fetch location
+        const response2 = await axios.get(`${baseURL}/api/location/get-one/${fetchedAd.areaId}`);
+        if (!response2.data.success) {
+          Alert.alert("Error!", response2.data.message);
+          return;
+        }
+        setLocation(response2.data.data);
+      } catch (error) {
+        console.error(error);
+        Alert.alert("Error", "Unable to fetch detailed ad.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) fetchData();
+  }, [id])
+
   console.log("Listing info : " + listing);
 
-  const navigation = useNavigation();
-  const scrollRef = useAnimatedRef<Animated.ScrollView>();
+  const handleLoved = async () => {
+    const baseURL = process.env.EXPO_PUBLIC_BASE_URL
+    console.log("is logged: ", currentUser);
+    
+    if(!isLoggedIn){
+      Alert.alert('Sorry!', "You must login first.");
+      return;
+    }
 
-  const [activeIndex, setActiveIndex] = useState(0); // To manage the active slide index
+    if(isLoved){
+      try {
+          const response = await axios.post(`${baseURL}/api/user/remove-from-wishlist`, {
+            userId : currentUser._id, 
+            adId : listing._id
+          });
+          
+          if (!response.data.success) {
+              Alert.alert('Error', response.data.message);
+              return;
+          }
+
+          Alert.alert('Success', response.data.message);
+      } catch (error : any) {
+          console.log(error);
+          const errorMessage =
+              error.response?.data?.message || 'An unexpected error occurred. Try again.';
+          Alert.alert('Error', errorMessage);
+      }
+    } else{ // add-to-wishlist
+      try {
+        const response = await axios.post(`${baseURL}/api/user/add-to-wishlist`, {
+          userId : currentUser._id, 
+          adId : listing._id
+        });
+        
+        if (!response.data.success) {
+            Alert.alert('Error', response.data.message);
+            return;
+        }
+
+
+        Alert.alert('Success', response.data.message);
+    } catch (error : any) {
+        console.log(error);
+        const errorMessage =
+            error.response?.data?.message || 'An unexpected error occurred. Try again.';
+        Alert.alert('Error', errorMessage);
+    }
+    }
+};
+
+ // To manage the active slide index
 
   const shareListing = async () => {
     try {
       await Share.share({
         title: listing.name,
-        url: listing.listing_url,
+        url: listing.images[0], //?
       });
     } catch (err) {
       console.log(err);
@@ -54,8 +155,8 @@ const DetailsPage = () => {
           <TouchableOpacity style={styles.roundButton} onPress={shareListing}>
             <Ionicons name="share-outline" size={22} color={'#000'} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.roundButton}>
-            <Ionicons name="heart-outline" size={22} color={'#000'} />
+          <TouchableOpacity style={styles.roundButton} onPress={handleLoved}>
+            <Ionicons name="heart-outline" size={22} color={!isLoved ?  '#000' : '#4feb34'} />
           </TouchableOpacity>
         </View>
       ),
@@ -67,7 +168,6 @@ const DetailsPage = () => {
     });
   }, []);
 
-  const scrollOffset = useScrollViewOffset(scrollRef);
 
   const imageAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -118,13 +218,28 @@ const DetailsPage = () => {
       />
     </TouchableWithoutFeedback>
   );
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
+  if (!listing || !location) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Data not available</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
       <Animated.ScrollView
-        contentContainerStyle={{ paddingBottom: 100 }}
         ref={scrollRef}
-        scrollEventThrottle={16}>
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        contentContainerStyle={{ paddingBottom: 100 }}>
 
         {/* Carousel of images */}
         <Carousel
@@ -145,13 +260,13 @@ const DetailsPage = () => {
             <TouchableOpacity style={styles.outlinedButton}>
               <Text style={styles.outlinedButtonText}>
                 <FontAwesome name='bed' size={18} style={{ marginHorizontal: 5 }} />{"   0"}
-                {listing.noOfBedroom}</Text>
+                {listing.bedrooms}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.outlinedButton}>
 
               <Text style={styles.outlinedButtonText}>
                 <FontAwesome5 name='toilet' size={18} style={{ marginHorizontal: 5 }} />{"   0"}
-                {listing.noOfBathroom}</Text>
+                {listing.bathrooms}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.outlinedButton}>
               <Text style={styles.outlinedButtonText}>
@@ -172,17 +287,17 @@ const DetailsPage = () => {
             </View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Advance Deposit:</Text>
-              <Text style={styles.tableCellValue}>{listing.advance_deposit} taka</Text>
+              <Text style={styles.tableCellValue}>{listing.advanceDeposit} taka</Text>
             </View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Refundable Advance:</Text>
               <Text
                 style={[
                   styles.tableCellValue,
-                  listing.advance_refund ? styles.green : styles.red,
+                  listing.willRefundAdvance ? styles.green : styles.red,
                 ]}
               >
-                {listing.advance_refund ? '✓' : '✗'}
+                {listing.willRefundAdvance ? '✓' : '✗'}
               </Text>
             </View>
           </View>
@@ -193,16 +308,20 @@ const DetailsPage = () => {
           <Text style={styles.sectionTitle}>Location Information</Text>
           <View style={styles.table}>
             <View style={styles.tableRow}>
-              <Text style={styles.tableCell}>Area:</Text>
-              <Text style={styles.tableCellValue}>{listing.subarea}</Text>
-            </View>
-            <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Division:</Text>
-              <Text style={styles.tableCellValue}>{listing.district}</Text>
+              <Text style={styles.tableCellValue}>{location.district}</Text>
             </View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>District:</Text>
-              <Text style={styles.tableCellValue}>{listing.division}</Text>
+              <Text style={styles.tableCellValue}>{location.division}</Text>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCell}>Area:</Text>
+              <Text style={styles.tableCellValue}>{location.area}</Text>
+            </View>
+            {(listing.subarea) && (<View style={styles.tableRow}>
+              <Text style={styles.tableCell}>SubArea:</Text>
+              <Text style={styles.tableCellValue}>{listing.subarea}</Text>
+            </View>)}
             </View>
           </View>
         </View>
@@ -221,11 +340,11 @@ const DetailsPage = () => {
             </View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>No of Bedrooms:</Text>
-              <Text style={styles.tableCellValue}>{listing.noOfBedroom}</Text>
+              <Text style={styles.tableCellValue}>{listing.bedrooms}</Text>
             </View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>No of Bathrooms:</Text>
-              <Text style={styles.tableCellValue}>{listing.noOfBathroom}</Text>
+              <Text style={styles.tableCellValue}>{listing.bathrooms}</Text>
             </View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Floor no :</Text>

@@ -1,5 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 import bcrypt from 'bcrypt'
+import jwt from "jsonwebtoken"
 
 const locationSchema = new Schema(
     {
@@ -24,18 +25,16 @@ const userSchema = new Schema(
         username: {
             type: String,
             required: true,
-            unique: true,
             trim: true, 
-            index: true
         },
         email: {
             type: String,
-            unique: true,
             lowercase: true,
             trim: true, 
         },
         contactNo: {
             type: String,
+            unique: true,
             required: true,
             trim: true, 
         },
@@ -87,9 +86,6 @@ userSchema.methods.generateAccessToken = function(){
     return jwt.sign(
         {
             _id: this._id,
-            email: this.email,
-            username: this.username,
-            fullName: this.fullName
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
