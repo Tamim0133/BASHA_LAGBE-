@@ -1,5 +1,5 @@
-import { useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useFocusEffect, useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Share, ScrollView, TouchableWithoutFeedback, Button, Alert } from 'react-native';
 import listingsData from '@/assets/data/temp-listing.json';
 import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
@@ -17,18 +17,23 @@ const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
 
 const DetailsPage = () => {
-  const { id } = useLocalSearchParams();
-  console.log(typeof id);
+  // const { id } = useLocalSearchParams();
+  console.log("Component rendering");  // Add this at the top
+  const { item: serializedItem } = useLocalSearchParams();
+  const item = JSON.parse(serializedItem as string);
+  console.log(item);
+  
   const baseURL = process.env.EXPO_PUBLIC_BASE_URL
-  const [listing, setListing] = useState<any>(null)
+  const [listing, setListing] = useState<any>(item)
   const [location, setLocation] = useState<any>(null)
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const scrollRef = useAnimatedRef();  // Remove the type annotation
   const scrollOffset = useSharedValue(0);
   const [activeIndex, setActiveIndex] = useState(0)
   const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
-  const [isLoved, setIsLoved] = useState<boolean>(false)
+  const [isLoved, setIsLoved] = useState<boolean>(true)
+
   // Rest of your state declarations...
 
   // Modify your Animated.ScrollView to include onScroll handler
@@ -37,94 +42,80 @@ const DetailsPage = () => {
       scrollOffset.value = event.contentOffset.y;
     },
   });
-
-  console.log("Selected Id : " + id);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-
-        // Fetch listing
-        const response = await axios.get(`${baseURL}/api/ad/get-one/${id}`);
-        if (!response.data.success) {
-          Alert.alert("Error!", response.data.message);
-          return;
-        }
-        const fetchedAd = response.data.data;
-        console.log("Ad: " + JSON.stringify(response.data.data, null, 2));
-        // console.log("Ad" + fetchedAd);
-        setListing(fetchedAd);
-
-        const response2 = await axios.get(`${baseURL}/api/location/get-one/${fetchedAd.areaId}`);
-        if (!response2.data.success) {
-          Alert.alert("Error!", response2.data.message);
-          return;
-        }
-        // console.log("Location: " + JSON.stringify(response2.data.data, null, 2));
-        // console.log("Type of subarea:", typeof response2.data.data.subarea);
-        setLocation(response2.data.data);
-      } catch (error) {
-        console.error(error);
-        Alert.alert("Error", "Unable to fetch detailed ad.");
-      } finally {
-        setLoading(false);
+;
+// const initialFetchDone = useRef(false);
+  
+useEffect(() => {
+  
+  const fetchData = async () => {
+ 
+    try {
+      setLoading(true);
+      const response2 = await axios.get(`${baseURL}/api/location/get-one/${item.areaId}`);
+      if (!response2.data.success) {
+        Alert.alert("Error!", response2.data.message);
+        return;
       }
-    };
+      setLocation(response2.data.data);
+    } catch (error) {
+      console.error("Fetch error:", error);
+      Alert.alert("Error", "Unable to fetch detailed ad.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    if (id) fetchData();
-  }, [id])
+  fetchData();
+  console.log(currentUser.myAds);
+  
+    if(currentUser && currentUser.myAds){
+    currentUser.myAds.forEach((x : String) =>{
+      if(x === item._id) setIsLoved(true)
+    })
+  }
+}, []);
 
-  console.log("Listing info : " + listing);
-  console.log("Lisssss : " + listing)
-
+// Add effect to monitor listing changes
+  
   const handleLoved = async () => {
-    const baseURL = process.env.EXPO_PUBLIC_BASE_URL
-    console.log("is logged: ", currentUser);
+    console.log("handleLoved called, current listing:", listing);
+    console.log("Current user:", currentUser);
+    console.log("isLoggedIn:", isLoggedIn);    
 
     if (!isLoggedIn) {
       Alert.alert('Sorry!', "You must login first.");
       return;
     }
-
-    if (isLoved) {
-      try {
-        const response = await axios.post(`${baseURL}/api/user/remove-from-wishlist`, {
-          userId: currentUser._id,
-          adId: listing._id
-        });
-
-        if (!response.data.success) {
-          Alert.alert('Error', response.data.message);
-          return;
-        }
-
-        Alert.alert('Success', response.data.message);
-      } catch (error: any) {
-        console.log(error);
-        const errorMessage =
-          error.response?.data?.message || 'An unexpected error occurred. Try again.';
-        Alert.alert('Error', errorMessage);
+  
+    if (!listing) {
+      console.error("Listing is null!");
+      return;
+    }
+  
+    // Optimistically update the UI
+    setIsLoved(prev => !prev);
+  
+    try {
+      const endpoint = isLoved ? 'remove-from-wishlist' : 'add-to-wishlist';
+      const response = await axios.post(`${baseURL}/api/user/${endpoint}`, {
+        userId: currentUser._id,
+        adId: listing._id
+      });
+  
+      if (!response.data.success) {
+        // Revert the optimistic update if the request fails
+        setIsLoved(prev => !prev);
+        Alert.alert('Error', response.data.message);
+        return;
       }
-    } else { // add-to-wishlist
-      try {
-        const response = await axios.post(`${baseURL}/api/user/add-to-wishlist`, {
-          userId: currentUser._id,
-          adId: listing._id
-        });
-
-        if (!response.data.success) {
-          Alert.alert('Error', response.data.message);
-          return;
-        }
-
-
-        Alert.alert('Success', response.data.message);
-      } catch (error: any) {
-        console.log(error);
-        const errorMessage =
-          error.response?.data?.message || 'An unexpected error occurred. Try again.';
-        Alert.alert('Error', errorMessage);
-      }
+  
+      Alert.alert('Success', response.data.message);
+    } catch (error: any) {
+      // Revert the optimistic update if the request fails
+      setIsLoved(prev => !prev);
+      console.error("Error in handleLoved:", error);
+      const errorMessage = error.response?.data?.message || 'An unexpected error occurred. Try again.';
+      Alert.alert('Error', errorMessage);
     }
   };
 
