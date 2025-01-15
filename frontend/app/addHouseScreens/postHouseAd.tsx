@@ -1,7 +1,7 @@
 import Colors from '@/constants/Colors';
 import { Entypo, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert, ScrollView, Image, Button, Modal, ActivityIndicator } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper'; // Import CheckBox
@@ -11,8 +11,9 @@ import axios from 'axios'
 import * as SecureStore from 'expo-secure-store';
 import ImageAnalyzer from '@/components/ImageAnalyzer';
 import { useUserState } from '@/hooks/UserContext';
-
-
+import MapComponentForUser from '@/components/MapComponentForUser';
+import ListingsMap from '@/components/ListingsMap';
+import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
 
 
 
@@ -221,6 +222,8 @@ const OnboardingScreen: React.FC = () => {
 //------------------------------
 
 const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
+    const getoItems = useMemo(() => listingsDataGeo, []);
+
 
     const Catagory: string[] = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'Female', 'Shop', 'Garage'];
     const Bedrooms: (number | string)[] = [1, 2, 3, 4, 5, 6, '6+'];
@@ -339,6 +342,14 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
             </View>
             <Text style={styles.sectionTitle}>Location:</Text>
             <LocationSelector onAreaSelected={handleArea} onSubAreaSelected={handleSubArea} />
+
+            {/* // Map Selection functionality For user */}
+            {/* ------------------------------------------ */}
+            <Text style={styles.sectionTitle}>
+                Mark Your Property: <Text style={{ color: Colors.grey }}>(Optional)</Text>
+            </Text>
+            <MapComponentForUser />
+            {/* <ListingsMap listings={getoItems} /> */}
 
 
         </View>
@@ -635,9 +646,9 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
     //-----------------------------------------------
 
     const handleSubmit = async () => {
-        const {currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
+        const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
 
-        if(!isLoggedIn){
+        if (!isLoggedIn) {
             Alert.alert("Login Required.", "You must login first.")
             return
         } else formData.owner = currentUser._id

@@ -24,14 +24,10 @@ const ListingsMap = memo(({ listings }: Props) => {
 
   console.log('Listings:', JSON.stringify(listings.features, null, 2));
   // When the component mounts, locate the user
+  //-----------------------------------------------------------
   useEffect(() => {
     onLocateMe();
   }, []);
-
-  // When a marker is selected, navigate to the listing page
-  const onMarkerSelected = (event: any) => {
-    router.push(`/listing/${event.properties.id}`);
-  };
 
   // Focus the map on the user's location
   const onLocateMe = async () => {
@@ -50,6 +46,11 @@ const ListingsMap = memo(({ listings }: Props) => {
     };
 
     mapRef.current?.animateToRegion(region);
+  };
+
+   // When a marker is selected, navigate to the listing page
+   const onMarkerSelected = (event: any) => {
+    router.push(`/listing/${event.properties.id}`);
   };
 
   // Overwrite the renderCluster function to customize the cluster markers

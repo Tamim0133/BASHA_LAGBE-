@@ -12,12 +12,9 @@ app.use(cors({
     credentials: true
 }))
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use("/api/location", locationRouter)
 app.use("/api/ad", adRouter)
 app.use("/api/user", userRouter)
-
-
-
 
 export default app
