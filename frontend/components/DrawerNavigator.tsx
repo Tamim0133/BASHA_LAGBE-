@@ -2,11 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList, DrawerItem, DrawerContentComponentProps } from '@react-navigation/drawer';
 import useAuth from '@/hooks/useAuth';
+import { useUserState } from "@/hooks/UserContext";
 import Colors from '@/constants/Colors';
 import { useRouter } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const CustomDrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
+    const {currentUser, isLoggedIn} = useUserState()
     const { signOut, isSignedIn, user } = useAuth();
     const displayName = user?.displayName || (user?.email ? user.email.split('@')[0] : 'User');
     const router = useRouter();
@@ -33,10 +35,10 @@ const CustomDrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
     return (
         <DrawerContentScrollView {...props}>
             <View style={styles.userInfoContainer}>
-                {isSignedIn ? (
+                {isLoggedIn ? (
                     <>
                         <Text style={styles.title}>Welcome</Text>
-                        <Text style={styles.titleName} >{displayName}!</Text>
+                        <Text style={styles.titleName} >{currentUser.username}</Text>
                     </>
                 ) : (
                     <View style={styles.buttonContainer}>

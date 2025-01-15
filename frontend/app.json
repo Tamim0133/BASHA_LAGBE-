@@ -8,22 +8,26 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#008080", 
+          "backgroundColor": "#008080",
           "image": "./assets/images/s2.png",
           "resizeMode": "cover"
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "splash": {
-      "backgroundColor": "#008080", 
+      "backgroundColor": "#008080",
       "image": "./assets/images/s2.png",
       "resizeMode": "cover"
     },
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "statusBar": {
-      "style": "dark", 
-      "backgroundColor": "transparent", 
-      "translucent": true 
+      "style": "dark",
+      "backgroundColor": "transparent",
+      "translucent": true
     }
   }
 }

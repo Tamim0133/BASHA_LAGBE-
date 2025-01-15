@@ -53,7 +53,15 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
     );
 
     return (
-      <Link href={`/listing/${item._id}`} asChild>
+      <Link 
+        href={{
+          pathname: `/listing/${item._id}`,
+          params: {
+            item: JSON.stringify(item) // Serialize the item object
+          }
+        }} 
+        asChild
+      >
         <TouchableOpacity activeOpacity={1}>
           <Animated.View style={styles.listing} entering={FadeInRight} exiting={FadeOutLeft}>
             {/* Carousel for Images */}

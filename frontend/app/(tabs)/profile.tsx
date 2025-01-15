@@ -5,6 +5,7 @@ import Colors from '@/constants/Colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { RefreshControl } from 'react-native';
+import { useUserState } from '@/hooks/UserContext';
 
 type MenuOption = {
     title: string;
@@ -14,10 +15,11 @@ type MenuOption = {
 };
 
 const Profile = () => {
+    const {currentUser, isLoggedIn} = useUserState()
     const { signOut, isSignedIn, user } = useAuth();
     const [refreshing, setRefreshing] = useState(false);
 
-    const displayName = user?.displayName || (user?.email ? user.email.split('@')[0] : 'User');
+    const displayName = isLoggedIn ? currentUser.username : "";
     const router = useRouter();
 
     const menuOptions: MenuOption[] = [
@@ -74,10 +76,10 @@ const Profile = () => {
                 }
             >
                 <View style={styles.header}>
-                    {isSignedIn ? (
+                    {isLoggedIn ? (
                         <>
                             <Text style={styles.name}>{displayName}</Text>
-                            <Text style={styles.email}>{user?.email || 'No email provided'}</Text>
+                            {/* <Text style={styles.email}>{user?.email || 'No email provided'}</Text> */}
                         </>
                     ) : (
                         <Button

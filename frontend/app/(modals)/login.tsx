@@ -9,15 +9,16 @@ import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import PhoneInput from "react-native-phone-number-input";
 import * as SecureStore from 'expo-secure-store';
-
+import { useUserState } from '@/hooks/UserContext'
 
 const Login = () => {
     const router = useRouter();
     const [email, setEmail] = useState('');
+    const baseURL = process.env.EXPO_PUBLIC_BASE_URL
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState<string | null>(null);
     const [passwordVisible, setPasswordVisible] = useState(false);
-
+    const {currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn} = useUserState()
     const [contactNo, setContactNo] = useState("");
     const [formattedContactNo, setFormattedContactNo] = useState("");
 
@@ -28,9 +29,49 @@ const Login = () => {
                 setErrMsg(null);
             }
         };
-
+        const verifyLoggedIn = async () => {
+            async function getToken() {
+              try {
+                const accessToken = await SecureStore.getItemAsync('accessToken');
+                const refreshToken = await SecureStore.getItemAsync('refreshToken');
+                return { accessToken, refreshToken };
+              } catch (error) {
+                console.error("Error fetching tokens:", error);
+                throw error; // Ensure the parent function knows of the error
+              }
+            }
+            try {
+              const { accessToken, refreshToken } = await getToken()
+      
+              if (!accessToken || !refreshToken || accessToken === "undefined") {
+                console.log("User is not logged in");
+                setIsLoggedIn(false)
+                return;
+              }
+              const response = await axios.get(`${baseURL}/api/user/verify-user`, {
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'x-refresh-token': refreshToken
+                }
+              });
+      
+              if (!response.data.success) {
+                setIsLoggedIn(false)
+                return;
+              }
+              const user = response.data.data.user
+              setIsLoggedIn(true)
+              setCurrentUser(user)
+              console.log("Current user is :", user);
+      
+            } catch (error: any) {
+              console.log(error);
+              const errorMessage =
+                error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+              Alert.alert('Error', errorMessage);
+            }
+          }
     const handleLogin = async () => {
-        const baseURL = process.env.EXPO_PUBLIC_BASE_URL
         try {
             const response = await axios.post(`${baseURL}/api/user/login-user`, {
                 contactNo: formattedContactNo,
