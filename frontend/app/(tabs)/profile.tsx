@@ -43,6 +43,7 @@ const Profile = () => {
             console.log('User logged out successfully');
             setIsLoggedIn(false);
             setCurrentUser(null);
+            Alert.alert("Done", "Logged out Sucessfully");
             router.push('/')
         } catch (error) {
             Alert.alert('Error', 'An error occurred while logging out.');

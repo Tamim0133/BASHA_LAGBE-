@@ -87,7 +87,7 @@ const Login = () => {
             Alert.alert('Success!', response.data.message);
 
             verifyLoggedIn();
-
+            router.push('/');
         } catch (error: any) {
             console.log(error);
             const errorMessage =
