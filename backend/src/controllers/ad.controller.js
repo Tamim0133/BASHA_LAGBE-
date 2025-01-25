@@ -39,6 +39,8 @@ export const insertAd = async (req, res) => {
         //   console.log("Local ", ind, " :", img.path);
           const result = await uploadOnCloudinary(img.path);
         //   console.log("Cloud ", ind, " :", result);
+        console.log(result);
+        
           return result.url; 
         })
       );
