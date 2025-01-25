@@ -10,39 +10,38 @@ import {
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import { Link, useNavigation } from 'expo-router';
+import { DrawerActions } from '@react-navigation/native'; // Added DrawerActions import
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { CompositeNavigationProp } from '@react-navigation/native';
 
-type DrawerParamList = {
-    Home: undefined;
-    Settings: undefined;
-};
+type HeaderNavigationProp = CompositeNavigationProp<
+    DrawerNavigationProp<any, any>,
+    any
+>;
 
-type NavigationProps = CompositeNavigationProp<DrawerNavigationProp<DrawerParamList>, any>;
-
-const Header = () => {
-    const navigation = useNavigation<NavigationProps>();
-    const [isSortModalVisible, setSortModalVisible] = useState(false);
+const Header: React.FC = () => {
+    const navigation = useNavigation<HeaderNavigationProp>();
+    const [isSortModalVisible, setSortModalVisible] = useState<boolean>(false);
     const [selectedSortOption, setSelectedSortOption] = useState<string>('Newest');
 
-    const toggleDrawer = () => {
-        navigation.toggleDrawer();
+    const toggleDrawer = (): void => {
+        navigation.dispatch(DrawerActions.toggleDrawer());
     };
 
-    const openSortModal = () => {
+    const openSortModal = (): void => {
         setSortModalVisible(true);
     };
 
-    const closeSortModal = () => {
+    const closeSortModal = (): void => {
         setSortModalVisible(false);
     };
 
-    const handleSortOptionSelect = (option: string) => {
+    const handleSortOptionSelect = (option: string): void => {
         setSelectedSortOption(option);
         closeSortModal(); // Close the modal after selection
     };
 
-    const getSortLabel = () => {
+    const getSortLabel = (): string => {
         if (selectedSortOption === 'Newest') {
             return 'Newest'; // Default option
         }

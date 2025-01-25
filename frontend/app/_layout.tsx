@@ -105,17 +105,25 @@ function SplashScreenAnimation() {
 }
 
 function RootLayoutNav() {
-  const { isLoaded, isSignedIn } = useAuth();
+  // const { isLoaded, isSignedIn } = useAuth();
   const router = useRouter();
   const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
   const baseURL = process.env.EXPO_PUBLIC_BASE_URL
-
-  // Automatically navigate to login screen if user is not authenticated
+  console.log("Is Logged in : " + isLoggedIn);
+  console.log("CurrentUser:", JSON.stringify(currentUser));  // Automatically navigate to login screen if user is not authenticated
   useEffect(() => {
-    if (isLoaded && !isSignedIn) {
-      router.push('/(modals)/login');
-    }
-  }, [isLoaded, isSignedIn]);
+    const timeout = setTimeout(() => {
+      if (!isLoggedIn) {
+        router.push('/(modals)/login');
+      }
+      else {
+        console.log("User is Already Logged In ! ")
+      }
+    }, 3000); // 3000ms = 3 seconds
+
+    // Cleanup the timeout to prevent memory leaks
+    return () => clearTimeout(timeout);
+  }, [isLoggedIn]);
 
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import ListingsBottomSheet from '@/components/ListingsBottomSheet';
@@ -17,9 +17,9 @@ import ContactUsScreen from '../otherScreens/contactUs';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
-import * as Location from 'expo-location'; // Import location package
+import * as Location from 'expo-location';
 
-// const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator();
 
 const MainScreen = () => {
     const initialLocation = {
@@ -35,8 +35,6 @@ const MainScreen = () => {
 
     const getoItems = useMemo(() => listingsDataGeo, []);
 
-    // Re-fetch or reload items when the screen comes into focus
-
     useFocusEffect(
         React.useCallback(() => {
             const fetchAds = async () => {
@@ -48,7 +46,6 @@ const MainScreen = () => {
                     }
                     const newItems = response.data.data;
                     setItems(newItems); // Update the listings state
-                    setCategory('Tiny homes'); // Reset category if needed
                 } catch (error) {
                     const errorMessage =
                         error.response?.data?.message || 'An unexpected error occurred. Please try again.';
@@ -58,21 +55,17 @@ const MainScreen = () => {
 
             const fetchLocation = async () => {
                 try {
-                    let { status } = await Location.requestForegroundPermissionsAsync();
+                    const { status } = await Location.requestForegroundPermissionsAsync();
                     if (status !== 'granted') {
                         console.warn("Location permission not granted");
                         return;
                     }
-                    let location = await Location.getCurrentPositionAsync({});
+                    const location = await Location.getCurrentPositionAsync({});
                     setMyLocation(location.coords); // Update state with fetched location
-                    console.log(myLocation)
                 } catch (err) {
                     console.warn("Error getting location:", err);
                 }
             };
-
-
-
 
             fetchAds();
             fetchLocation(); // Fetch location on screen focus
@@ -90,4 +83,30 @@ const MainScreen = () => {
     );
 };
 
-export default MainScreen;
+const App = () => {
+    return (
+        // <NavigationContainer>
+        <Drawer.Navigator
+            drawerContent={(props) => <CustomDrawerContent {...props} />}
+            screenOptions={{
+                // headerShown: false,
+                // drawerStyle: { backgroundColor: Colors.primaryLight },
+            }}
+        >
+            <Drawer.Screen
+                name="Main"
+                component={MainScreen}
+                options={{ headerShown: false }} // Hide the header for the Main screen
+            />
+            <Drawer.Screen name="Settings" component={settings} />
+            <Drawer.Screen name="About Us" component={AboutUsScreen} />
+            <Drawer.Screen name="Privacy Policy" component={PrivacyPolicyScreen} />
+            <Drawer.Screen name="Refund Policy" component={RefundPolicyScreen} />
+            <Drawer.Screen name="Terms & Conditions" component={TermsAndConditionsScreen} />
+            <Drawer.Screen name="Contact Us" component={ContactUsScreen} />
+        </Drawer.Navigator>
+        // </NavigationContainer>
+    );
+};
+
+export default App;

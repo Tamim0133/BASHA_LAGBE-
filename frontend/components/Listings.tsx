@@ -49,8 +49,7 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
   }, [category]);
 
   const renderRow: ListRenderItem<any> = ({ item }) => {
-    console.log('Item data:', item); // Log the item data
-
+    console.log('Item data:', JSON.stringify(item, null, 2)); // Log the item data as a JSON string with indentation
     // Carousel render function
     const renderCarouselItem = ({ item: image, index }: { item: string; index: number }) => (
       // <TouchableWithoutFeedback>

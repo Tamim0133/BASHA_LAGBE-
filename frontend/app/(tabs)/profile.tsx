@@ -6,7 +6,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { RefreshControl } from 'react-native';
 import { useUserState } from '@/hooks/UserContext';
-import PointsViewer from '@/components/pointsViewer'
+import PointsViewer from '@/components/pointsViewer';
+import * as SecureStore from 'expo-secure-store';
+import { useNavigation } from '@react-navigation/native';
+
 
 type MenuOption = {
     title: string;
@@ -16,8 +19,7 @@ type MenuOption = {
 };
 
 const Profile = () => {
-    const { currentUser, isLoggedIn } = useUserState()
-    const { signOut, isSignedIn, user } = useAuth();
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
     const [refreshing, setRefreshing] = useState(false);
 
     // const displayName = isLoggedIn ? currentUser.username : "";
@@ -35,6 +37,18 @@ const Profile = () => {
         { title: 'Change Password', subtitle: 'Change your login password', icon: 'lock', action: () => { } },
         { title: 'Logout', subtitle: 'Logout your account', icon: 'exit-to-app', action: () => handleLogOut() }, // Updated logout action
     ];
+    const logout = async () => {
+        try {
+            await SecureStore.deleteItemAsync('accessToken'); // Remove token from secure storage
+            console.log('User logged out successfully');
+            setIsLoggedIn(false);
+            setCurrentUser(null);
+            router.push('/')
+        } catch (error) {
+            Alert.alert('Error', 'An error occurred while logging out.');
+            console.error('Logout error:', error);
+        }
+    };
 
     // Function to show a confirmation dialog on log out
     const handleLogOut = () => {
@@ -48,7 +62,9 @@ const Profile = () => {
                 },
                 {
                     text: "Yes",
-                    onPress: () => signOut(),
+                    onPress: () => {
+                        logout();
+                    },
                     style: "destructive",
                 },
             ]
@@ -81,7 +97,7 @@ const Profile = () => {
                         <>
 
                             <Text style={styles.name}>{currentUser.username}</Text>
-                            <PointsViewer points={100} />
+                            <PointsViewer points={currentUser.credits} />
                             {/* <Text style={styles.email}>{user?.email || 'No email provided'}</Text> */}
                         </>
                     ) : (

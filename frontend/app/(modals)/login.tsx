@@ -18,7 +18,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState<string | null>(null);
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const {currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn} = useUserState()
+    const { currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn } = useUserState()
     const [contactNo, setContactNo] = useState("");
     const [formattedContactNo, setFormattedContactNo] = useState("");
 
@@ -29,48 +29,48 @@ const Login = () => {
                 setErrMsg(null);
             }
         };
-        const verifyLoggedIn = async () => {
-            async function getToken() {
-              try {
+    const verifyLoggedIn = async () => {
+        async function getToken() {
+            try {
                 const accessToken = await SecureStore.getItemAsync('accessToken');
                 const refreshToken = await SecureStore.getItemAsync('refreshToken');
                 return { accessToken, refreshToken };
-              } catch (error) {
+            } catch (error) {
                 console.error("Error fetching tokens:", error);
                 throw error; // Ensure the parent function knows of the error
-              }
             }
-            try {
-              const { accessToken, refreshToken } = await getToken()
-      
-              if (!accessToken || !refreshToken || accessToken === "undefined") {
+        }
+        try {
+            const { accessToken, refreshToken } = await getToken()
+
+            if (!accessToken || !refreshToken || accessToken === "undefined") {
                 console.log("User is not logged in");
                 setIsLoggedIn(false)
                 return;
-              }
-              const response = await axios.get(`${baseURL}/api/user/verify-user`, {
+            }
+            const response = await axios.get(`${baseURL}/api/user/verify-user`, {
                 headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                  'x-refresh-token': refreshToken
+                    Authorization: `Bearer ${accessToken}`,
+                    'x-refresh-token': refreshToken
                 }
-              });
-      
-              if (!response.data.success) {
+            });
+
+            if (!response.data.success) {
                 setIsLoggedIn(false)
                 return;
-              }
-              const user = response.data.data.user
-              setIsLoggedIn(true)
-              setCurrentUser(user)
-              console.log("Current user is :", user);
-      
-            } catch (error: any) {
-              console.log(error);
-              const errorMessage =
-                error.response?.data?.message || 'An unexpected error occurred. Please try again.';
-              Alert.alert('Error', errorMessage);
             }
-          }
+            const user = response.data.data.user
+            setIsLoggedIn(true)
+            setCurrentUser(user)
+            console.log("Current user is :", user);
+
+        } catch (error: any) {
+            console.log(error);
+            const errorMessage =
+                error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+            Alert.alert('Error', errorMessage);
+        }
+    }
     const handleLogin = async () => {
         try {
             const response = await axios.post(`${baseURL}/api/user/login-user`, {
@@ -84,8 +84,10 @@ const Login = () => {
             }
             await SecureStore.setItemAsync("accessToken", String(response.data.data.accessToken));
             await SecureStore.setItemAsync("refreshToken", String(response.data.data.refreshToken));
+            Alert.alert('Success!', response.data.message);
 
-            Alert.alert('Success', response.data.message);
+            verifyLoggedIn();
+
         } catch (error: any) {
             console.log(error);
             const errorMessage =

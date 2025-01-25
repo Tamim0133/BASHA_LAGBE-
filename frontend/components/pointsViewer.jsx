@@ -7,7 +7,7 @@ const PointsViewer = ({ points }) => {
     return (
         <View style={styles.container}>
             <Ionicons name="trophy" size={24} color='white' style={styles.icon} />
-            <Text style={styles.points}>{points} Points</Text>
+            <Text style={styles.pointsText}> <Text style={styles.points}>{points}</Text> Points</Text>
         </View>
     );
 };
@@ -29,7 +29,12 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     points: {
-        fontSize: 16,
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#fff', // White text
+    },
+    pointsText: {
+        fontSize: 12,
         fontWeight: 'bold',
         color: '#fff', // White text
     },
