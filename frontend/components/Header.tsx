@@ -18,10 +18,7 @@ type DrawerParamList = {
     Settings: undefined;
 };
 
-type NavigationProps = CompositeNavigationProp<
-    DrawerNavigationProp<DrawerParamList>,
-    any
->;
+type NavigationProps = CompositeNavigationProp<DrawerNavigationProp<DrawerParamList>, any>;
 
 const Header = () => {
     const navigation = useNavigation<NavigationProps>();

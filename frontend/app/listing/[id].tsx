@@ -77,7 +77,7 @@ const DetailsPage = () => {
     };
 
     fetchData();
-    console.log(currentUser.myAds);
+    // console.log(currentUser.myAds);
 
     if (currentUser && currentUser.myAds) {
       currentUser.myAds.forEach((x: String) => {
@@ -236,7 +236,7 @@ const DetailsPage = () => {
   return (
     <View style={styles.container}>
       <Animated.ScrollView
-        ref={scrollRef}
+        ref={scrollRef as any}
         onScroll={scrollHandler}
         scrollEventThrottle={16}
         contentContainerStyle={{ paddingBottom: 100 }}>

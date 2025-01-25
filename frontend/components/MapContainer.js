@@ -3,9 +3,10 @@ import MapView, { Marker } from 'react-native-maps';
 import { View } from 'react-native';
 import styles from '@/styles/myMapComponentStyles';
 
-const MapContainer = ({ myLocation, pin, handleMapPress }) => (
+const MapContainer = ({ myLocation, pin, handleMapPress, mapref }) => (
     <>
         <MapView
+            ref={mapref}
             style={styles.map}
             initialRegion={{
                 latitude: myLocation?.latitude || pin.latitude,

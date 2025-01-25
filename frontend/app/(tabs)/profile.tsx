@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { RefreshControl } from 'react-native';
 import { useUserState } from '@/hooks/UserContext';
+import PointsViewer from '@/components/pointsViewer'
 
 type MenuOption = {
     title: string;
@@ -78,7 +79,9 @@ const Profile = () => {
                 <View style={styles.header}>
                     {isLoggedIn ? (
                         <>
-                            {/* <Text style={styles.name}>{displayName}</Text> */}
+
+                            <Text style={styles.name}>{currentUser.username}</Text>
+                            <PointsViewer points={100} />
                             {/* <Text style={styles.email}>{user?.email || 'No email provided'}</Text> */}
                         </>
                     ) : (

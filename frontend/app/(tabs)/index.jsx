@@ -19,7 +19,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import * as Location from 'expo-location'; // Import location package
 
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
 
 const MainScreen = () => {
     const initialLocation = {

@@ -682,12 +682,17 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
     //-----------------------------------------------
 
     const handleSubmit = async () => {
+
+        console.log('Submitting Data ..... (0)');
         const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
+        console.log('Submitting Data ..... (1)');
 
         if (!isLoggedIn) {
             Alert.alert("Login Required.", "You must login first.")
             return
-        } else formData.owner = currentUser._id
+        } else {
+            formData.owner = currentUser._id
+        }
         if (formData.images.length < 3) {
             Alert.alert("Minimum Images Required", "Please select at least 3 images.");
             return;
@@ -708,6 +713,7 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
         // Add other form data
         const { images, ...otherData } = formData;
         fd.append('data', JSON.stringify(otherData));
+        console.log('Submitting Data ..... (2)');
 
         try {
             const response = await axios.post(`${baseURL}/api/ad/insert-ad`, fd, {
