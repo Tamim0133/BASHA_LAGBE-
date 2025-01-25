@@ -25,7 +25,6 @@ interface FormData {
     bedrooms: (Number | String);
     bathrooms: (Number | String);
     images: ImagePicker.ImagePickerAsset[]; // array of photo URIs
-    imagesInfo: string[];
     floor: Number,
     category: 'Family' | 'Bachelor' | 'Hostel' | 'Office' | 'Sublet' | 'Female' | 'Shop' | 'Garage';
     rent: Number;
@@ -62,7 +61,6 @@ const OnboardingScreen: React.FC = () => {
         bedrooms: 0,
         bathrooms: 0,
         images: [],
-        imagesInfo: [],
         rent: 0,
         advanceDeposit: 0,
         willRefundAdvance: true,
@@ -674,6 +672,7 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [rent, setrent] = useState<Number>(formData.rent); // Month
     const [adv, setAdv] = useState<Number>(formData.advanceDeposit);
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
 
 
 
@@ -684,7 +683,6 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
     const handleSubmit = async () => {
 
         console.log('Submitting Data ..... (0)');
-        const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
         console.log('Submitting Data ..... (1)');
 
         if (!isLoggedIn) {
@@ -703,6 +701,7 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
         // Handle image uploads
         formData.images.forEach((image, index) => {
             // ImagePickerAsset already contains the necessary file information
+            
             fd.append('images', {
                 uri: image.uri,
                 type: image.mimeType || 'image/jpeg', // Use the actual mime type if available

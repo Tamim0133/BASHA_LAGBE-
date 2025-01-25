@@ -85,7 +85,9 @@ const Login = () => {
             await SecureStore.setItemAsync("accessToken", String(response.data.data.accessToken));
             await SecureStore.setItemAsync("refreshToken", String(response.data.data.refreshToken));
             Alert.alert('Success!', response.data.message);
-
+            const user = response.data.data.user
+            setIsLoggedIn(true)
+            setCurrentUser(user)
             verifyLoggedIn();
             router.push('/');
         } catch (error: any) {
