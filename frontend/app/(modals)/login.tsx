@@ -84,7 +84,9 @@ const Login = () => {
             }
             await SecureStore.setItemAsync("accessToken", String(response.data.data.accessToken));
             await SecureStore.setItemAsync("refreshToken", String(response.data.data.refreshToken));
-
+            const user = response.data.data.user
+            setIsLoggedIn(true)
+            setCurrentUser(user)
             Alert.alert('Success', response.data.message);
         } catch (error: any) {
             console.log(error);
