@@ -152,6 +152,14 @@ const adSchema = new Schema(
         owner: {
             type: Schema.Types.ObjectId,
             ref: "User"
+        },
+        latitude: {
+            type: Number,
+            required: false
+        },
+        longitude: {
+            type: Number,
+            required: false
         }
 
     }, 

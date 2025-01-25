@@ -15,6 +15,8 @@ const adValidationSchema = Joi.object({
     category: Joi.string().valid('Family', 'Bachelor', 'Hostel', 'Office', 'Sublet', 'Female', 'Shop', 'Garage').optional(),
     bedrooms: Joi.number().integer().positive().optional().allow(null),
     bathrooms: Joi.number().integer().positive().optional().allow(null),
+    latitude: Joi.number().integer().positive().optional().allow(null),
+    longitude: Joi.number().integer().positive().optional().allow(null),
     facilities: Joi.array().items(
         Joi.string().valid(
             'Wifi', 'Gas', 'Parking', 'Lift', 'Water Supply', 'Sunlight & Ventilation', 
