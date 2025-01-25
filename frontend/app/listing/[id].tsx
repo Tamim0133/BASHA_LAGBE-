@@ -1,7 +1,6 @@
 import { useFocusEffect, useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Share, ScrollView, TouchableWithoutFeedback, Button, Alert } from 'react-native';
-import listingsData from '@/assets/data/temp-listing.json';
 import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import Animated, { SlideInDown, interpolate, useAnimatedRef, useAnimatedScrollHandler, useAnimatedStyle, useScrollViewOffset, useSharedValue } from 'react-native-reanimated';
@@ -9,12 +8,24 @@ import { defaultStyles } from '@/constants/Styles';
 import Carousel from 'react-native-reanimated-carousel';
 import axios from 'axios';
 import { useUserState } from '@/hooks/UserContext';
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from 'react-native-reanimated';
 
+// This is the default configuration
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: true, // Reanimated runs in strict mode by default
+});
 
 
 
 const { width } = Dimensions.get('window');
+
 const IMG_HEIGHT = 300;
+
+
 
 const DetailsPage = () => {
   // const { id } = useLocalSearchParams();
@@ -22,7 +33,7 @@ const DetailsPage = () => {
   const { item: serializedItem } = useLocalSearchParams();
   const item = JSON.parse(serializedItem as string);
   console.log(item);
-  
+
   const baseURL = process.env.EXPO_PUBLIC_BASE_URL
   const [listing, setListing] = useState<any>(item)
   const [location, setLocation] = useState<any>(null)
@@ -42,73 +53,73 @@ const DetailsPage = () => {
       scrollOffset.value = event.contentOffset.y;
     },
   });
-;
-// const initialFetchDone = useRef(false);
-  
-useEffect(() => {
-  
-  const fetchData = async () => {
- 
-    try {
-      setLoading(true);
-      const response2 = await axios.get(`${baseURL}/api/location/get-one/${item.areaId}`);
-      if (!response2.data.success) {
-        Alert.alert("Error!", response2.data.message);
-        return;
+  ;
+  // const initialFetchDone = useRef(false);
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+
+      try {
+        setLoading(true);
+        const response2 = await axios.get(`${baseURL}/api/location/get-one/${item.areaId}`);
+        if (!response2.data.success) {
+          Alert.alert("Error!", response2.data.message);
+          return;
+        }
+        setLocation(response2.data.data);
+      } catch (error) {
+        console.error("Fetch error:", error);
+        Alert.alert("Error", "Unable to fetch detailed ad.");
+      } finally {
+        setLoading(false);
       }
-      setLocation(response2.data.data);
-    } catch (error) {
-      console.error("Fetch error:", error);
-      Alert.alert("Error", "Unable to fetch detailed ad.");
-    } finally {
-      setLoading(false);
+    };
+
+    fetchData();
+    console.log(currentUser.myAds);
+
+    if (currentUser && currentUser.myAds) {
+      currentUser.myAds.forEach((x: String) => {
+        if (x === item._id) setIsLoved(true)
+      })
     }
-  };
+  }, []);
 
-  fetchData();
-  console.log(currentUser.myAds);
-  
-    if(currentUser && currentUser.myAds){
-    currentUser.myAds.forEach((x : String) =>{
-      if(x === item._id) setIsLoved(true)
-    })
-  }
-}, []);
+  // Add effect to monitor listing changes
 
-// Add effect to monitor listing changes
-  
   const handleLoved = async () => {
     console.log("handleLoved called, current listing:", listing);
     console.log("Current user:", currentUser);
-    console.log("isLoggedIn:", isLoggedIn);    
+    console.log("isLoggedIn:", isLoggedIn);
 
     if (!isLoggedIn) {
       Alert.alert('Sorry!', "You must login first.");
       return;
     }
-  
+
     if (!listing) {
       console.error("Listing is null!");
       return;
     }
-  
+
     // Optimistically update the UI
     setIsLoved(prev => !prev);
-  
+
     try {
       const endpoint = isLoved ? 'remove-from-wishlist' : 'add-to-wishlist';
       const response = await axios.post(`${baseURL}/api/user/${endpoint}`, {
         userId: currentUser._id,
         adId: listing._id
       });
-  
+
       if (!response.data.success) {
         // Revert the optimistic update if the request fails
         setIsLoved(prev => !prev);
         Alert.alert('Error', response.data.message);
         return;
       }
-  
+
       Alert.alert('Success', response.data.message);
     } catch (error: any) {
       // Revert the optimistic update if the request fails

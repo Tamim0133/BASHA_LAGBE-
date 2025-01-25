@@ -7,8 +7,17 @@ import { useEffect, useRef, useState } from 'react';
 import { BottomSheetFlatList, BottomSheetFlatListMethods } from '@gorhom/bottom-sheet';
 import Carousel from 'react-native-reanimated-carousel'; // Import the carousel library
 import { TouchableOpacity } from 'react-native';
-import { useUserState } from '@/hooks/UserContext';
 
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from 'react-native-reanimated';
+
+// This is the default configuration
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: true, // Reanimated runs in strict mode by default
+});
 interface Props {
   listings: any[];
   refresh: number;
@@ -53,13 +62,13 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
     );
 
     return (
-      <Link 
+      <Link
         href={{
           pathname: `/listing/${item._id}`,
           params: {
             item: JSON.stringify(item) // Serialize the item object
           }
-        }} 
+        }}
         asChild
       >
         <TouchableOpacity activeOpacity={1}>

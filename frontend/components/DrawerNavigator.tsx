@@ -8,7 +8,7 @@ import { useRouter } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const CustomDrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
-    const {currentUser, isLoggedIn} = useUserState()
+    const { currentUser, isLoggedIn } = useUserState()
     const { signOut, isSignedIn, user } = useAuth();
     const displayName = user?.displayName || (user?.email ? user.email.split('@')[0] : 'User');
     const router = useRouter();
@@ -38,7 +38,7 @@ const CustomDrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
                 {isLoggedIn ? (
                     <>
                         <Text style={styles.title}>Welcome</Text>
-                        <Text style={styles.titleName} >{currentUser.username}</Text>
+                        {/* <Text style={styles.titleName} >{currentUser.username}</Text> */}
                     </>
                 ) : (
                     <View style={styles.buttonContainer}>

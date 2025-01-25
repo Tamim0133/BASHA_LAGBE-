@@ -39,6 +39,8 @@ interface FormData {
     facilities: string[];
     description: string;
     owner: string;
+    latitude: number; // Add latitude
+    longitude: number;
 }
 
 // Props for each step component
@@ -71,7 +73,9 @@ const OnboardingScreen: React.FC = () => {
         isAvailable: true,
         facilities: [],
         description: '',
-        owner: ""
+        owner: "",
+        latitude: 0,  // Initialize latitude with a default value
+        longitude: 0
     });
 
 
@@ -237,42 +241,70 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
         if (text.length <= 100) {
             setTitle(text);
             setFormData({ ...formData, title: text });
-            console.log(formData);
+            // console.log(formData);
         }
     };
 
     // Room No koyta kobe oita main data te change hobe
     const handleBedRooms = (text: (Number | String)) => {
         setFormData({ ...formData, bedrooms: text });
-        console.log(formData);
+        // console.log(formData);
 
     };
 
     // Bathroom koyta oita o change hobe
     const handleBathRooms = (text: (Number | String)) => {
         setFormData({ ...formData, bathrooms: text });
-        console.log(formData);
+        // console.log(formData);
 
     };
 
     //Kun catagory er basha
     const handleCategory = (text: 'Family' | 'Bachelor' | 'Hostel' | 'Office' | 'Sublet' | 'Female' | 'Shop' | 'Garage') => {
         setFormData({ ...formData, category: text });
-        console.log(formData);
+        // console.log(formData);
 
     };
     const handleArea = (obj: any) => {
         setSelectedArea(obj.areaId)
         setFormData({ ...formData, areaId: obj.areaId });
-        console.log(formData);
+        // console.log(formData);
 
     }
     const handleSubArea = (obj: any) => {
         setSelectedSubArea(obj.subarea)
         setFormData({ ...formData, subarea: obj.subarea });
-        console.log(formData);
+        // console.log(formData);
 
     }
+
+    const printFormData = () => {
+        console.log("Updated Form Data: ", JSON.stringify(formData, null, 2));
+    }
+
+    useEffect(() => {
+        // Trigger whenever formData updates
+        printFormData();
+    }, [formData]);
+
+    const handleLocationConfirmation = (lat: any, lon: any) => {
+        // console.log("AdLocation latitude: " + lat);
+        // console.log("AdLocation Logitude : " + lon);
+        if (lat !== 0 && lon !== 0) {
+            // Update the formData with latitude and longitude
+            setFormData({
+                ...formData,
+                latitude: lat,
+                longitude: lon
+            });
+
+            // Print the updated formData
+            // printFormData();
+        }
+        else {
+            console.log("zero");
+        }
+    };
 
     const [selectedPropertyType, setSelectedPropertyType] = useState<string | null>(formData.category);
     const [selectedBedroom, setSelectedBedroom] = useState<Number | String | null>(formData.bedrooms);
@@ -280,7 +312,8 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
     const [selectedFeatures, setSelectedFeatures] = useState<string[]>(formData.facilities);
     const [selectedArea, setSelectedArea] = useState<string>(formData.areaId);
     const [selectedSubArea, setSelectedSubArea] = useState<string>(formData.subarea);
-
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
     return (
         <View>
             <Text style={styles.sectionTitle}>Enter a Suitable Title:</Text>
@@ -346,9 +379,12 @@ const BasicInfo: React.FC<StepProps> = ({ formData, setFormData }) => {
             {/* // Map Selection functionality For user */}
             {/* ------------------------------------------ */}
             <Text style={styles.sectionTitle}>
-                Mark Your Property: <Text style={{ color: Colors.grey }}>(Optional)</Text>
+                Mark Your Property: <Text style={{ color: Colors.grey }}>(Optional)
+                    {!latitude && !longitude && <Text style={{ fontSize: 12, color: 'red' }}>Not Selected</Text>}
+                </Text>
             </Text>
-            <MapComponentForUser />
+            <MapComponentForUser setLatitude={setLatitude} setLongitude={setLongitude} handleLocationConfirmation={handleLocationConfirmation}
+            />
             {/* <ListingsMap listings={getoItems} /> */}
 
 
@@ -606,7 +642,7 @@ const Uploadimages: React.FC<StepProps> = ({ formData, setFormData }) => {
                             flexDirection: 'row',
                             alignItems: 'center',
                         }}                    >
-                        <MaterialCommunityIcons name={feature.icon} size={20} style={selectedFeatures.includes(feature.name) ? styles.selectedButton : styles.button} />
+                        <MaterialCommunityIcons name={feature.icon as any} size={20} style={selectedFeatures.includes(feature.name) ? styles.selectedButton : styles.button} />
                         <Text style={{ marginLeft: 8 }}>{feature.name}</Text>
                     </TouchableOpacity>
                 ))}

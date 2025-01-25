@@ -15,11 +15,11 @@ type MenuOption = {
 };
 
 const Profile = () => {
-    const {currentUser, isLoggedIn} = useUserState()
+    const { currentUser, isLoggedIn } = useUserState()
     const { signOut, isSignedIn, user } = useAuth();
     const [refreshing, setRefreshing] = useState(false);
 
-    const displayName = isLoggedIn ? currentUser.username : "";
+    // const displayName = isLoggedIn ? currentUser.username : "";
     const router = useRouter();
 
     const menuOptions: MenuOption[] = [
@@ -78,7 +78,7 @@ const Profile = () => {
                 <View style={styles.header}>
                     {isLoggedIn ? (
                         <>
-                            <Text style={styles.name}>{displayName}</Text>
+                            {/* <Text style={styles.name}>{displayName}</Text> */}
                             {/* <Text style={styles.email}>{user?.email || 'No email provided'}</Text> */}
                         </>
                     ) : (
