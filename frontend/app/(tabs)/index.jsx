@@ -76,7 +76,7 @@ const MainScreen = () => {
         <View style={{ flex: 1 }}>
             <Header />
             <View style={{ flex: 1 }}>
-                <ListingsMap pin={pin} myLocation={myLocation} />
+                <ListingsMap pin={pin} myLocation={myLocation} items={items} />
                 <ListingsBottomSheet listings={items} category={category} />
             </View>
         </View>

@@ -1,4 +1,4 @@
-import { useFocusEffect, useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Share, ScrollView, TouchableWithoutFeedback, Button, Alert } from 'react-native';
 import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
@@ -89,6 +89,8 @@ const DetailsPage = () => {
   // Add effect to monitor listing changes
 
   const handleLoved = async () => {
+    const router = useRouter();
+
     console.log("handleLoved called, current listing:", listing);
     console.log("Current user:", currentUser);
     console.log("isLoggedIn:", isLoggedIn);
@@ -161,7 +163,7 @@ const DetailsPage = () => {
         </View>
       ),
       headerLeft: () => (
-        <TouchableOpacity style={styles.roundButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.roundButton} onPress={() => router.push('/')}>
           <Ionicons name="chevron-back" size={24} color={'#000'} />
         </TouchableOpacity>
       ),
