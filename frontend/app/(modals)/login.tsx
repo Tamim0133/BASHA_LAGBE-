@@ -73,8 +73,7 @@ const Login = () => {
     }
     const handleLogin = async () => {
         try {
-            const response = await axios.post(`${baseURL}/api/user/
-                login-user`, {
+            const response = await axios.post(`${baseURL}/api/user/login-user`, {
                 contactNo: formattedContactNo,
                 password: password
             });

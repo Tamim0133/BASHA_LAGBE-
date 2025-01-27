@@ -14,6 +14,8 @@ const MapContainer = ({ myLocation, pin, handleMapPress, mapref }) => (
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01,
             }}
+            showsMyLocationButton
+            showsUserLocation
             provider="google"
             onPress={handleMapPress}
         >

@@ -210,7 +210,77 @@ const DetailsPage = () => {
       </View>
     );
   };
-  const screenWidth = Dimensions.get('window').width; // Get screen width in pixels
+  const screenWidth = Dimensions.get('window').width;
+
+
+
+  /*------------------------------------- 
+        Naiiiiiiimulllllll Sheraaaaa !
+--------------------------------------- */
+  const handleCreditEchange = () => {
+    if (currentUser.credits < 10) {
+      Alert.alert(
+        "Insufficient Credits",
+        "You can increase your credits in the profile section!"
+      )
+    }
+    else {
+      // Todo from here : 
+      // Todo ------------------- >
+      Alert.alert(
+        "Sufficient Credits",
+        "Now need to handle the credits flow!"
+      )
+    }
+  }
+  /*------------------------------------- 
+    Unlock Button e click korle jeita hobe
+  --------------------------------------- */
+  const handleUnlock = async () => {
+    Alert.alert(
+      "Unlock This Property",
+      "Unlocking this property will cost you 10 credits !?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            /*------------------------------------- 
+              Change Gula ei Function Handle korbe
+            --------------------------------------- */
+            handleCreditEchange();
+          },
+          style: "destructive",
+        },
+      ]
+    ); console.log("Handle Clicked")
+
+    console.log(JSON.stringify(item, null, 2));
+
+    try {
+      const response = await axios.get(`${baseURL}/api/user/get-owner/${item.owner}`);
+
+      if (response.data.success) {
+        console.log('Owner :', JSON.stringify(response.data.user, null, 2)); // <--- Owner
+        console.log('User:', JSON.stringify(currentUser, null, 2));// <------- User 
+        return response.data.user;
+      } else {
+        Alert.alert('Error', response.data.message || 'Failed to fetch owner.');
+        return null;
+      }
+    } catch (error: any) {
+      console.error('Error fetching owner:', error);
+      if (error.response) {
+        Alert.alert('Error', error.response.data.message || 'An error occurred.');
+      } else {
+        Alert.alert('Error', 'Network error. Please check your connection.');
+      }
+      return null;
+    }
+  }
 
   const renderCarouselItem = ({ item: image, index }: { item: string; index: number }) => (
     <TouchableWithoutFeedback>
@@ -373,6 +443,13 @@ const DetailsPage = () => {
         </View>
       </Animated.ScrollView >
 
+
+      {/* -------------------------------------
+                Unlock Section Footer 
+                Todo : Naimul -> 
+      --------------------------------------- */ }
+
+
       <Animated.View style={defaultStyles.footer} entering={SlideInDown.delay(200)}>
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -381,7 +458,7 @@ const DetailsPage = () => {
             <Text style={styles.footerPrice}> Contact Number</Text>
           </View>
 
-          <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20, marginTop: 5 }]}>
+          <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20, marginTop: 5 }]} onPress={() => handleUnlock()}>
             <Text style={defaultStyles.btnText}>
               <FontAwesome name='unlock' size={20} />
               {""} Unlock

@@ -38,7 +38,7 @@ const CustomDrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
                 {isLoggedIn ? (
                     <>
                         <Text style={styles.title}>Welcome</Text>
-                        <Text style={styles.titleName} >{currentUser.username}</Text>
+                        <Text style={styles.titleName} >{currentUser?.username}</Text>
                     </>
                 ) : (
                     <View style={styles.buttonContainer}>

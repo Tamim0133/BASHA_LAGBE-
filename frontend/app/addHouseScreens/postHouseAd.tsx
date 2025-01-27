@@ -685,6 +685,8 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
         console.log('Submitting Data ..... (0)');
         console.log('Submitting Data ..... (1)');
 
+
+
         if (!isLoggedIn) {
             Alert.alert("Login Required.", "You must login first.")
             return
@@ -701,7 +703,7 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
         // Handle image uploads
         formData.images.forEach((image, index) => {
             // ImagePickerAsset already contains the necessary file information
-            
+
             fd.append('images', {
                 uri: image.uri,
                 type: image.mimeType || 'image/jpeg', // Use the actual mime type if available

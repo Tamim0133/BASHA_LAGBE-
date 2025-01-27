@@ -1,7 +1,7 @@
 
 import { useFonts } from 'expo-font';
 import { Stack, useRouter } from 'expo-router';
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import { TouchableOpacity, Animated, StyleSheet, Text, Alert } from 'react-native';
@@ -13,7 +13,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import axios from 'axios'
 import * as SecureStore from 'expo-secure-store';
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -53,10 +52,12 @@ export default function RootLayout() {
   }
 
   return (
+
     <UserStateProvider>
       <StatusBar style="dark" backgroundColor="transparent" translucent={true} />
       <RootLayoutNav />
     </UserStateProvider>
+
   );
 }
 
@@ -111,10 +112,13 @@ function RootLayoutNav() {
   const baseURL = process.env.EXPO_PUBLIC_BASE_URL
   console.log("Is Logged in : " + isLoggedIn);
   console.log("CurrentUser:", JSON.stringify(currentUser));  // Automatically navigate to login screen if user is not authenticated
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (!isLoggedIn) {
         router.push('/(modals)/login');
+        console.log("User not Logged in !")
+        console.log()
       }
       else {
         console.log("User is Already Logged In ! ")

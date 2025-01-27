@@ -1,20 +1,9 @@
-import React, { useMemo, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Header, ListingsBottomSheet, ListingsMap, CustomDrawerContent } from '@/components';
+import { settings, AboutUsScreen, PrivacyPolicyScreen, RefundPolicyScreen, TermsAndConditionsScreen, ContactUsScreen, } from '@/app/otherScreens';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import ListingsBottomSheet from '@/components/ListingsBottomSheet';
-import ListingsMap from '@/components/ListingsMap';
 import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
-import Header from '@/components/Header';
-import settings from '../otherScreens/settings';
-import CustomDrawerContent from '@/components/DrawerNavigator';
 import { View, Alert } from 'react-native';
-import Colors from '@/constants/Colors';
-import AboutUsScreen from '../otherScreens/aboutUs';
-import PrivacyPolicyScreen from '../otherScreens/privacyPolicy';
-import RefundPolicyScreen from '../otherScreens/refundPolicy';
-import TermsAndConditionsScreen from '../otherScreens/termsAndCondition';
-import ContactUsScreen from '../otherScreens/contactUs';
-import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import * as Location from 'expo-location';
@@ -35,42 +24,40 @@ const MainScreen = () => {
 
     const getoItems = useMemo(() => listingsDataGeo, []);
 
-    useFocusEffect(
-        React.useCallback(() => {
-            const fetchAds = async () => {
-                try {
-                    const response = await axios.get(`${baseURL}/api/ad/get-ad`);
-                    if (!response.data.success) {
-                        Alert.alert('Error', response.data.message);
-                        return;
-                    }
-                    const newItems = response.data.data;
-                    setItems(newItems); // Update the listings state
-                } catch (error) {
-                    const errorMessage =
-                        error.response?.data?.message || 'An unexpected error occurred. Please try again.';
-                    Alert.alert('Error', errorMessage);
+    useEffect(() => {
+        const fetchAds = async () => {
+            try {
+                const response = await axios.get(`${baseURL}/api/ad/get-ad`);
+                if (!response.data.success) {
+                    Alert.alert('Error', response.data.message);
+                    return;
                 }
-            };
+                const newItems = response.data.data;
+                setItems(newItems); // Update the listings state
+            } catch (error) {
+                const errorMessage =
+                    error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+                Alert.alert('Error', errorMessage);
+            }
+        };
 
-            const fetchLocation = async () => {
-                try {
-                    const { status } = await Location.requestForegroundPermissionsAsync();
-                    if (status !== 'granted') {
-                        console.warn("Location permission not granted");
-                        return;
-                    }
-                    const location = await Location.getCurrentPositionAsync({});
-                    setMyLocation(location.coords); // Update state with fetched location
-                } catch (err) {
-                    console.warn("Error getting location:", err);
+        const fetchLocation = async () => {
+            try {
+                const { status } = await Location.requestForegroundPermissionsAsync();
+                if (status !== 'granted') {
+                    console.warn("Location permission not granted");
+                    return;
                 }
-            };
+                const location = await Location.getCurrentPositionAsync({});
+                setMyLocation(location.coords); // Update state with fetched location
+            } catch (err) {
+                console.warn("Error getting location:", err);
+            }
+        };
 
-            fetchAds();
-            fetchLocation(); // Fetch location on screen focus
-        }, [])
-    );
+        fetchAds();
+        fetchLocation(); // Fetch location when the component mounts
+    }, []);
 
     return (
         <View style={{ flex: 1 }}>

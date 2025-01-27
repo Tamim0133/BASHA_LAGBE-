@@ -97,8 +97,8 @@ const Profile = () => {
                     {isLoggedIn ? (
                         <>
 
-                            <Text style={styles.name}>{currentUser.username}</Text>
-                            <PointsViewer points={currentUser.credits} />
+                            <Text style={styles.name}>{currentUser?.username}</Text>
+                            <PointsViewer points={currentUser?.credits} />
                             {/* <Text style={styles.email}>{user?.email || 'No email provided'}</Text> */}
                         </>
                     ) : (
