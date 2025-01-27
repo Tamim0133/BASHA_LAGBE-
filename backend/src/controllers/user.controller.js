@@ -51,6 +51,38 @@ export const fetchOwner = async (req, res) => {
   }
 };
 
+export const unlockOwner = async (req, res) => {
+  try {
+    const {userId, ownerId} = req.body;
+
+    // Check if userId is provided
+    if (!userId) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Are you really logged in?' 
+      });
+    }
+
+    const user = await User.findById(userId)
+    user.credits -= 10;
+    user.unlockedPersons.push(ownerId)
+    await user.save();
+
+    // Return the user data
+    return res.status(200).json({
+      success: true,
+      message: `Owner unlocked successfully. You have ${user.credits} credits remaining.`,
+    });
+  } catch (error) {
+    console.error('Error unlocking owner:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'An error occurred while unlocking the owner.',
+      error: error.message,
+    });
+  }
+};
+
 
 export const registerUser =  async (req, res) => {
   try{
