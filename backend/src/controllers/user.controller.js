@@ -3,6 +3,53 @@ import{ ApiError }from '../utils/ApiError.js'
 import {User, Ad} from '../db/model.js' 
 import jwt from 'jsonwebtoken'
 
+export const fetchOwner = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Check if userId is provided
+    if (!userId) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Owner ID is required.' 
+      });
+    }
+
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Invalid ObjectId.' 
+      });
+    }
+
+    // Find the user by ID and exclude sensitive fields
+    const existedUser = await User.findById(userId).select("-password -refreshToken");
+
+    // Check if the user exists
+    if (!existedUser) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Owner not found.' 
+      });
+    }
+
+    // Return the user data
+    return res.status(200).json({
+      success: true,
+      message: 'Owner fetched successfully.',
+      user: existedUser,
+    });
+  } catch (error) {
+    console.error('Error fetching owner:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'An error occurred while fetching the owner.',
+      error: error.message,
+    });
+  }
+};
+
 
 export const registerUser =  async (req, res) => {
   try{
