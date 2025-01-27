@@ -33,7 +33,7 @@ const DetailsPage = () => {
   const { item: serializedItem } = useLocalSearchParams();
   const item = JSON.parse(serializedItem as string);
   console.log(item);
-
+  const [owner, setOwner] = useState<any>(null)
   const baseURL = process.env.EXPO_PUBLIC_BASE_URL
   const [listing, setListing] = useState<any>(item)
   const [location, setLocation] = useState<any>(null)
@@ -65,12 +65,19 @@ const DetailsPage = () => {
         const response2 = await axios.get(`${baseURL}/api/location/get-one/${item.areaId}`);
         if (!response2.data.success) {
           Alert.alert("Error!", response2.data.message);
-          return;
         }
-        setLocation(response2.data.data);
+        else setLocation(response2.data.data);
+
+        const response = await axios.get(`${baseURL}/api/user/get-owner/${item.owner}`);
+        if (response.data.success) {
+          setOwner(response.data.user)
+        } else {
+          Alert.alert('Error', response.data.message || 'Failed to fetch owner.');
+        }
+
       } catch (error) {
         console.error("Fetch error:", error);
-        Alert.alert("Error", "Unable to fetch detailed ad.");
+        Alert.alert("Error", "Unable to fetch detailed ad or owner.");
       } finally {
         setLoading(false);
       }
@@ -215,70 +222,73 @@ const DetailsPage = () => {
 
 
   /*------------------------------------- 
-        Naiiiiiiimulllllll Sheraaaaa !
+        Naiiiiiiimulllllll baaaal !
 --------------------------------------- */
-  const handleCreditEchange = () => {
-    if (currentUser.credits < 10) {
-      Alert.alert(
-        "Insufficient Credits",
-        "You can increase your credits in the profile section!"
-      )
-    }
-    else {
-      // Todo from here : 
-      // Todo ------------------- >
-      Alert.alert(
-        "Sufficient Credits",
-        "Now need to handle the credits flow!"
-      )
+  const handleCreditEchange = async () => {
+    try {
+      const response = await axios.post(`${baseURL}/api/user/unlock-owner`, {
+        userId: currentUser._id, 
+        ownerId: owner._id
+      });
+
+      if (!response.data.success) {
+        Alert.alert('Error', response.data.message || 'Failed to unlock owner.');
+      }
+    } catch (error : any) {
+      console.error('Error unlocking owner:', error);
+      if (error.response) {
+        Alert.alert('Error', error.response.data.message || 'An error occurred.');
+      } else {
+        Alert.alert('Error', 'Network error. Please check your connection...');
+      }
     }
   }
   /*------------------------------------- 
     Unlock Button e click korle jeita hobe
   --------------------------------------- */
   const handleUnlock = async () => {
-    Alert.alert(
-      "Unlock This Property",
-      "Unlocking this property will cost you 10 credits !?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "Yes",
-          onPress: () => {
-            /*------------------------------------- 
-              Change Gula ei Function Handle korbe
-            --------------------------------------- */
-            handleCreditEchange();
+    let isOkToLoadContact = true;
+    if(currentUser.unlockedPersons.indexOf(item.owner) == -1){ // unlocked na
+      Alert.alert(
+        "Unlock This Property",
+        "Unlocking this property will cost you 10 credits!?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
           },
-          style: "destructive",
-        },
-      ]
-    ); console.log("Handle Clicked")
-
-    console.log(JSON.stringify(item, null, 2));
-
-    try {
-      const response = await axios.get(`${baseURL}/api/user/get-owner/${item.owner}`);
-
-      if (response.data.success) {
-        console.log('Owner :', JSON.stringify(response.data.user, null, 2)); // <--- Owner
-        console.log('User:', JSON.stringify(currentUser, null, 2));// <------- User 
-        return response.data.user;
-      } else {
-        Alert.alert('Error', response.data.message || 'Failed to fetch owner.');
-        return null;
-      }
-    } catch (error: any) {
-      console.error('Error fetching owner:', error);
-      if (error.response) {
-        Alert.alert('Error', error.response.data.message || 'An error occurred.');
-      } else {
-        Alert.alert('Error', 'Network error. Please check your connection.');
-      }
-      return null;
+          {
+            text: "Yes",
+            onPress: () => {
+              if (!currentUser) {
+                Alert.alert(
+                  "Please, Login!",
+                  "You must login first to see owner contact info."
+                )
+                isOkToLoadContact = false;
+                return;
+              }
+              if (currentUser.credits < 10) {
+                Alert.alert(
+                  "Insufficient Credits",
+                  "You can increase your credits in the profile section!"
+                )
+                isOkToLoadContact = false;
+                return;
+              }
+              handleCreditEchange();
+            },
+            style: "destructive",
+          },
+        ]
+      ); 
+    }
+    if(isOkToLoadContact){
+      // display owner.contactNo
+      Alert.alert(
+        "Contact Info:",
+        `${owner.contactNo}`
+      )
     }
   }
 
