@@ -9,6 +9,7 @@ import { useUserState } from '@/hooks/UserContext';
 import PointsViewer from '@/components/pointsViewer';
 import * as SecureStore from 'expo-secure-store';
 import { useNavigation } from '@react-navigation/native';
+import { navigate } from 'expo-router/build/global-state/routing';
 
 
 type MenuOption = {
@@ -28,7 +29,13 @@ const Profile = () => {
     const menuOptions: MenuOption[] = [
         { title: 'Order Now', subtitle: 'Order now to find your perfect rental property', icon: 'home', action: () => { } },
         { title: 'Order History', subtitle: 'View your order history', icon: 'history', action: () => { } },
-        { title: 'My Properties', subtitle: 'View and manage your added properties', icon: 'briefcase', action: () => { } },
+        {
+            title: 'My Properties', subtitle: 'View and manage your added properties', icon: 'briefcase', action: () => {
+                router.push({
+                    pathname: '/profileScreens/myProperties',
+                });
+            }
+        },
         { title: 'Unlocked Properties', subtitle: 'View your unlocked properties', icon: 'lock-open', action: () => { } },
         { title: 'Buy Package', subtitle: 'Buy a package to unlock premium features', icon: 'shopping', action: () => { } },
         { title: 'Purchase History', subtitle: 'View your purchase history', icon: 'receipt', action: () => { } },

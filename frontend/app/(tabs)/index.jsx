@@ -17,13 +17,13 @@ const MainScreen = () => {
     };
 
     const [category, setCategory] = useState('Tiny homes');
-    const [items, setItems] = useState([]); // State for storing fetched listings
     const [myLocation, setMyLocation] = useState(initialLocation); // User location state
     const [pin, setPin] = useState(initialLocation); // Default pin location
     const baseURL = process.env.EXPO_PUBLIC_BASE_URL;
 
     const getoItems = useMemo(() => listingsDataGeo, []);
 
+    const [items, setItems] = useState([]); // State for storing fetched listings
     useEffect(() => {
         const fetchAds = async () => {
             try {
