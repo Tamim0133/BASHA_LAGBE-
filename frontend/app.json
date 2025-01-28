@@ -28,6 +28,20 @@
       "style": "dark",
       "backgroundColor": "transparent",
       "translucent": true
-    }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/splash.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.example.bashalagbe",
+      "googleServicesFile": "./google-services.json"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6984c218-4bff-4a1d-b982-70bde41c3710"
+      }
+    },
+    "owner": "dusty_spider"
   }
 }

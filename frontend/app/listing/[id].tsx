@@ -227,14 +227,14 @@ const DetailsPage = () => {
   const handleCreditEchange = async () => {
     try {
       const response = await axios.post(`${baseURL}/api/user/unlock-owner`, {
-        userId: currentUser._id, 
+        userId: currentUser._id,
         ownerId: owner._id
       });
 
       if (!response.data.success) {
         Alert.alert('Error', response.data.message || 'Failed to unlock owner.');
       }
-    } catch (error : any) {
+    } catch (error: any) {
       console.error('Error unlocking owner:', error);
       if (error.response) {
         Alert.alert('Error', error.response.data.message || 'An error occurred.');
@@ -246,12 +246,16 @@ const DetailsPage = () => {
   /*------------------------------------- 
     Unlock Button e click korle jeita hobe
   --------------------------------------- */
+  let isOkToLoadContact = false;
+  if (currentUser?.unlockedPersons?.indexOf(item.owner) != -1) { // unlocked na
+    isOkToLoadContact = true;
+  }
+
   const handleUnlock = async () => {
-    let isOkToLoadContact = true;
-    if(currentUser.unlockedPersons.indexOf(item.owner) == -1){ // unlocked na
+    if (currentUser.unlockedPersons.indexOf(item.owner) == -1) { // unlocked na
       Alert.alert(
-        "Unlock This Property",
-        "Unlocking this property will cost you 10 credits!?",
+        "Unlock This Owners Property",
+        "Unlocking this property will cost you 10 credits !?",
         [
           {
             text: "Cancel",
@@ -281,16 +285,19 @@ const DetailsPage = () => {
             style: "destructive",
           },
         ]
-      ); 
+      );
     }
-    if(isOkToLoadContact){
+    if (isOkToLoadContact) {
+      console.log(currentUser.unlockedPersons)
       // display owner.contactNo
-      Alert.alert(
-        "Contact Info:",
-        `${owner.contactNo}`
-      )
+      // Alert.alert(
+      //   "Contact Info:",
+      //   `${owner.contactNo}`
+      // )
     }
   }
+
+
 
   const renderCarouselItem = ({ item: image, index }: { item: string; index: number }) => (
     <TouchableWithoutFeedback>
@@ -459,25 +466,41 @@ const DetailsPage = () => {
                 Todo : Naimul -> 
       --------------------------------------- */ }
 
+      {
+        !isOkToLoadContact &&
+        <Animated.View style={defaultStyles.footer} entering={SlideInDown.delay(200)}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <View style={styles.footerText}>
+              <Ionicons name='lock-closed' size={48} />
+              <Text style={styles.footerPrice}> Contact Number</Text>
+            </View>
 
-      <Animated.View style={defaultStyles.footer} entering={SlideInDown.delay(200)}>
-        <View
-          style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <View style={styles.footerText}>
-            <Ionicons name='lock-closed' size={48} />
-            <Text style={styles.footerPrice}> Contact Number</Text>
+            <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20, marginTop: 5 }]} onPress={() => handleUnlock()}>
+              <Text style={defaultStyles.btnText}>
+                <FontAwesome name='unlock' size={20} />
+                {""} Unlock
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={{ color: Colors.grey, marginLeft: 110, position: 'absolute', top: 45 }}>use points</Text>
+
+        </Animated.View>
+      }
+      {
+        isOkToLoadContact &&
+        <Animated.View style={defaultStyles.footer} entering={SlideInDown.delay(200)}>
+
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={styles.footerPrice}> Owner : {owner.username}</Text>
+            <Text style={styles.footerPrice}> Contact : {owner.contactNo}</Text>
           </View>
 
-          <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20, marginTop: 5 }]} onPress={() => handleUnlock()}>
-            <Text style={defaultStyles.btnText}>
-              <FontAwesome name='unlock' size={20} />
-              {""} Unlock
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{ color: Colors.grey, marginLeft: 110, position: 'absolute', top: 45 }}>use points</Text>
 
-      </Animated.View>
+
+
+        </Animated.View>
+      }
 
     </View >
   );

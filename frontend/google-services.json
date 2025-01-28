@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1092333023586",
+    "project_id": "bashalagbenotifications",
+    "storage_bucket": "bashalagbenotifications.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092333023586:android:cdbcd02f24463a3a5c7c3b",
+        "android_client_info": {
+          "package_name": "com.example.bashalagbe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC85XekdUsGC5OMPqZNLu0fx4VKI5kTUAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
