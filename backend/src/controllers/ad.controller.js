@@ -32,16 +32,12 @@ export const insertAd = async (req, res) => {
     try {
       const adData = JSON.parse(req.body.data);
       const serverURIs = req.files;
-    //   console.log("AdData: ", adData, "\nFiles: ", serverURIs);
   
       const cloudImages = await Promise.all(
-        serverURIs.map(async (img, ind) => {
-        //   console.log("Local ", ind, " :", img.path);
-          const result = await uploadOnCloudinary(img.path);
-        //   console.log("Cloud ", ind, " :", result);
-        
-          return result.url; 
-        })
+      serverURIs.map(async (img, ind) => {
+        const result = await uploadOnCloudinary(img.path);
+        return result.url; 
+      })
       );
   
       const { error } = adValidationSchema.validate({ ...adData, images: cloudImages });
@@ -75,6 +71,8 @@ export const insertAd = async (req, res) => {
 export const getAds = async (req, res) => {
       try {
           const {
+              areaId,
+              subArea,
               sortBy, // e.g., "priceLowToHigh", "priceHighToLow", "newest"
               propertyType, // e.g., "Family", "Bachelor"
               priceMin, // minimum price
@@ -87,6 +85,8 @@ export const getAds = async (req, res) => {
           // Build the query object for filtering
           const filters = {};
   
+          if (areaId) filters.areaId = areaId;
+          if (subArea) filters.subArea = subArea;
           if (propertyType) filters.category = propertyType;
           if (priceMin || priceMax) filters.rent = {};
           if (priceMin) filters.rent.$gte = Number(priceMin);
