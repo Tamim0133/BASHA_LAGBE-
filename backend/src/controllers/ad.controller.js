@@ -86,7 +86,7 @@ export const getAds = async (req, res) => {
           const filters = {};
   
           if (areaId) filters.areaId = areaId;
-          if (subArea) filters.subArea = subArea;
+          if (subArea) filters.subarea = subArea;
           if (propertyType) filters.category = propertyType;
           if (priceMin || priceMax) filters.rent = {};
           if (priceMin) filters.rent.$gte = Number(priceMin);
