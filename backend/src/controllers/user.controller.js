@@ -51,6 +51,61 @@ export const fetchOwner = async (req, res) => {
   }
 };
 
+export const fetchWishes = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Check if userId is provided
+    if (!userId) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Owner ID is required.' 
+      });
+    }
+
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Invalid ObjectId.' 
+      });
+    }
+
+    // Find the user by ID and exclude sensitive fields
+    const existedUser = await User.findById(userId).select("-password -refreshToken");
+
+    // Check if the user exists
+    if (!existedUser) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Owner not found.' 
+      });
+    }
+    
+    // get users wished ads
+    const ads = await Ad.find({ _id: { $in: existedUser.wishlist } })    
+    if(!ads || ads.length == 0){
+      return res.status(404).json({ 
+        success: false, 
+        message: 'No adds in  wishlist.' 
+      });
+    }
+    // Return the wishlist ads
+    return res.status(200).json({
+      success: true,
+      message: 'Wishlist fetched successfully.',
+      ads: ads
+    });
+  } catch (error) {
+    console.error('Error fetching owner:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'An error occurred while fetching the wishlist.',
+      error: error.message,
+    });
+  }
+};
+
 export const unlockOwner = async (req, res) => {
   try {
     const {userId, ownerId} = req.body;
