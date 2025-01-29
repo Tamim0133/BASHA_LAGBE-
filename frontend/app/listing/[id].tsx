@@ -15,6 +15,7 @@ import {
 
 import PhoneInput from "react-native-phone-number-input";
 import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // This is the default configuration
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -33,10 +34,10 @@ const baseURL = process.env.EXPO_PUBLIC_BASE_URL;
 
 const DetailsPage = () => {
   // const { id } = useLocalSearchParams();
-  console.log("Component rendering");  // Add this at the top
+  // console.log("Component rendering");  // Add this at the top
   const { item: serializedItem } = useLocalSearchParams();
   const item = JSON.parse(serializedItem as string);
-  console.log(item);
+  // console.log(item);
   const [owner, setOwner] = useState<any>(null)
   const baseURL = process.env.EXPO_PUBLIC_BASE_URL
   const [listing, setListing] = useState<any>(item)
@@ -47,7 +48,7 @@ const DetailsPage = () => {
   const scrollOffset = useSharedValue(0);
   const [activeIndex, setActiveIndex] = useState(0)
   const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useUserState()
-  const [isLoved, setIsLoved] = useState<boolean>(true)
+  const [isLoved, setIsLoved] = useState<boolean>(false)
 
   // Rest of your state declarations...
 
@@ -57,59 +58,63 @@ const DetailsPage = () => {
       scrollOffset.value = event.contentOffset.y;
     },
   });
-  ;
-  // const initialFetchDone = useRef(false);
+
   const verifyLoggedIn = async () => {
     async function getToken() {
       try {
-        const accessToken = await SecureStore.getItemAsync('accessToken');
-        const refreshToken = await SecureStore.getItemAsync('refreshToken');
+        const accessToken = await SecureStore.getItemAsync("accessToken");
+        const refreshToken = await SecureStore.getItemAsync("refreshToken");
         return { accessToken, refreshToken };
       } catch (error) {
         console.error("Error fetching tokens:", error);
-        throw error; // Ensure the parent function knows of the error
+        throw error;
       }
     }
+
     try {
-      const { accessToken, refreshToken } = await getToken()
+      const { accessToken, refreshToken } = await getToken();
       const response = await axios.get(`${baseURL}/api/user/verify-user`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'x-refresh-token': refreshToken
-        }
+          "x-refresh-token": refreshToken,
+        },
       });
 
-      const user = response.data.data.user
-      setCurrentUser(user)
+      const user = response.data.data.user;
+      console.log(user);
+      setCurrentUser(user);
+
 
     } catch (error: any) {
       console.log(error);
       const errorMessage =
-        error.response?.data?.message || 'An unexpected error occurred. Please try again.';
-      Alert.alert('Error', errorMessage);
+        error.response?.data?.message ||
+        "An unexpected error occurred. Please try again.";
+      Alert.alert("Error", errorMessage);
     }
-  }
+  };
+
   useEffect(() => {
-
     const fetchData = async () => {
-
       try {
         setLoading(true);
-        const response2 = await axios.get(`${baseURL}/api/location/get-one/${item.areaId}`);
+
+        const response2 = await axios.get(
+          `${baseURL}/api/location/get-one/${item.areaId}`
+        );
         if (!response2.data.success) {
           Alert.alert("Error!", response2.data.message);
-        }
-        else setLocation(response2.data.data);
+        } else setLocation(response2.data.data);
 
-        const response = await axios.get(`${baseURL}/api/user/get-owner/${item.owner}`);
+        const response = await axios.get(
+          `${baseURL}/api/user/get-owner/${item.owner}`
+        );
         if (response.data.success) {
-          setOwner(response.data.user)
+          setOwner(response.data.user);
         } else {
-          Alert.alert('Error', response.data.message || 'Failed to fetch owner.');
+          Alert.alert("Error", response.data.message || "Failed to fetch owner.");
         }
-
       } catch (error) {
-        console.error("Fetch error:", error);
         Alert.alert("Error", "Unable to fetch detailed ad or owner.");
       } finally {
         setLoading(false);
@@ -117,56 +122,64 @@ const DetailsPage = () => {
     };
 
     fetchData();
-    // console.log(currentUser.myAds);
+    console.log("cureent user : ", currentUser);
+    // Load wishlist from AsyncStorage based on user ID
+    const loadWishlist = async () => {
+      try {
+        if (!currentUser?._id) return;
+        const storedWishlist = await AsyncStorage.getItem(
+          `wishlist_${currentUser._id}`
+        );
+        if (storedWishlist) {
+          const wishlist = JSON.parse(storedWishlist);
+          console.log("Asol Wishlist : ", wishlist);
+          console.log("item id : " + item._id);
+          if (wishlist.includes(item._id)) {
+            setIsLoved(true);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to load wishlist:", error);
+      }
+    };
 
-    if (currentUser?.myAds?.some((x: String) => x === item._id)) {
-      setIsLoved(true);
-    }
-  }, []);
-  // Add effect to monitor listing changes
+    loadWishlist();
+  }, [currentUser]);
 
   const handleLoved = async () => {
-    const router = useRouter();
-
-    console.log("handleLoved called, current listing: ", listing);
-    console.log("Current user: ", currentUser);
-    console.log("isLoggedIn: ", isLoggedIn);
-
     if (!isLoggedIn) {
-      Alert.alert('Sorry!', "You must login first.");
-      return;
-    }
-
-    if (!listing) {
-      console.error("Listing is null!");
+      Alert.alert("Sorry!", "You must login first.");
       return;
     }
 
     // Optimistically update the UI
-    setIsLoved(prev => !prev);
+    setIsLoved((prev) => !prev);
 
     try {
-      const endpoint = isLoved ? 'remove-from-wishlist' : 'add-to-wishlist';
-      const response = await axios.post(`${baseURL}/api/user/${endpoint}`, {
-        userId: currentUser._id,
-        adId: listing._id
-      });
+      // Update wishlist in AsyncStorage using userId
+      const storedWishlist = await AsyncStorage.getItem(
+        `wishlist_${currentUser._id}`
+      );
+      let wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
+      console.log("wishlist button chapar por: " + wishlist);
 
-      if (!response.data.success) {
-        // Revert the optimistic update if the request fails
-        setIsLoved(prev => !prev);
-        Alert.alert('Error', response.data.message);
-        return;
+      if (isLoved) {
+        wishlist = wishlist.filter((id: any) => id !== listing._id);
+      } else {
+        wishlist.push(listing._id);
       }
 
-      Alert.alert('Success', response.data.message);
+      await AsyncStorage.setItem(
+        `wishlist_${currentUser._id}`,
+        JSON.stringify(wishlist)
+      );
+
     } catch (error: any) {
-      // Revert the optimistic update if the request fails
-      setIsLoved(prev => !prev);
+      setIsLoved((prev) => !prev);
       console.error("Error in handleLoved:", error);
-      const errorMessage = error.response?.data?.message || 'An unexpected error occurred. Try again.';
-      Alert.alert('Error', errorMessage);
     }
+
+    verifyLoggedIn();
   };
 
   // To manage the active slide index

@@ -17,5 +17,5 @@
     "**/*.tsx",
     "app/(auth)/signUp.jsx",
     "nativewind-env.d.ts"
-, "components/LocationSelector.jsx", "components/MapComponentForUser.jsx", "components/ListingsMap.jsx", "app/(tabs)/index.jsx", "components/Header.tsx", "components/DrawerNavigator.jsx", "app/profileScreens/myProperties.jsx"  ]
+, "components/LocationSelector.jsx", "components/MapComponentForUser.jsx", "components/ListingsMap.jsx", "app/(tabs)/index.jsx", "components/Header.tsx", "components/DrawerNavigator.jsx", "app/profileScreens/myProperties.jsx", "app/(tabs)/wishlists.jsx"  ]
 }

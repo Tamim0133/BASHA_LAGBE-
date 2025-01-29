@@ -13,6 +13,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import axios from 'axios'
 import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -165,6 +167,21 @@ function RootLayoutNav() {
         setIsLoggedIn(true)
         setCurrentUser(user)
         console.log("Current user is :", user);
+
+
+        const storedWishlist = await AsyncStorage.getItem(`wishlist_${user._id}`);
+        let wishlist = [];
+        if (storedWishlist) {
+          wishlist = JSON.parse(storedWishlist);
+        } else {
+          wishlist = [];
+        }
+        const updatedWishlist = [...wishlist];
+
+        await AsyncStorage.setItem(
+          `wishlist_${user._id}`,
+          JSON.stringify(updatedWishlist)
+        );
 
       } catch (error: any) {
         console.log(error);

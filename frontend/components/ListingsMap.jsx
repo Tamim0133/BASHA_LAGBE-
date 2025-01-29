@@ -31,7 +31,6 @@ const ListingsMap = ({ pin, myLocation, items }) => {
     const handleShowMore = () => {
         if (selectedMarker?.item?._id) {
             console.log("Selected Item on map : " + selectedMarker.item);
-            // navigation.navigate(`/listing/${selectedMarker.item._id}`);
         }
     };
 
@@ -99,10 +98,9 @@ const ListingsMap = ({ pin, myLocation, items }) => {
                                     <Text>Floor: {selectedMarker?.item?.floor || 'Not specified'}</Text>
                                     <Text>Bedrooms: {selectedMarker?.item?.bedrooms || 'N/A'}</Text>
                                     <Text>Bathrooms: {selectedMarker?.item?.bathrooms || 'N/A'}</Text>
-                                    <Text>Rent: {selectedMarker?.item?.rent || 'N/A'} USD</Text>
-                                    <Text>Advance Deposit: {selectedMarker?.item?.advanceDeposit || 'N/A'} months</Text>
+                                    <Text>Rent: {selectedMarker?.item?.rent || 'N/A'} </Text>
+                                    <Text>Advance Deposit: {selectedMarker?.item?.advanceDeposit || 'N/A'} </Text>
                                     <Text>Available From: {selectedMarker?.item?.availableFrom || 'Not mentioned'}</Text>
-                                    <Text>Description: {selectedMarker?.item?.description || 'No description available'}</Text>
                                     <Text>Facilities: {selectedMarker?.item?.facilities?.join(', ') || 'None'}</Text>
                                     <Text>Refundable Advance: {selectedMarker?.item?.willRefundAdvance ? 'Yes' : 'No'}</Text>
 
