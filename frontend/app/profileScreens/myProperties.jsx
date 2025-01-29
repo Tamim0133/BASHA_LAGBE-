@@ -101,7 +101,7 @@ const MyProperties = () => {
           <ScrollView style={{ flex: 1, padding: 16 }} contentContainerStyle={{
             paddingBottom: 150, // Ensures extra space at the bottom for scrolling
           }}>
-            {/* <Text style={styles.pageTitle}>My Properties</Text> */}
+            <Text style={styles.pageTitle}>My Properties</Text>
             {items.length > 0 ? (
               items.map((item, index) => (
                 <Link

@@ -1,4 +1,4 @@
-import { router, useFocusEffect, useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
+import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Share, ScrollView, TouchableWithoutFeedback, Button, Alert } from 'react-native';
 import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
@@ -13,6 +13,8 @@ import {
   ReanimatedLogLevel,
 } from 'react-native-reanimated';
 
+import PhoneInput from "react-native-phone-number-input";
+import * as SecureStore from 'expo-secure-store';
 // This is the default configuration
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -25,7 +27,9 @@ const { width } = Dimensions.get('window');
 
 const IMG_HEIGHT = 300;
 
+const baseURL = process.env.EXPO_PUBLIC_BASE_URL;
 
+// const navigation = useNavigation();
 
 const DetailsPage = () => {
   // const { id } = useLocalSearchParams();
@@ -55,7 +59,36 @@ const DetailsPage = () => {
   });
   ;
   // const initialFetchDone = useRef(false);
+  const verifyLoggedIn = async () => {
+    async function getToken() {
+      try {
+        const accessToken = await SecureStore.getItemAsync('accessToken');
+        const refreshToken = await SecureStore.getItemAsync('refreshToken');
+        return { accessToken, refreshToken };
+      } catch (error) {
+        console.error("Error fetching tokens:", error);
+        throw error; // Ensure the parent function knows of the error
+      }
+    }
+    try {
+      const { accessToken, refreshToken } = await getToken()
+      const response = await axios.get(`${baseURL}/api/user/verify-user`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'x-refresh-token': refreshToken
+        }
+      });
 
+      const user = response.data.data.user
+      setCurrentUser(user)
+
+    } catch (error: any) {
+      console.log(error);
+      const errorMessage =
+        error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+      Alert.alert('Error', errorMessage);
+    }
+  }
   useEffect(() => {
 
     const fetchData = async () => {
@@ -86,21 +119,18 @@ const DetailsPage = () => {
     fetchData();
     // console.log(currentUser.myAds);
 
-    if (currentUser && currentUser.myAds) {
-      currentUser.myAds.forEach((x: String) => {
-        if (x === item._id) setIsLoved(true)
-      })
+    if (currentUser?.myAds?.some((x: String) => x === item._id)) {
+      setIsLoved(true);
     }
   }, []);
-
   // Add effect to monitor listing changes
 
   const handleLoved = async () => {
     const router = useRouter();
 
-    console.log("handleLoved called, current listing:", listing);
-    console.log("Current user:", currentUser);
-    console.log("isLoggedIn:", isLoggedIn);
+    console.log("handleLoved called, current listing: ", listing);
+    console.log("Current user: ", currentUser);
+    console.log("isLoggedIn: ", isLoggedIn);
 
     if (!isLoggedIn) {
       Alert.alert('Sorry!', "You must login first.");
@@ -170,13 +200,12 @@ const DetailsPage = () => {
         </View>
       ),
       headerLeft: () => (
-        <TouchableOpacity style={styles.roundButton} onPress={() => router.push('/')}>
+        <TouchableOpacity style={styles.roundButton} onPress={() => router.back()}>
           <Ionicons name="chevron-back" size={24} color={'#000'} />
         </TouchableOpacity>
       ),
     });
-  }, []);
-
+  }, [isLoved]);
 
   const imageAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -219,11 +248,16 @@ const DetailsPage = () => {
   };
   const screenWidth = Dimensions.get('window').width;
 
-
+  const router = useRouter();
+  const { id } = useLocalSearchParams();
+  console.log("ID ----- > ", id);
 
   /*------------------------------------- 
-        Naiiiiiiimulllllll baaaal !
+        Naiiiiiiimulllllll 
 --------------------------------------- */
+  const [isOkToLoadContact, setIsOkToLoadContact] = useState(false);
+  const [justUnlocked, setJustUnlocked] = useState(false);
+
   const handleCreditEchange = async () => {
     try {
       const response = await axios.post(`${baseURL}/api/user/unlock-owner`, {
@@ -234,6 +268,11 @@ const DetailsPage = () => {
       if (!response.data.success) {
         Alert.alert('Error', response.data.message || 'Failed to unlock owner.');
       }
+      else {
+        Alert.alert("Success!", "Unlocked Owner...", [
+          { text: "OK", onPress: () => { setJustUnlocked(true); setIsOkToLoadContact(true); verifyLoggedIn(); } },
+        ]);
+      }
     } catch (error: any) {
       console.error('Error unlocking owner:', error);
       if (error.response) {
@@ -242,14 +281,19 @@ const DetailsPage = () => {
         Alert.alert('Error', 'Network error. Please check your connection...');
       }
     }
+    finally {
+      setLoading(false);
+    }
   }
   /*------------------------------------- 
     Unlock Button e click korle jeita hobe
   --------------------------------------- */
-  let isOkToLoadContact = false;
-  if (currentUser?.unlockedPersons?.indexOf(item.owner) != -1) { // unlocked na
-    isOkToLoadContact = true;
-  }
+
+  useEffect(() => {
+    if (currentUser?.unlockedPersons?.includes(item.owner)) {
+      setIsOkToLoadContact(true);
+    }
+  }, [currentUser, item.owner]);
 
   const handleUnlock = async () => {
     if (currentUser.unlockedPersons.indexOf(item.owner) == -1) { // unlocked na
@@ -269,17 +313,17 @@ const DetailsPage = () => {
                   "Please, Login!",
                   "You must login first to see owner contact info."
                 )
-                isOkToLoadContact = false;
+                setIsOkToLoadContact(false);
                 return;
               }
-              if (currentUser.credits < 10) {
-                Alert.alert(
-                  "Insufficient Credits",
-                  "You can increase your credits in the profile section!"
-                )
-                isOkToLoadContact = false;
-                return;
-              }
+              // if (currentUser.credits < 10) {
+              //   Alert.alert(
+              //     "Insufficient Credits",
+              //     "You can increase your credits in the profile section!"
+              //   )
+              //   isOkToLoadContact = false;
+              //   return;
+              // }
               handleCreditEchange();
             },
             style: "destructive",
@@ -289,11 +333,6 @@ const DetailsPage = () => {
     }
     if (isOkToLoadContact) {
       console.log(currentUser.unlockedPersons)
-      // display owner.contactNo
-      // Alert.alert(
-      //   "Contact Info:",
-      //   `${owner.contactNo}`
-      // )
     }
   }
 
@@ -488,7 +527,7 @@ const DetailsPage = () => {
         </Animated.View>
       }
       {
-        isOkToLoadContact &&
+        (isOkToLoadContact || justUnlocked) &&
         <Animated.View style={defaultStyles.footer} entering={SlideInDown.delay(200)}>
 
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>

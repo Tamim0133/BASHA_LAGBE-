@@ -17,6 +17,7 @@ import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
 
 
 
+
 // Type for form data
 interface FormData {
     title: string;
@@ -679,9 +680,10 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
     //-----------------------------------------------
     // Final Page Submit Button Handle Click 
     //-----------------------------------------------
-
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
     const handleSubmit = async () => {
-
+        setIsLoading(true);
         console.log('Submitting Data ..... (0)');
         console.log('Submitting Data ..... (1)');
 
@@ -735,12 +737,29 @@ const Pricing: React.FC<StepProps> = ({ formData, setFormData }) => {
                 error.response?.data?.message || 'An unexpected error occurred. Please try again.';
             Alert.alert('Error', errorMessage);
         }
+        setIsLoading(false);
+        router.push('/');
     };
+    const [dots, setDots] = useState('.');
 
+    useEffect(() => {
+        if (isLoading) {
+            const interval = setInterval(() => {
+                setDots((prev) => (prev.length < 3 ? prev + '.' : '.'));
+            }, 1000); // Change dots every 500ms
 
+            return () => clearInterval(interval); // Cleanup on unmount or when `isLoading` changes
+        }
+    }, [isLoading]);
 
     return (
         <View style={styles.container}>
+            {isLoading && (
+                <View style={styles.loaderContainer}>
+                    <ActivityIndicator size="large" color="#ffffff" />
+                    <Text style={styles.loaderText}>{`Sumbitting${dots}`}</Text>
+                </View>
+            )}
             {/* rent Input */}
             <Text style={styles.sectionTitle}>Set Rent:<Text style={{ color: Colors.grey }}> (rent in taka per month) </Text></Text>
             <TextInput

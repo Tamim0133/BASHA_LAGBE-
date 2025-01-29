@@ -27,8 +27,6 @@ const Profile = () => {
     const router = useRouter();
 
     const menuOptions: MenuOption[] = [
-        { title: 'Order Now', subtitle: 'Order now to find your perfect rental property', icon: 'home', action: () => { } },
-        { title: 'Order History', subtitle: 'View your order history', icon: 'history', action: () => { } },
         {
             title: 'My Properties', subtitle: 'View and manage your added properties', icon: 'briefcase', action: () => {
                 router.push({
@@ -36,10 +34,24 @@ const Profile = () => {
                 });
             }
         },
-        { title: 'Unlocked Properties', subtitle: 'View your unlocked properties', icon: 'lock-open', action: () => { } },
-        { title: 'Buy Package', subtitle: 'Buy a package to unlock premium features', icon: 'shopping', action: () => { } },
+        {
+            title: 'Unlocked Properties', subtitle: 'View your unlocked properties', icon: 'lock-open', action: () => {
+                router.push({
+                    pathname: '/profileScreens/unlockedProperties',
+                });
+            }
+        },
+        {
+            title: 'Refer and Earn', subtitle: 'Refer your friends and earn credits', icon: 'account-group', action: () => {
+                router.push({
+                    pathname: '/profileScreens/ReferAndEarn',
+                });
+            }
+        },
+        { title: 'History', subtitle: 'View your property Unlock history', icon: 'history', action: () => { } },
+        { title: 'Buy Credits', subtitle: 'Buy a package to unlock premium features', icon: 'shopping', action: () => { } },
+        { title: 'Order Now', subtitle: 'Order now to find your perfect rental property', icon: 'home', action: () => { } },
         { title: 'Purchase History', subtitle: 'View your purchase history', icon: 'receipt', action: () => { } },
-        { title: 'Refer and Earn', subtitle: 'Refer your friends and earn credits', icon: 'account-group', action: () => { } },
         { title: 'Edit Profile', subtitle: 'Edit your profile information', icon: 'account-edit', action: () => { } },
         { title: 'Change Password', subtitle: 'Change your login password', icon: 'lock', action: () => { } },
         { title: 'Logout', subtitle: 'Logout your account', icon: 'exit-to-app', action: () => handleLogOut() }, // Updated logout action

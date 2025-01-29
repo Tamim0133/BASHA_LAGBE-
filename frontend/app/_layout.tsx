@@ -197,7 +197,8 @@ function RootLayoutNav() {
           <Stack.Screen name="listing/[id]" options={{ headerTitle: '' }} />
           <Stack.Screen name="addHouseScreens/postHouseAd" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)/signUp" options={{ headerTitle: '', headerShadowVisible: false }} />
-          <Stack.Screen name="profileScreens" options={{ headerTitle: 'My Properties', headerShadowVisible: false }} />
+          <Stack.Screen name="profileScreens" options={{ headerShown: false }} />
+          {/* <Stack.Screen name="profileScreens/unlockedProperties.jsx" options={{ headerTitle: 'Unlocked', headerShadowVisible: false }} /> */}
 
         </Stack>
       </GestureHandlerRootView>
