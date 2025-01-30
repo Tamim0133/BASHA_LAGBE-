@@ -1,12 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-// Define the type of the context value
-// type UserStateContextType = {
-//   currentUser: any;
-//   setCurrentUser: React.Dispatch<React.SetStateAction<any>>;
-// };
-
-// Create the context with an initial undefined value
 interface UserStateContextType {
     currentUser: any;
     setCurrentUser: React.Dispatch<React.SetStateAction<any>>;

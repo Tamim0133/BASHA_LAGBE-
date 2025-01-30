@@ -161,7 +161,7 @@ export const LocationSelector = ({ onAreaSelected, onSubAreaSelected }) => {
                     onSelect={(item) => {
                         setSelectedSubArea(item);
                         setIsSubAreaDropdownVisible(false);
-                        onSubAreaSelected({ subarea: item })
+                        onSubAreaSelected({ subArea: item })
                     }}
                 />
             </Modal>

@@ -8,6 +8,7 @@ import { TouchableOpacity, Animated, StyleSheet, Text, Alert } from 'react-nativ
 import useAuth from '@/hooks/useAuth';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { RefreshProvider } from '@/hooks/RefreshContext';
+import { QueryParamsProvider } from '@/hooks/QueryContext';
 import { UserStateProvider, UserStateContext, useUserState } from '@/hooks/UserContext';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -54,6 +55,7 @@ export default function RootLayout() {
   }
 
   return (
+    
 
     <UserStateProvider>
       <StatusBar style="dark" backgroundColor="transparent" translucent={true} />
@@ -194,6 +196,8 @@ function RootLayoutNav() {
   }, [isLoggedIn])
 
   return (
+    <QueryParamsProvider>
+    <UserStateProvider>
     <RefreshProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Stack>
@@ -220,6 +224,9 @@ function RootLayoutNav() {
         </Stack>
       </GestureHandlerRootView>
     </RefreshProvider>
+    </UserStateProvider>
+    </QueryParamsProvider>
+
   );
 }
 
