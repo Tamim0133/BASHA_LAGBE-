@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
-import { Link, useNavigation } from 'expo-router';
+import { Link, router, useNavigation } from 'expo-router';
 import { DrawerActions } from '@react-navigation/native'; // Added DrawerActions import
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { CompositeNavigationProp } from '@react-navigation/native';
+import {useQueryParams} from '@/hooks/QueryContext'
 
 type HeaderNavigationProp = CompositeNavigationProp<
     DrawerNavigationProp<any, any>,
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
     const navigation = useNavigation<HeaderNavigationProp>();
     const [isSortModalVisible, setSortModalVisible] = useState<boolean>(false);
     const [selectedSortOption, setSelectedSortOption] = useState<string>('Newest');
-
+    const { queryParams, updateQueryParams } = useQueryParams();
     const toggleDrawer = (): void => {
         navigation.dispatch(DrawerActions.toggleDrawer());
     };
@@ -32,13 +33,24 @@ const Header: React.FC = () => {
         setSortModalVisible(true);
     };
 
+    //  "priceLowToHigh", "priceHighToLow", "newest"
     const closeSortModal = (): void => {
+        if (selectedSortOption === 'Newest') {
+            updateQueryParams({ sortBy: 'newest' });
+        }
+        else if (selectedSortOption === 'Price (High to Low)') {
+            updateQueryParams({ sortBy: 'priceHighToLow' });
+        }
+        else if (selectedSortOption === 'Price (Low to High)') {
+            updateQueryParams({ sortBy: 'priceLowToHigh' });
+        
+        }
+        
         setSortModalVisible(false);
     };
 
     const handleSortOptionSelect = (option: string): void => {
         setSelectedSortOption(option);
-        closeSortModal(); // Close the modal after selection
     };
 
     const getSortLabel = (): string => {

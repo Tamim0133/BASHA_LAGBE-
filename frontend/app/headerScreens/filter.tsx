@@ -1,13 +1,15 @@
 import Colors from '@/constants/Colors';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import {useQueryParams} from '@/hooks/QueryContext'
 
 // Define the type for features  
 type Feature = 'LIFT' | 'GARAGE' | 'CCTV' | 'GAS' | 'WIFI';
 // Define the type for property types and bedrooms and bathrooms  
 type PropertyType = 'Family' | 'Bachelor' | 'Office' | 'Sublet' | 'Hostel' | 'Female' | 'Shop';
 type BedroomCount = 1 | 2 | 3 | 4 | 5 | 6 | 7;
-type BathroomCount = 1 | 2 | 3 | 4 | 5 | 6 | '6+';
+type BathroomCount = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 const FilterScreen: React.FC = () => {
     const [minPrice, setMinPrice] = useState<string>('');
@@ -17,10 +19,11 @@ const FilterScreen: React.FC = () => {
     const [selectedBedroom, setSelectedBedroom] = useState<BedroomCount | null>(null);
     const [selectedBathroom, setSelectedBathroom] = useState<BathroomCount | null>(null);
     const [selectedFeatures, setSelectedFeatures] = useState<Feature[]>([]);
+    const { queryParams, updateQueryParams } = useQueryParams();
 
     const propertyTypes: PropertyType[] = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'Female', 'Shop'];
     const bedrooms: BedroomCount[] = [1, 2, 3, 4, 5, 6, 7];
-    const bathrooms: BathroomCount[] = [1, 2, 3, 4, 5, 6, '6+'];
+    const bathrooms: BathroomCount[] = [1, 2, 3, 4, 5, 6, 7];
     const features: Feature[] = ['LIFT', 'GARAGE', 'CCTV', 'GAS', 'WIFI'];
 
     // Update types for the item parameter  
@@ -42,8 +45,26 @@ const FilterScreen: React.FC = () => {
         setSelectedBedroom(null);
         setSelectedBathroom(null);
         setSelectedFeatures([]);
+        updateQueryParams({
+            areaId: '',
+            subArea: '',
+            sortBy: '',
+            priceMin: '',
+            priceMax: '',
+            bedrooms: '',
+            bathrooms: '',
+            propertyType: '',
+          })
     };
 
+    const handleSubmit = ()=>{
+        if(maxPrice) updateQueryParams({ priceMax : maxPrice });
+        if(minPrice) updateQueryParams({ priceMin : minPrice});
+        if(selectedBedroom) updateQueryParams({ bedrooms : selectedBedroom});
+        if(selectedBathroom) updateQueryParams({ bathrooms : selectedBathroom});
+        if(selectedPropertyType) updateQueryParams({ propertyType : selectedPropertyType});
+        router.push('/');
+    }
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.title}>Filter</Text>
@@ -143,7 +164,7 @@ const FilterScreen: React.FC = () => {
             />
 
             {/* Show Property Button */}
-            <TouchableOpacity style={styles.showButton}>
+            <TouchableOpacity style={styles.showButton} onPress={handleSubmit}>
                 <Text style={styles.showButtonText}>Show Property</Text>
             </TouchableOpacity>
         </ScrollView>

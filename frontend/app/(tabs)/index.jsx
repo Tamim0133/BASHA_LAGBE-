@@ -7,6 +7,8 @@ import { View, Alert } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import * as Location from 'expo-location';
+import {useQueryParams} from '@/hooks/QueryContext'
+import { useLocalSearchParams } from 'expo-router';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,13 +23,27 @@ const MainScreen = () => {
     const [myLocation, setMyLocation] = useState(initialLocation); // User location state
     const [pin, setPin] = useState(initialLocation); // Default pin location
     const baseURL = process.env.EXPO_PUBLIC_BASE_URL;
-
     const getoItems = useMemo(() => listingsDataGeo, []);
+    const { queryParams, updateQueryParams } = useQueryParams();
 
     useEffect(() => {
         const fetchAds = async () => {
+            let qur = '';
+            if(queryParams.areaId) qur += `areaId=${queryParams.areaId}&`
+            if(queryParams.sortBy) qur += `sortBy=${queryParams.sortBy}&`
+            if(queryParams.subArea) qur += `subArea=${queryParams.subArea}&`
+            if(queryParams.priceMin) qur += `priceMin=${queryParams.priceMin}&`
+            if(queryParams.priceMax) qur += `priceMax=${queryParams.priceMax}&`
+            if(queryParams.bedrooms) qur += `bedrooms=${queryParams.bedrooms}&`
+            if(queryParams.bathrooms) qur += `bathrooms=${queryParams.bathrooms}&`
+            if(queryParams.propertyType) qur += `propertyType=${queryParams.propertyType}&`
+    
+            let url = `${baseURL}/api/ad/get-ad`
+            if(qur) url = url+`?${qur}`
+
             try {
-                const response = await axios.get(`${baseURL}/api/ad/get-ad`);
+                console.log("Fetching", url);
+                const response = await axios.get(url);
                 if (!response.data.success) {
                     Alert.alert('Error', response.data.message);
                     return;
@@ -57,7 +73,7 @@ const MainScreen = () => {
 
         fetchAds();
         fetchLocation(); // Fetch location when the component mounts
-    }, []);
+    }, [queryParams]);
 
     return (
         <View style={{ flex: 1 }}>
